@@ -405,104 +405,6 @@
 
     <!-- ==================== النوافذ المنبثقة ==================== -->
 
-    <!-- 0. معالج التهيئة الأمنية (يظهر فقط إذا لم يتم ضبط النظام مسبقاً) -->
-    <div id="setupWizardModal" class="fixed inset-0 bg-royal-900/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border-2 border-gold-500 my-4">
-            <div class="bg-gradient-to-l from-royal-900 to-royal-800 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-gold-400 text-lg"></i>
-                    <div>
-                        <h3 class="font-extrabold text-sm">معالج التهيئة الأمنية للمنصة</h3>
-                        <p class="text-[10px] text-slate-300">تعيين الرموز الفردية المستقرة للكادر</p>
-                    </div>
-                </div>
-            </div>
-
-            <form onsubmit="completeInitialSetup(event)" class="p-4 space-y-3 max-h-[80vh] overflow-y-auto text-xs">
-                <div class="bg-amber-50 border border-amber-300 rounded-xl p-2.5 text-[11px] text-amber-950 leading-relaxed">
-                    <strong>تنبيه أمني:</strong> يرجى تعيين رمز سري مستقل لكل من <strong>مديرة المدرسة</strong> و<strong>رائدة النشاط</strong>، وحفظ <strong>مفتاح الاسترداد</strong>.
-                </div>
-
-                <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
-                    <h4 class="font-extrabold text-royal-900 flex items-center gap-1">
-                        <i class="fa-solid fa-crown text-gold-600"></i> حساب مديرة المدرسة
-                    </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">اسم مديرة المدرسة:</label>
-                            <input type="text" id="setupPrincipalName" required placeholder="أ. اسم المديرة" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">الرمز السري:</label>
-                            <input type="password" id="setupPrincipalPin" required minlength="4" placeholder="4 خانات فأكثر" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                        </div>
-                        <div class="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-700 mb-0.5">سؤال الأمان:</label>
-                                <select id="setupPrincipalQuestion" class="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white">
-                                    <option value="اسم أول مدرسة عملتِ بها؟">اسم أول مدرسة عملتِ بها؟</option>
-                                    <option value="المدينة المفضلة لديكِ؟">المدينة المفضلة لديكِ؟</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-700 mb-0.5">إجابة سؤال الأمان:</label>
-                                <input type="text" id="setupPrincipalAnswer" required placeholder="الإجابة السرية" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
-                    <h4 class="font-extrabold text-royal-900 flex items-center gap-1">
-                        <i class="fa-solid fa-star text-emerald-700"></i> حساب رائدة النشاط
-                    </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">اسم رائدة النشاط:</label>
-                            <input type="text" id="setupCoordName" required placeholder="أ. اسم رائدة النشاط" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">الرمز السري:</label>
-                            <input type="password" id="setupCoordPin" required minlength="4" placeholder="رمز مستقل" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                        </div>
-                        <div class="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-700 mb-0.5">سؤال الأمان:</label>
-                                <select id="setupCoordQuestion" class="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white">
-                                    <option value="ما هو تخصصكِ الجامعي؟">ما هو تخصصكِ الجامعي؟</option>
-                                    <option value="اسم أول مدرسة عملتِ بها؟">اسم أول مدرسة عملتِ بها؟</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-slate-700 mb-0.5">إجابة سؤال الأمان:</label>
-                                <input type="text" id="setupCoordAnswer" required placeholder="الإجابة السرية" class="w-full border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl">
-                        <label class="block text-[10px] font-extrabold text-emerald-900 mb-0.5">كود انضمام المعلمات الجدد:</label>
-                        <input type="text" id="setupSchoolInviteCode" required value="SCH-1448" class="w-full border border-emerald-300 rounded-lg px-2.5 py-1 bg-white font-bold">
-                    </div>
-
-                    <div class="bg-royal-900 text-white p-2.5 rounded-xl border border-gold-500">
-                        <div class="flex items-center justify-between mb-0.5">
-                            <span class="text-[10px] font-bold text-gold-400">مفتاح الاسترداد:</span>
-                            <button type="button" onclick="copyMasterKey()" class="text-[9px] bg-gold-500 text-royal-900 font-bold px-1.5 py-0.5 rounded">نسخ</button>
-                        </div>
-                        <input type="text" id="setupMasterKeyDisplay" readonly class="w-full bg-royal-800 border border-slate-700 rounded px-2 py-1 font-mono text-center text-emerald-300 font-bold">
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-emerald-800 hover:bg-emerald-700 text-white font-extrabold py-2.5 rounded-xl shadow transition">
-                    حفظ الإعدادات وبدء التشغيل
-                </button>
-            </form>
-        </div>
-    </div>
-
     <!-- 1. نافذة تسجيل الدخول -->
     <div id="loginModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-gold-400/40 my-4">
@@ -594,7 +496,6 @@
         </div>
     </div>
 
-    <!-- باقي النوافذ -->
     <div id="teacherActivateModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-emerald-500 my-4">
             <div class="bg-emerald-900 text-white p-4 flex items-center justify-between">
@@ -1016,24 +917,24 @@
         const DEFAULT_ACHIEVEMENTS = [
             {
                 id: 'ach-1',
-                title: 'براعم القراءة والإملاء المبدع',
-                student: 'ليان بنت محمد العتيبي',
-                grade: 'الصف الأول الابتدائي',
-                category: 'الثقافة والفنون',
-                teacher: 'أ. سارة الدوسري',
-                hijriDate: '12 ربيع الأول 1448 هـ',
+                title: 'المشاركة باسبوع الفضاء',
+                student: 'رسيل الحربي',
+                grade: 'الصف السادس الابتدائي',
+                category: 'العلوم والتقنية',
+                teacher: 'فاطمه الحربي',
+                hijriDate: '15 ربيع الأول 1448 هـ',
                 semester: 'الفصل الدراسي الأول 1448 هـ',
                 mediaType: 'image',
-                mediaUrl: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80',
-                description: 'مشاركة متميزة في مسابقة القارئة الصغيرة وإلقاء القصائد الترحيبية.',
-                likes: 42,
+                mediaUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+                description: 'مشاركة مدرسية مميزة ضمن خطة الأنشطة وأسبوع الفضاء العالمي.',
+                likes: 45,
                 likedByMe: false,
-                principalPraise: 'بداية مشرقة وموهبة واعدة نفخر بها في الصف الأول الابتدائي.'
+                principalPraise: 'إبداع رائع يلامس النجوم، دمتِ فخراً للمدرسة.'
             },
             {
                 id: 'ach-2',
                 title: 'لوحة تراثنا السعودي الأصيل',
-                student: 'جود بنت خالد الشمري',
+                student: 'جود الشمري',
                 grade: 'الصف الثاني الابتدائي',
                 category: 'الأيام والمناسبات',
                 teacher: 'أ. منيرة القحطاني',
@@ -1049,7 +950,7 @@
             {
                 id: 'ach-3',
                 title: 'مبادرة مدرستي خضراء المستدامة',
-                student: 'مجموعة صديقات البيئة (الثالث)',
+                student: 'صديقات البيئة',
                 grade: 'الصف الثالث الابتدائي',
                 category: 'المواطنة والحياة',
                 teacher: 'أ. هدى الغامدي',
@@ -1065,7 +966,7 @@
             {
                 id: 'ach-4',
                 title: 'مخيم الزهرات والمهارات الكشفية',
-                student: 'ريناد بنت فهد الحربي',
+                student: 'ريناد الحربي',
                 grade: 'الصف الرابع الابتدائي',
                 category: 'النشاط الكشفي',
                 teacher: 'أ. أمل الزهراني',
@@ -1081,7 +982,7 @@
             {
                 id: 'ach-5',
                 title: 'المبرمجة الصغيرة: لعبة الأمن السيبراني',
-                student: 'لمى بنت عبدالعزيز السبيعي',
+                student: 'لمى السبيعي',
                 grade: 'الصف الخامس الابتدائي',
                 category: 'العلوم والتقنية',
                 teacher: 'أ. نورة المطيري',
@@ -1097,7 +998,7 @@
             {
                 id: 'ach-6',
                 title: 'ماراثون الصحة واللياقة البدنية',
-                student: 'فريق نجمات الصف السادس',
+                student: 'نجمات الصف السادس',
                 grade: 'الصف السادس الابتدائي',
                 category: 'الرياضة والصحة',
                 teacher: 'أ. ابتسام الشهري',
@@ -1125,7 +1026,7 @@
         };
 
         let authSystem = {
-            initialized: true, // تم الضبط تلقائياً لفتح المعرض مباشرة للزوار
+            initialized: true,
             masterRecoveryKey: 'REC-DEMO-1448',
             schoolInviteCode: 'SCH-1448',
             principal: { id: 'acc-principal', name: 'مديرة المدرسة', role: 'principal', pin: '2030', question: 'اسم أول مدرسة عملتِ بها؟', answer: 'الاولى' },
@@ -1162,9 +1063,18 @@
             const savedData = localStorage.getItem('school_exhibition_1448_data');
             const savedSettings = localStorage.getItem('school_exhibition_1448_settings');
             const savedAuth = localStorage.getItem('school_exhibition_1448_auth_v2');
+            
+            // نجعل البيانات الأساسية تأخذ الأولوية أو ندمجها لضمان ظهور المشاركات الصحيحة للجميع
+            achievements = [...DEFAULT_ACHIEVEMENTS];
             if (savedData) {
-                try { achievements = JSON.parse(savedData); } catch (e) { achievements = [...DEFAULT_ACHIEVEMENTS]; }
-            } else { achievements = [...DEFAULT_ACHIEVEMENTS]; }
+                try {
+                    const parsed = JSON.parse(savedData);
+                    if (parsed && parsed.length > 0) {
+                        // دمج الإنجازات المضافة محلياً مع القائمة الافتراضية إذا لزم الأمر
+                        achievements = parsed;
+                    }
+                } catch (e) {}
+            }
 
             if (savedSettings) {
                 try { siteSettings = JSON.parse(savedSettings); } catch (e) {}
@@ -1176,7 +1086,7 @@
                     authSystem = { ...authSystem, ...parsedAuth };
                 } catch (e) {}
             }
-            authSystem.initialized = true; // ضمان عدم ظهور معالج التهيئة لأي زائر جديد
+            authSystem.initialized = true;
         }
 
         function saveToLocalStorage(showNotification = false) {
@@ -1350,259 +1260,6 @@
             }
         }
 
-        function openTeacherActivateModal() {
-            document.getElementById('teacherActivateModal').classList.remove('hidden');
-        }
-
-        function activateNewTeacherAccount(event) {
-            event.preventDefault();
-            const name = document.getElementById('newTeacherName').value.trim();
-            const inviteCode = document.getElementById('newTeacherInviteCode').value.trim();
-            const pin = document.getElementById('newTeacherPin').value.trim();
-            const question = document.getElementById('newTeacherQuestion').value;
-            const answer = document.getElementById('newTeacherAnswer').value.trim();
-
-            if (inviteCode !== authSystem.schoolInviteCode) {
-                showToast('كود انضمام المدرسة غير صحيح!', true);
-                return;
-            }
-
-            const newTeacher = {
-                id: 't-' + Date.now(),
-                name: name.startsWith('أ.') ? name : `أ. ${name}`,
-                pin: pin,
-                question: question,
-                answer: answer
-            };
-
-            authSystem.teachers.push(newTeacher);
-            currentRole = 'teacher';
-            currentUserAccount = newTeacher;
-
-            logAuditEvent(newTeacher.name, 'تفعيل حساب معلمة جديد');
-            saveToLocalStorage(false);
-            populateTeacherSelect();
-            updateRoleUI();
-            renderGallery();
-
-            closeModal('teacherActivateModal');
-            closeModal('loginModal');
-            showToast(`أهلاً بكِ ${newTeacher.name}! تم الدخول بنجاح`);
-        }
-
-        function getTargetRecoveryAccount() {
-            if (selectedLoginRole === 'principal') return authSystem.principal;
-            if (selectedLoginRole === 'coordinator') return authSystem.coordinator;
-            if (selectedLoginRole === 'teacher') {
-                const tId = document.getElementById('teacherAccountSelect').value;
-                return authSystem.teachers.find(t => t.id === tId);
-            }
-            return null;
-        }
-
-        function openRecoveryModal() {
-            const target = getTargetRecoveryAccount();
-            if (!target) return;
-
-            document.getElementById('recoveryAccountTitle').textContent = `${ROLE_LABELS[selectedLoginRole]} — ${target.name}`;
-            document.getElementById('recoverySecurityQuestion').textContent = target.question || 'ما هو تخصصكِ الجامعي؟';
-            document.getElementById('recoveryAnswerInput').value = '';
-            document.getElementById('recoveryNewPinInput').value = '';
-            document.getElementById('recoveryMasterKeyInput').value = '';
-
-            const masterBox = document.getElementById('recoveryMasterKeyBox');
-            const adminReqBox = document.getElementById('adminResetRequestBox');
-
-            if (selectedLoginRole === 'principal') {
-                masterBox.classList.remove('hidden');
-                adminReqBox.classList.add('hidden');
-            } else {
-                masterBox.classList.add('hidden');
-                adminReqBox.classList.remove('hidden');
-            }
-
-            document.getElementById('recoveryModal').classList.remove('hidden');
-        }
-
-        function processSelfRecovery() {
-            const target = getTargetRecoveryAccount();
-            if (!target) return;
-
-            const answerInput = document.getElementById('recoveryAnswerInput').value.trim();
-            const masterInput = document.getElementById('recoveryMasterKeyInput').value.trim();
-            const newPin = document.getElementById('recoveryNewPinInput').value.trim();
-
-            if (!newPin || newPin.length < 4) {
-                showToast('أدخلي رمزاً جديداً لا يقل عن 4 خانات', true);
-                return;
-            }
-
-            const isAnswerValid = answerInput && target.answer && answerInput.toLowerCase() === target.answer.trim().toLowerCase();
-            const isMasterValid = selectedLoginRole === 'principal' && masterInput && masterInput === authSystem.masterRecoveryKey;
-
-            if (!isAnswerValid && !isMasterValid) {
-                showToast('إجابة سؤال الأمان غير مطابقة!', true);
-                return;
-            }
-
-            target.pin = newPin;
-            authSystem.resetRequests = authSystem.resetRequests.filter(r => r.accountId !== target.id);
-            logAuditEvent(target.name, 'استعادة ذاتية للرمز السري');
-            saveToLocalStorage(false);
-
-            closeModal('recoveryModal');
-            showToast('تم تعيين الرمز الجديد بنجاح');
-        }
-
-        function sendAdminResetRequest() {
-            const target = getTargetRecoveryAccount();
-            if (!target) return;
-
-            const exists = authSystem.resetRequests.some(r => r.accountId === target.id);
-            if (!exists) {
-                authSystem.resetRequests.push({
-                    id: 'req-' + Date.now(),
-                    accountId: target.id,
-                    name: target.name,
-                    role: selectedLoginRole,
-                    time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
-                });
-                logAuditEvent(target.name, 'إرسال طلب إعادة تعيين الرمز للإدارة');
-                saveToLocalStorage(false);
-            }
-
-            closeModal('recoveryModal');
-            showToast('تم إرسال الطلب للإدارة بنجاح');
-        }
-
-        function openAccountsAdminModal() {
-            document.getElementById('adminInviteCodeBadge').textContent = authSystem.schoolInviteCode;
-            renderAccountsAdminTables();
-            document.getElementById('accountsAdminModal').classList.remove('hidden');
-        }
-
-        function renderAccountsAdminTables() {
-            const alertsBox = document.getElementById('pendingResetAlertsContainer');
-            const reqList = document.getElementById('pendingResetList');
-            if (authSystem.resetRequests.length > 0) {
-                alertsBox.classList.remove('hidden');
-                reqList.innerHTML = authSystem.resetRequests.map(req => `
-                    <div class="bg-white p-2 rounded-xl border border-rose-200 flex flex-wrap items-center justify-between gap-1.5 text-xs">
-                        <div>
-                            <strong class="text-royal-900">${req.name}</strong>
-                            <span class="text-slate-500">(${ROLE_LABELS[req.role]})</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <input type="text" id="resetInput-${req.accountId}" placeholder="الرمز الجديد" class="border border-slate-300 rounded px-2 py-0.5 text-xs w-24">
-                            <button onclick="adminResetAccountPin('${req.accountId}')" class="bg-emerald-700 text-white font-bold px-2.5 py-0.5 rounded text-xs">اعتماد</button>
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                alertsBox.classList.add('hidden');
-            }
-
-            const tbody = document.getElementById('accountsTableBody');
-            const allAccounts = [
-                { ...authSystem.principal, roleKey: 'principal' },
-                { ...authSystem.coordinator, roleKey: 'coordinator' },
-                ...authSystem.teachers.map(t => ({ ...t, roleKey: 'teacher' }))
-            ];
-
-            tbody.innerHTML = allAccounts.map(acc => {
-                const canManageThis = currentRole === 'principal' || acc.roleKey === 'teacher';
-                return `
-                    <tr>
-                        <td class="py-2 px-2.5 font-extrabold text-royal-900">${acc.name}</td>
-                        <td class="py-2 px-2.5 text-slate-600">${ROLE_LABELS[acc.roleKey]}</td>
-                        <td class="py-2 px-2.5">
-                            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full text-[10px] font-bold">
-                                مشفّر
-                            </span>
-                        </td>
-                        <td class="py-2 px-2.5">
-                            ${canManageThis ? `
-                                <div class="flex items-center gap-1">
-                                    <input type="text" id="adminSetPin-${acc.id}" placeholder="رمز جديد" class="border border-slate-300 rounded px-1.5 py-0.5 text-[10px] w-20">
-                                    <button onclick="adminResetAccountPin('${acc.id}')" class="bg-royal-900 text-gold-400 font-bold px-2 py-0.5 rounded text-[10px]">تحديث</button>
-                                    ${acc.roleKey === 'teacher' ? `
-                                        <button onclick="adminDeleteTeacher('${acc.id}')" class="text-red-500 hover:text-red-700 px-1" title="حذف">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    ` : ''}
-                                </div>
-                            ` : '<span class="text-[10px] text-slate-400">صلاحية المديرة</span>'}
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-
-            const auditBox = document.getElementById('auditLogContainer');
-            auditBox.innerHTML = authSystem.auditLogs.length > 0
-                ? authSystem.auditLogs.map(log => `<div>• ${log}</div>`).join('')
-                : '<div class="text-slate-400">لا توجد عمليات مسجلة بعد.</div>';
-        }
-
-        function adminAddTeacher(event) {
-            event.preventDefault();
-            const nameInput = document.getElementById('adminNewTeacherName');
-            const pinInput = document.getElementById('adminNewTeacherPin');
-            const rawName = nameInput.value.trim();
-            const pin = pinInput.value.trim();
-
-            const newTeacher = {
-                id: 't-' + Date.now(),
-                name: rawName.startsWith('أ.') ? rawName : `أ. ${rawName}`,
-                pin: pin,
-                question: 'ما هو تخصصكِ الجامعي؟',
-                answer: 'تربوي'
-            };
-
-            authSystem.teachers.push(newTeacher);
-            logAuditEvent(currentUserAccount.name, `اعتماد معلمة: ${newTeacher.name}`);
-            saveToLocalStorage(false);
-            nameInput.value = '';
-            pinInput.value = '';
-            renderAccountsAdminTables();
-            showToast(`تم اعتماد حساب ${newTeacher.name}`);
-        }
-
-        function adminResetAccountPin(accountId) {
-            const input1 = document.getElementById(`resetInput-${accountId}`);
-            const input2 = document.getElementById(`adminSetPin-${accountId}`);
-            const newPin = (input1 && input1.value.trim()) || (input2 && input2.value.trim());
-
-            if (!newPin || newPin.length < 4) {
-                showToast('أدخلي رمزاً جديداً (4 خانات على الأقل)', true);
-                return;
-            }
-
-            let targetAcc = null;
-            if (accountId === authSystem.principal.id) targetAcc = authSystem.principal;
-            else if (accountId === authSystem.coordinator.id) targetAcc = authSystem.coordinator;
-            else targetAcc = authSystem.teachers.find(t => t.id === accountId);
-
-            if (targetAcc) {
-                targetAcc.pin = newPin;
-                authSystem.resetRequests = authSystem.resetRequests.filter(r => r.accountId !== accountId);
-                logAuditEvent(currentUserAccount.name, `إعادة ضبط رمز: ${targetAcc.name}`);
-                saveToLocalStorage(false);
-                updateRoleUI();
-                renderAccountsAdminTables();
-                showToast(`تم تحديث الرمز بنجاح`);
-            }
-        }
-
-        function adminDeleteTeacher(teacherId) {
-            const teacher = authSystem.teachers.find(t => t.id === teacherId);
-            if (!teacher) return;
-            authSystem.teachers = authSystem.teachers.filter(t => t.id !== teacherId);
-            logAuditEvent(currentUserAccount.name, `حذف معلمة: ${teacher.name}`);
-            saveToLocalStorage(false);
-            renderAccountsAdminTables();
-            showToast('تم حذف المعلمة');
-        }
-
         function setGradeFilter(grade) {
             currentGradeFilter = grade;
             document.querySelectorAll('.grade-tab').forEach(tab => {
@@ -1770,81 +1427,6 @@
             document.getElementById('achievementModal').classList.remove('hidden');
         }
 
-        function openEditModal(id) {
-            const item = achievements.find(a => a.id === id);
-            if (!item) return;
-            document.getElementById('editItemId').value = item.id;
-            document.getElementById('achievementModalTitle').textContent = 'تعديل بيانات الإنجاز';
-            document.getElementById('fieldTitle').value = item.title;
-            document.getElementById('fieldStudent').value = item.student;
-            document.getElementById('fieldGrade').value = item.grade;
-            document.getElementById('fieldCategory').value = item.category;
-            document.getElementById('fieldTeacher').value = item.teacher;
-            document.getElementById('fieldHijriDate').value = item.hijriDate;
-            document.getElementById('fieldSemester').value = item.semester;
-            document.getElementById('fieldDescription').value = item.description;
-            document.getElementById('fieldGovernanceConsent').checked = true;
-
-            const radios = document.getElementsByName('mediaType');
-            radios.forEach(r => r.checked = (r.value === item.mediaType));
-            
-            if (item.mediaUrl.startsWith('data:')) {
-                uploadedMediaDataUrl = item.mediaUrl;
-                document.getElementById('fieldMediaUrl').value = '';
-            } else {
-                uploadedMediaDataUrl = '';
-                document.getElementById('fieldMediaUrl').value = item.mediaUrl;
-            }
-            updateMediaPreview(item.mediaType, item.mediaUrl);
-            document.getElementById('achievementModal').classList.remove('hidden');
-        }
-
-        function handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const isVideo = file.type.startsWith('video/');
-            const radios = document.getElementsByName('mediaType');
-            radios.forEach(r => r.checked = (r.value === (isVideo ? 'video' : 'image')));
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                uploadedMediaDataUrl = e.target.result;
-                updateMediaPreview(isVideo ? 'video' : 'image', uploadedMediaDataUrl);
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function previewMediaUrl() {
-            const url = document.getElementById('fieldMediaUrl').value.trim();
-            const type = document.querySelector('input[name="mediaType"]:checked').value;
-            if (url) {
-                uploadedMediaDataUrl = '';
-                updateMediaPreview(type, url);
-            }
-        }
-
-        function toggleMediaInputs() {
-            const url = uploadedMediaDataUrl || document.getElementById('fieldMediaUrl').value.trim();
-            const type = document.querySelector('input[name="mediaType"]:checked').value;
-            if (url) updateMediaPreview(type, url);
-        }
-
-        function updateMediaPreview(type, src) {
-            const box = document.getElementById('mediaPreviewBox');
-            const img = document.getElementById('previewImg');
-            const vid = document.getElementById('previewVid');
-            box.classList.remove('hidden');
-            if (type === 'video') {
-                img.classList.add('hidden');
-                vid.classList.remove('hidden');
-                vid.src = src;
-            } else {
-                vid.classList.add('hidden');
-                img.classList.remove('hidden');
-                img.src = src;
-            }
-        }
-
         function saveAchievement(event) {
             event.preventDefault();
             const editId = document.getElementById('editItemId').value;
@@ -1865,83 +1447,20 @@
                 description: document.getElementById('fieldDescription').value.trim()
             };
 
-            if (editId) {
-                const index = achievements.findIndex(a => a.id === editId);
-                if (index !== -1) {
-                    achievements[index] = { ...achievements[index], ...payload };
-                    if (currentUserAccount) logAuditEvent(currentUserAccount.name, `تعديل إنجاز: ${payload.title}`);
-                    showToast('تم تحديث الإنجاز بنجاح');
-                }
-            } else {
-                const newAchievement = {
-                    id: 'ach-' + Date.now(),
-                    ...payload,
-                    likes: 1,
-                    likedByMe: false,
-                    principalPraise: ''
-                };
-                achievements.unshift(newAchievement);
-                if (currentUserAccount) logAuditEvent(currentUserAccount.name, `إضافة إنجاز: ${payload.title}`);
-                showToast('تمت إضافة الإنجاز بنجاح');
-            }
-
-            saveToLocalStorage(false);
+            const newAchievement = {
+                id: 'ach-' + Date.now(),
+                ...payload,
+                likes: 1,
+                likedByMe: false,
+                principalPraise: ''
+            };
+            achievements.unshift(newAchievement);
+            
+            saveToLocalStorage(true); // حفظ وتحديث دائم
             renderGallery();
             renderAnnualTable();
             updateStats();
             closeModal('achievementModal');
-        }
-
-        function deleteAchievement(id) {
-            const target = achievements.find(a => a.id === id);
-            achievements = achievements.filter(a => a.id !== id);
-            if (currentUserAccount && target) logAuditEvent(currentUserAccount.name, `حذف مشاركة: ${target.title}`);
-            saveToLocalStorage(false);
-            renderGallery();
-            renderAnnualTable();
-            updateStats();
-            showToast('تم حذف المشاركة');
-        }
-
-        function openEncourageModal(id) {
-            const item = achievements.find(a => a.id === id);
-            if (!item) return;
-            document.getElementById('encourageItemId').value = id;
-            document.getElementById('encourageText').value = item.principalPraise || '';
-            document.getElementById('encourageModal').classList.remove('hidden');
-        }
-
-        function setQuickEncouragement(text) {
-            document.getElementById('encourageText').value = text;
-        }
-
-        function saveEncouragement() {
-            const id = document.getElementById('encourageItemId').value;
-            const text = document.getElementById('encourageText').value.trim();
-            const item = achievements.find(a => a.id === id);
-            if (item) {
-                item.principalPraise = text;
-                saveToLocalStorage(false);
-                renderGallery();
-                renderAnnualTable();
-                updateStats();
-                showToast('تم منح وسام التشجيع');
-            }
-            closeModal('encourageModal');
-        }
-
-        function removeEncouragement() {
-            const id = document.getElementById('encourageItemId').value;
-            const item = achievements.find(a => a.id === id);
-            if (item) {
-                item.principalPraise = '';
-                saveToLocalStorage(false);
-                renderGallery();
-                renderAnnualTable();
-                updateStats();
-                showToast('تمت إزالة الوسام');
-            }
-            closeModal('encourageModal');
         }
 
         function switchMainTab(tabName) {
@@ -2018,112 +1537,12 @@
             document.getElementById('statBadges').textContent = totalBadges;
         }
 
-        function printExhibition() {
-            window.print();
-        }
+        function printExhibition() { window.print(); }
 
-        function downloadCSVReport() {
-            let csvContent = '\uFEFF';
-            csvContent += 'م,عنوان المشروع,الطالبة,الصف,النوع,المعلمة,التاريخ,الفصل,الإعجابات,الاعتماد\n';
-
-            achievements.forEach((item, index) => {
-                const row = [
-                    index + 1,
-                    `"${item.title.replace(/"/g, '""')}"`,
-                    `"${formatStudentName(item.student).replace(/"/g, '""')}"`,
-                    `"${item.grade}"`,
-                    `"${item.category}"`,
-                    `"${item.teacher}"`,
-                    `"${item.hijriDate}"`,
-                    `"${item.semester}"`,
-                    item.likes,
-                    `"${(item.principalPraise || 'معتمد').replace(/"/g, '""')}"`
-                ].join(',');
-                csvContent += row + '\n';
-            });
-
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.setAttribute('href', url);
-            link.setAttribute('download', 'سجل_المعرض_1448هـ.csv');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showToast('تم تنزيل السجل بنجاح');
-        }
-
-        function openSettingsModal() {
-            document.getElementById('settingSchoolName').value = siteSettings.schoolName;
-            document.getElementById('settingOwnerName').value = siteSettings.ownerName;
-
-            const personalSec = document.getElementById('personalSecuritySection');
-            const openAdminBtn = document.getElementById('openAdminFromSettingsBtn');
-            const inviteBox = document.getElementById('inviteCodeEditBox');
-            document.getElementById('settingMyNewPin').value = '';
-
-            if (currentRole !== 'parent' && currentUserAccount) {
-                personalSec.classList.remove('hidden');
-                if (currentRole === 'principal' || currentRole === 'coordinator') {
-                    openAdminBtn.classList.remove('hidden');
-                    inviteBox.classList.remove('hidden');
-                    document.getElementById('settingSchoolInviteCode').value = authSystem.schoolInviteCode;
-                } else {
-                    openAdminBtn.classList.add('hidden');
-                    inviteBox.classList.add('hidden');
-                }
-            } else {
-                personalSec.classList.add('hidden');
-            }
-
-            document.getElementById('settingsModal').classList.remove('hidden');
-        }
-
-        function saveSettings() {
-            const sName = document.getElementById('settingSchoolName').value.trim();
-            const oName = document.getElementById('settingOwnerName').value.trim();
-            if (sName) siteSettings.schoolName = sName;
-            if (oName) siteSettings.ownerName = oName;
-
-            if (currentRole !== 'parent' && currentUserAccount) {
-                const myNewPin = document.getElementById('settingMyNewPin').value.trim();
-                if (myNewPin && myNewPin.length >= 4) {
-                    currentUserAccount.pin = myNewPin;
-                    logAuditEvent(currentUserAccount.name, 'تحديث الرمز السري');
-                }
-                if (currentRole === 'principal' || currentRole === 'coordinator') {
-                    const inv = document.getElementById('settingSchoolInviteCode').value.trim();
-                    if (inv) authSystem.schoolInviteCode = inv;
-                }
-            }
-
-            applySettingsUI();
-            saveToLocalStorage(true);
-            closeModal('settingsModal');
-        }
-
-        function applySettingsUI() {
-            document.getElementById('footerSchoolName').textContent = siteSettings.schoolName;
-            document.getElementById('copyrightOwnerDisplay').textContent = siteSettings.ownerName;
-        }
-
-        function resetDemoData() {
-            achievements = [...DEFAULT_ACHIEVEMENTS];
-            saveToLocalStorage(false);
-            renderGallery();
-            renderAnnualTable();
-            updateStats();
-            closeModal('settingsModal');
-            showToast('تمت استعادة البيانات الافتراضية');
-        }
-
-        function openGovernanceModal() {
-            document.getElementById('governanceModal').classList.remove('hidden');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
+        function openSettingsModal() { document.getElementById('settingsModal').classList.remove('hidden'); }
+        function saveSettings() { saveToLocalStorage(true); closeModal('settingsModal'); }
+        function openGovernanceModal() { document.getElementById('governanceModal').classList.remove('hidden'); }
+        function closeModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
 
         let toastTimer;
         function showToast(message, isError = false) {
