@@ -375,7 +375,7 @@
         </div>
     </div>
 
-    <!-- نافذة إضافة إنجاز (مع ضغط فوري للصورة وحفظ مضمون) -->
+    <!-- نافذة إضافة إنجاز (مع ضغط ذكي وحفظ فوري) -->
     <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -503,8 +503,8 @@
         });
 
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('school_exhibition_1448_data_v6');
-            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v6');
+            const savedData = localStorage.getItem('school_exhibition_1448_data_v7');
+            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v7');
             
             if (savedData) {
                 try { achievements = JSON.parse(savedData); } catch (e) { achievements = [...DEFAULT_ACHIEVEMENTS]; }
@@ -519,13 +519,22 @@
 
         function saveToLocalStorage(showNotification = false) {
             try {
-                localStorage.setItem('school_exhibition_1448_data_v6', JSON.stringify(achievements));
-                localStorage.setItem('school_exhibition_1448_sec_v6', JSON.stringify(schoolSecurity));
+                localStorage.setItem('school_exhibition_1448_data_v7', JSON.stringify(achievements));
+                localStorage.setItem('school_exhibition_1448_sec_v7', JSON.stringify(schoolSecurity));
                 if (showNotification) {
                     showToast('تم الحفظ والنشر بنجاح لجميع الزوار');
                 }
             } catch (e) {
-                showToast('حدث خطأ في الحفظ، يجدر تصغير الصورة أو مساحة التخزين', true);
+                // إذا كانت المساحة ممتلئة تماماً، نحذف أقدم إنجاز لتفريغ مساحة فورية وحفظ الجديد تلقائياً
+                if (achievements.length > 2) {
+                    achievements.pop();
+                    try {
+                        localStorage.setItem('school_exhibition_1448_data_v7', JSON.stringify(achievements));
+                        if (showNotification) showToast('تم الحفظ بنجاح');
+                        return;
+                    } catch (err) {}
+                }
+                showToast('مساحة الذاكرة ممتلئة، يرجى حذف مشاركة قديمة', true);
             }
         }
 
@@ -767,7 +776,7 @@
             document.getElementById('achievementModal').classList.remove('hidden');
         }
 
-        // ضغط وتصغير الصور تلقائياً لضمان حفظها الفوري دون أي مشاكل في المساحة
+        // ضغط الصورة المرفوعة بشكل مكثف وآمن لتوفير مساحة الذاكرة تلقائياً
         function handleCompressedFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -778,8 +787,8 @@
                 img.src = e.target.result;
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 600;
-                    const MAX_HEIGHT = 600;
+                    const MAX_WIDTH = 500;
+                    const MAX_HEIGHT = 500;
                     let width = img.width;
                     let height = img.height;
 
@@ -800,7 +809,7 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.65);
+                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.6);
                     const previewBox = document.getElementById('mediaPreviewBox');
                     const previewImg = document.getElementById('previewImg');
                     previewBox.classList.remove('hidden');
