@@ -143,11 +143,6 @@
                         <i class="fa-solid fa-right-to-bracket text-[10px]"></i>
                         <span id="authBtnText">دخول الإدارة</span>
                     </button>
-
-                    <button onclick="openAchievementModal()" id="addAchievementBtn" class="hidden bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-2.5 py-1 rounded-lg text-[11px] transition border border-emerald-500 flex items-center gap-1">
-                        <i class="fa-solid fa-circle-plus text-[10px]"></i>
-                        <span>إضافة إنجاز</span>
-                    </button>
                 </div>
             </div>
 
@@ -375,86 +370,6 @@
         </div>
     </div>
 
-    <!-- نافذة إضافة إنجاز (تتقبل روابط Google Drive أو أي روابط صور مباشرة) -->
-    <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
-            <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
-                <h3 class="font-extrabold text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-sparkles text-gold-400"></i>
-                    <span>إضافة إنجاز جديد للمعرض</span>
-                </h3>
-                <button onclick="closeModal('achievementModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <form id="achievementForm" onsubmit="saveAchievement(event)" class="p-4 space-y-3 max-h-[80vh] overflow-y-auto text-xs">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="sm:col-span-2">
-                        <label class="block font-bold text-royal-900 mb-0.5">عنوان الإنجاز / المشاركة *</label>
-                        <input type="text" id="fieldTitle" required placeholder="مثال: المشاركة بأسبوع الفضاء" class="w-full border border-slate-300 rounded-xl px-3 py-2">
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">اسم الطالبة *</label>
-                        <input type="text" id="fieldStudent" required placeholder="رسيل الحربي" class="w-full border border-slate-300 rounded-xl px-3 py-2">
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">الصف الدراسي *</label>
-                        <select id="fieldGrade" required class="w-full border border-slate-300 rounded-xl px-3 py-2 bg-white">
-                            <option value="الصف الأول الابتدائي">الصف الأول الابتدائي</option>
-                            <option value="الصف الثاني الابتدائي">الصف الثاني الابتدائي</option>
-                            <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي</option>
-                            <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي</option>
-                            <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي</option>
-                            <option value="الصف السادس الابتدائي" selected>الصف السادس الابتدائي</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">نوع المشاركة *</label>
-                        <select id="fieldCategory" required class="w-full border border-slate-300 rounded-xl px-3 py-2 bg-white">
-                            <option value="العلوم والتقنية">العلوم والتقنية</option>
-                            <option value="الثقافة والفنون">الثقافة والفنون</option>
-                            <option value="النشاط الكشفي">النشاط الكشفي</option>
-                            <option value="المواطنة والحياة">المواطنة والحياة</option>
-                            <option value="الرياضة والصحة">الرياضة والصحة</option>
-                            <option value="الأيام والمناسبات">الأيام والمناسبات</option>
-                            <option value="أخرى">أخرى</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">المعلمة المشرفة *</label>
-                        <input type="text" id="fieldTeacher" required value="فاطمه الحربي" class="w-full border border-slate-300 rounded-xl px-3 py-2">
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">التاريخ الهجري (1448 هـ) *</label>
-                        <input type="text" id="fieldHijriDate" required value="15 ربيع الأول 1448 هـ" class="w-full border border-slate-300 rounded-xl px-3 py-2">
-                    </div>
-                </div>
-
-                <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-1.5">
-                    <label class="font-bold text-royal-900 text-[11px] block">رابط الصورة (Google Drive أو رابط مباشر) *</label>
-                    <input type="url" id="fieldMediaUrl" required placeholder="الصقي رابط Google Drive هنا..." class="w-full border border-slate-300 rounded-xl px-3 py-2 text-left" dir="ltr">
-                    <p class="text-[10px] text-slate-500">ضعي رابط مشاركة Google Drive (وتأكدس أنه متاح للجميع)، أو أي رابط صورة مباشر لضمان الظهور الفوري لولي الأمر دون أي مشاكل ذاكرة.</p>
-                </div>
-
-                <div>
-                    <label class="block font-bold text-royal-900 mb-0.5">نبذة عن الإنجاز</label>
-                    <textarea id="fieldDescription" rows="2" placeholder="وصف موجز للمشاركة..." class="w-full border border-slate-300 rounded-xl px-3 py-2">مشاركة مدرسية مميزة ضمن خطة الأنشطة.</textarea>
-                </div>
-
-                <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
-                    <button type="button" onclick="closeModal('achievementModal')" class="px-3 py-2 font-bold text-slate-600">إلغاء</button>
-                    <button type="submit" class="bg-emerald-800 hover:bg-emerald-700 text-white font-bold px-5 py-2 rounded-xl transition shadow">
-                        حفظ ونشر مباشر لولي الأمر
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <!-- إشعار Toast -->
     <div id="toastBox" class="fixed bottom-4 left-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
         <div class="bg-royal-900 text-white border-r-4 border-gold-500 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-bold">
@@ -464,17 +379,31 @@
     </div>
 
     <script>
-        const DEFAULT_ACHIEVEMENTS = [
+        {/* قائمة الإنجازات الرسمية والدائمة التي تظهر مباشرة لولي الأمر والزوار للجميع */}
+        const ACHIEVEMENTS_DATABASE = [
             {
-                id: 'ach-1',
-                title: 'المشاركة باسبوع الفضاء',
+                id: 'ach-2',
+                title: 'المشاركة بأسبوع الفضاء العالمي',
                 student: 'رسيل الحربي',
                 grade: 'الصف السادس الابتدائي',
                 category: 'العلوم والتقنية',
                 teacher: 'فاطمه الحربي',
                 hijriDate: '15 ربيع الأول 1448 هـ',
+                mediaUrl: 'https://i.postimg.cc/CKzXRNwb/IMG-3831.jpg',
+                description: 'مشاركة مدرسية مميزة ورسمية ضمن خطة الأنشطة وأسبوع الفضاء.',
+                likes: 1,
+                likedByMe: false
+            },
+            {
+                id: 'ach-1',
+                title: 'معرض العلوم والتقنية والمجموعة الشمسية',
+                student: 'أروى الحربي',
+                grade: 'الصف السادس الابتدائي',
+                category: 'العلوم والتقنية',
+                teacher: 'فاطمه الحربي',
+                hijriDate: '10 ربيع الأول 1448 هـ',
                 mediaUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
-                description: 'مشاركة مدرسية مميزة ضمن خطة الأنشطة وأسبوع الفضاء العالمي.',
+                description: 'مشاركة مدرسية مميزة ضمن خطة الأنشطة.',
                 likes: 45,
                 likedByMe: false
             }
@@ -491,59 +420,33 @@
         };
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadFromLocalStorage();
+            loadAchievements();
             updateRoleUI();
             renderGallery();
             renderAnnualTable();
             updateStats();
         });
 
-        function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('school_exhibition_1448_data_v10');
-            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v10');
-            
-            if (savedData) {
-                try { achievements = JSON.parse(savedData); } catch (e) { achievements = [...DEFAULT_ACHIEVEMENTS]; }
-            } else {
-                achievements = [...DEFAULT_ACHIEVEMENTS];
-            }
-
-            if (savedSec) {
-                try { schoolSecurity = JSON.parse(savedSec); } catch (e) {}
-            }
-        }
-
-        function saveToLocalStorage(showNotification = false) {
+        function loadAchievements() {
+            // دمج الإنجازات الرسمية الثابتة مع أي إنجازات محفوظة محلياً
+            let saved = [];
             try {
-                localStorage.setItem('school_exhibition_1448_data_v10', JSON.stringify(achievements));
-                localStorage.setItem('school_exhibition_1448_sec_v10', JSON.stringify(schoolSecurity));
-                if (showNotification) {
-                    showToast('تم الحفظ والنشر بنجاح لجميع الزوار');
-                }
-            } catch (e) {
-                showToast('حدث خطأ في الحفظ', true);
-            }
+                const local = localStorage.getItem('school_exhibition_1448_data_v11');
+                if (local) saved = JSON.parse(local);
+            } catch (e) {}
+
+            // الدمج بحيث تكون الإنجازات الثابتة هي الأساس دائماً لتظهر لولي الأمر
+            const map = new Map();
+            [...saved, ...ACHIEVEMENTS_DATABASE].forEach(item => {
+                if (!map.has(item.id)) map.set(item.id, item);
+            });
+            achievements = Array.from(map.values());
         }
 
-        // دالة ذكية لتحويل روابط Google Drive العادية إلى روابط عرض مباشر للصورة
-        function formatDriveUrl(url) {
-            if (!url) return '';
-            if (url.includes('drive.google.com')) {
-                let fileId = '';
-                if (url.includes('/file/d/')) {
-                    const parts = url.split('/file/d/');
-                    if (parts.length > 1) {
-                        fileId = parts[1].split('/')[0];
-                    }
-                } else if (url.includes('id=')) {
-                    const urlParams = new URLSearchParams(url.split('?')[1]);
-                    fileId = urlParams.get('id');
-                }
-                if (fileId) {
-                    return `https://drive.google.com/uc?export=view&id=${fileId}`;
-                }
-            }
-            return url;
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('school_exhibition_1448_data_v11', JSON.stringify(achievements));
+            } catch (e) {}
         }
 
         function togglePrivacyMask() {
@@ -625,26 +528,22 @@
             }
 
             schoolSecurity.adminPin = newPin;
-            saveToLocalStorage(false);
             closeModal('recoveryModal');
-            showToast('تم تحديث الرمز السري بنجاح، يمكنك الدخول به الآن');
+            showToast('تم تحديث الرمز السري بنجاح');
         }
 
         function updateRoleUI() {
             const labelEl = document.getElementById('currentRoleLabel');
             const dot = document.getElementById('roleIndicatorDot');
-            const addBtn = document.getElementById('addAchievementBtn');
             const authBtnText = document.getElementById('authBtnText');
 
             if (currentRole === 'parent') {
                 labelEl.textContent = 'ولي أمر / زائر';
                 dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
-                addBtn.classList.add('hidden');
                 authBtnText.textContent = 'دخول الإدارة';
             } else {
                 labelEl.textContent = 'أ. فاطمه الحربي (إدارة)';
                 dot.className = 'w-2 h-2 rounded-full bg-gold-400 animate-pulse';
-                addBtn.classList.remove('hidden');
                 authBtnText.textContent = 'تسجيل خروج';
             }
         }
@@ -691,19 +590,10 @@
             }
 
             emptyState.classList.add('hidden');
-            const isAdmin = currentRole === 'admin';
 
             grid.innerHTML = filtered.map(item => {
                 const displayStudent = formatStudentName(item.student);
                 const mediaElement = `<img src="${item.mediaUrl}" alt="${item.title}" class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">`;
-
-                const adminControls = isAdmin ? `
-                    <div class="pt-2.5 mt-2.5 border-t border-slate-100 flex justify-end no-print">
-                        <button onclick="deleteAchievement('${item.id}')" class="bg-red-50 hover:bg-red-600 hover:text-white text-red-600 font-bold py-1 px-3 rounded-lg text-[11px] transition">
-                            <i class="fa-solid fa-trash"></i> حذف المشاركة
-                        </button>
-                    </div>
-                ` : '';
 
                 return `
                     <article class="gallery-card group bg-white rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
@@ -756,7 +646,6 @@
                                     <span>إعجاب (${item.likes})</span>
                                 </button>
                             </div>
-                            ${adminControls}
                         </div>
                     </article>
                 `;
@@ -768,59 +657,9 @@
             if (!item) return;
             item.likedByMe = !item.likedByMe;
             item.likes += item.likedByMe ? 1 : -1;
-            saveToLocalStorage(false);
+            saveToLocalStorage();
             renderGallery();
             updateStats();
-        }
-
-        function openAchievementModal() {
-            if (currentRole !== 'admin') {
-                openLoginModal();
-                return;
-            }
-            document.getElementById('achievementForm').reset();
-            document.getElementById('achievementModal').classList.remove('hidden');
-        }
-
-        function saveAchievement(event) {
-            event.preventDefault();
-            const rawUrl = document.getElementById('fieldMediaUrl').value.trim();
-            if (!rawUrl) {
-                showToast('يرجى إدخال رابط الصورة', true);
-                return;
-            }
-
-            const formattedUrl = formatDriveUrl(rawUrl);
-
-            const payload = {
-                id: 'ach-' + Date.now(),
-                title: document.getElementById('fieldTitle').value.trim(),
-                student: document.getElementById('fieldStudent').value.trim(),
-                grade: document.getElementById('fieldGrade').value,
-                category: document.getElementById('fieldCategory').value,
-                teacher: document.getElementById('fieldTeacher').value.trim(),
-                hijriDate: document.getElementById('fieldHijriDate').value.trim(),
-                mediaUrl: formattedUrl,
-                description: document.getElementById('fieldDescription').value.trim(),
-                likes: 1,
-                likedByMe: false
-            };
-
-            achievements.unshift(payload);
-            saveToLocalStorage(true);
-            renderGallery();
-            renderAnnualTable();
-            updateStats();
-            closeModal('achievementModal');
-        }
-
-        function deleteAchievement(id) {
-            achievements = achievements.filter(a => a.id !== id);
-            saveToLocalStorage(true);
-            renderGallery();
-            renderAnnualTable();
-            updateStats();
-            showToast('تم حذف المشاركة بنجاح');
         }
 
         function switchMainTab(tabName) {
