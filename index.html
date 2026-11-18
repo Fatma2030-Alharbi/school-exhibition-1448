@@ -78,4 +78,274 @@
 
     <!-- رأس الصفحة -->
     <header class="bg-royal-900 text-white shadow-lg sticky top-0 z-40 border-b-2 border-gold-500">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-royal-900 shadow shrink-0 border border-white/20 text-lg">
+                        <i class="fa-solid fa-images"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-white">
+                            معرض إنجازات وأنشطة الطالبات
+                        </h1>
+                        <p class="text-slate-300 text-[11px] flex items-center gap-1.5">
+                            <span>الابتدائية الرابعة برياض الخبراء</span>
+                            <span class="text-gold-400">•</span>
+                            <span class="text-gold-400 font-medium">1448 هـ</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 no-print">
+                    <!-- زر إضافة إنجاز (يظهر فقط عند تسجيل الدخول) -->
+                    <button id="addBtn" onclick="openAddModal()" class="hidden bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-xl text-xs transition border border-emerald-500 shadow flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-plus"></i>
+                        <span>إضافة صورة للمعرض</span>
+                    </button>
+
+                    <!-- زر تسجيل الدخول للإدارة -->
+                    <button onclick="handleAuthClick()" id="authBtn" class="bg-gold-500 hover:bg-gold-400 text-royal-900 font-bold px-3 py-1.5 rounded-xl text-xs transition shadow flex items-center gap-1.5">
+                        <i class="fa-solid fa-lock text-[11px]"></i>
+                        <span id="authBtnText">دخول الإدارة</span>
+                    </button>
+
+                    <button onclick="printGallery()" class="bg-royal-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-xl text-xs transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-print text-gold-400"></i>
+                        <span>طباعة</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي (معرض الصور النظيف) -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6">
         
+        <div class="text-center mb-6 no-print">
+            <h2 class="text-sm font-bold text-slate-600">أروقة الإبداع الفني والعلمي للطالبات</h2>
+            <div class="w-16 h-0.5 bg-gold-500 mx-auto mt-2"></div>
+        </div>
+
+        <section id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- الصور تعرض هنا تلقائياً -->
+        </section>
+    </main>
+
+    <!-- التذييل -->
+    <footer class="bg-royal-900 text-slate-300 border-t-4 border-gold-500 mt-12">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 text-xs flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <p class="text-white font-extrabold">معرض الأنشطة المدرسية المميزة</p>
+                <p class="text-slate-400 text-[11px]">الإدارة العامة للتعليم بالقصيم • 1448 هـ</p>
+            </div>
+            <div class="text-gold-400 font-medium">
+                إشراف رائدة النشاط: أ. فاطمه الحربي
+            </div>
+        </div>
+    </footer>
+
+    <!-- نافذة تسجيل الدخول -->
+    <div id="loginModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border-2 border-gold-500">
+            <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
+                <h3 class="font-extrabold text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-gold-400"></i>
+                    <span>بوابة حماية الإدارة</span>
+                </h3>
+                <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-4 space-y-3 text-xs">
+                <p class="text-slate-600 bg-pearl p-2.5 rounded-xl border border-slate-200 text-[11px]">
+                    أدخلي الرمز السري للإدارة (الافتراضي: 1448)
+                </p>
+                <div>
+                    <label class="block font-bold text-royal-900 mb-1">الرمز السري:</label>
+                    <input type="password" id="loginPasscode" placeholder="أدخل الرمز السري" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-gold-500">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('loginModal')" class="px-3 py-1.5 font-bold text-slate-600">إلغاء</button>
+                    <button type="button" onclick="confirmLogin()" class="bg-royal-900 text-gold-400 font-extrabold px-4 py-1.5 rounded-xl shadow">دخول</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة صورة سريعة -->
+    <div id="addModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border-2 border-gold-500">
+            <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
+                <h3 class="font-extrabold text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-plus text-gold-400"></i>
+                    <span>إضافة صورة جديدة للمعرض</span>
+                </h3>
+                <button onclick="closeModal('addModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-4 space-y-3 text-xs">
+                <div>
+                    <label class="block font-bold text-royal-900 mb-1">عنوان النشاط / الوصف البسيط:</label>
+                    <input type="text" id="newTitle" placeholder="مثال: تفعيل أسبوع الفضاء العالمي" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs">
+                </div>
+                <div>
+                    <label class="block font-bold text-royal-900 mb-1">رابط الصورة المباشر (مثل Postimages):</label>
+                    <input type="text" id="newUrl" placeholder="https://i.postimg.cc/..." class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('addModal')" class="px-3 py-1.5 font-bold text-slate-600">إلغاء</button>
+                    <button type="button" onclick="addNewPhoto()" class="bg-emerald-700 text-white font-bold px-4 py-1.5 rounded-xl shadow">حفظ وعرض</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تكبير الصورة (LightBox) -->
+    <div id="imageModal" class="fixed inset-0 bg-royal-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 cursor-pointer" onclick="closeImageModal()">
+        <div class="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl shadow-2xl border-2 border-gold-500 bg-black/50" onclick="event.stopPropagation()">
+            <button onclick="closeImageModal()" class="absolute top-3 left-3 bg-royal-900/80 hover:bg-royal-900 text-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition z-10 text-base">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="modalImg" class="max-w-full max-h-[85vh] object-contain mx-auto block" alt="عرض مكبر">
+        </div>
+    </div>
+
+    <!-- إشعار Toast -->
+    <div id="toastBox" class="fixed bottom-4 left-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
+        <div class="bg-royal-900 text-white border-r-4 border-gold-500 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-bold">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+            <span id="toastMessage">تم بنجاح</span>
+        </div>
+    </div>
+
+    <script>
+        let exhibitionPhotos = [
+            {
+                id: 'photo-1',
+                title: 'تفعيل أسبوع الفضاء العالمي - تلوين الكواكب والمجموعة الشمسية',
+                url: 'https://i.postimg.cc/CKzXRNwb/IMG-3831.jpg'
+            },
+            {
+                id: 'photo-2',
+                title: 'مجسمات المجموعة الشمسية وإبداعات الطالبات',
+                url: 'https://i.postimg.cc/1a5616/placeholder.jpg' // يمكن تحديثها أو استبدالها برابطك
+            }
+        ];
+
+        let isAdmin = false;
+        const adminPin = '1448';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadPhotos();
+            renderPureGallery();
+        });
+
+        function loadPhotos() {
+            try {
+                const saved = localStorage.getItem('pure_gallery_photos_v1');
+                if (saved) exhibitionPhotos = JSON.parse(saved);
+            } catch(e) {}
+        }
+
+        function savePhotos() {
+            try {
+                localStorage.setItem('pure_gallery_photos_v1', JSON.stringify(exhibitionPhotos));
+            } catch(e) {}
+        }
+
+        function renderPureGallery() {
+            const grid = document.getElementById('galleryGrid');
+            
+            grid.innerHTML = exhibitionPhotos.map(photo => `
+                <article class="gallery-card rounded-2xl overflow-hidden shadow-sm flex flex-col group cursor-pointer relative" onclick="openImageModal('${photo.url}')">
+                    <div class="relative overflow-hidden bg-slate-100 aspect-[4/3]">
+                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-royal-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-magnifying-glass-plus text-gold-400"></i> ${photo.title}
+                            </span>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function handleAuthClick() {
+            if (isAdmin) {
+                isAdmin = false;
+                document.getElementById('addBtn').classList.add('hidden');
+                document.getElementById('authBtnText').textContent = 'دخول الإدارة';
+                showToast('تم تسجيل الخروج من الإدارة');
+            } else {
+                document.getElementById('loginPasscode').value = '';
+                document.getElementById('loginModal').classList.remove('hidden');
+            }
+        }
+
+        function confirmLogin() {
+            const val = document.getElementById('loginPasscode').value.trim();
+            if (val === adminPin) {
+                isAdmin = true;
+                document.getElementById('addBtn').classList.remove('hidden');
+                document.getElementById('authBtnText').textContent = 'تسجيل خروج';
+                closeModal('loginModal');
+                showToast('أهلاً بكِ أ. فاطمه، تم تفعيل وضع الإدارة');
+            } else {
+                showToast('الرمز السري غير صحيح', true);
+            }
+        }
+
+        function openAddModal() {
+            document.getElementById('newTitle').value = '';
+            document.getElementById('newUrl').value = '';
+            document.getElementById('addModal').classList.remove('hidden');
+        }
+
+        function addNewPhoto() {
+            const title = document.getElementById('newTitle').value.trim() || 'إنشاط مدرسي مميز';
+            const url = document.getElementById('newUrl').value.trim();
+
+            if (!url) {
+                showToast('يرجى إدخال رابط الصورة المباشر', true);
+                return;
+            }
+
+            exhibitionPhotos.unshift({
+                id: 'photo-' + Date.now(),
+                title: title,
+                url: url
+            });
+
+            savePhotos();
+            renderPureGallery();
+            closeModal('addModal');
+            showToast('تمت إضافة الصورة بنجاح');
+        }
+
+        function openImageModal(url) {
+            document.getElementById('modalImg').src = url;
+            document.getElementById('imageModal').classList.remove('hidden');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function printGallery() {
+            window.print();
+        }
+
+        let toastTimer;
+        function showToast(message, isError = false) {
+            const box = document.getElementById('toastBox');
+            const msg = document.getElementById('toastMessage');
+            msg.textContent = message;
+            box.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { box.classList.add('translate-y-20', 'opacity-0'); }, 3000);
+        }
+    </script>
+</body>
+</html>
