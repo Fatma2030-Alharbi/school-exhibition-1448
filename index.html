@@ -375,7 +375,7 @@
         </div>
     </div>
 
-    <!-- نافذة إضافة إنجاز (مع ضغط ذكي وحفظ فوري) -->
+    <!-- نافذة إضافة إنجاز (تعتمد على رابط الصورة المباشر لضمان السلاسة وحفظ جميع المشاركات) -->
     <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -434,13 +434,10 @@
                     </div>
                 </div>
 
-                <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
-                    <label class="font-bold text-royal-900 text-[11px] block">اختر صورة الإنجاز من ألبوم الهاتف أو الكاميرا *</label>
-                    <input type="file" id="fieldMediaFile" accept="image/*" required onchange="handleCompressedFileUpload(event)" class="w-full text-[11px] text-slate-600 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:font-bold file:bg-royal-900 file:text-gold-400">
-                    
-                    <div id="mediaPreviewBox" class="hidden mt-1.5 rounded-xl overflow-hidden border border-slate-300 bg-black/5 max-h-40 flex items-center justify-center">
-                        <img id="previewImg" class="max-h-40 object-contain" alt="معاينة">
-                    </div>
+                <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-1.5">
+                    <label class="font-bold text-royal-900 text-[11px] block">رابط صورة الإنجاز المباشر *</label>
+                    <input type="url" id="fieldMediaUrl" required placeholder="https://images.unsplash.com/photo-..." class="w-full border border-slate-300 rounded-xl px-3 py-2 text-left" dir="ltr">
+                    <p class="text-[10px] text-slate-500">ضعي رابط الصورة المباشر هنا (مثل صور Unsplash أو أي رابط صورة مباشر لضمان الظهور الفوري لولي الأمر دون أي مشاكل مساحة).</p>
                 </div>
 
                 <div>
@@ -487,7 +484,6 @@
         let currentRole = 'parent';
         let currentGradeFilter = 'الكل';
         let privacyMaskEnabled = true;
-        let uploadedMediaDataUrl = '';
         
         let schoolSecurity = {
             adminPin: '1448',
@@ -503,8 +499,8 @@
         });
 
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('school_exhibition_1448_data_v7');
-            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v7');
+            const savedData = localStorage.getItem('school_exhibition_1448_data_v8');
+            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v8');
             
             if (savedData) {
                 try { achievements = JSON.parse(savedData); } catch (e) { achievements = [...DEFAULT_ACHIEVEMENTS]; }
@@ -519,22 +515,13 @@
 
         function saveToLocalStorage(showNotification = false) {
             try {
-                localStorage.setItem('school_exhibition_1448_data_v7', JSON.stringify(achievements));
-                localStorage.setItem('school_exhibition_1448_sec_v7', JSON.stringify(schoolSecurity));
+                localStorage.setItem('school_exhibition_1448_data_v8', JSON.stringify(achievements));
+                localStorage.setItem('school_exhibition_1448_sec_v8', JSON.stringify(schoolSecurity));
                 if (showNotification) {
                     showToast('تم الحفظ والنشر بنجاح لجميع الزوار');
                 }
             } catch (e) {
-                // إذا كانت المساحة ممتلئة تماماً، نحذف أقدم إنجاز لتفريغ مساحة فورية وحفظ الجديد تلقائياً
-                if (achievements.length > 2) {
-                    achievements.pop();
-                    try {
-                        localStorage.setItem('school_exhibition_1448_data_v7', JSON.stringify(achievements));
-                        if (showNotification) showToast('تم الحفظ بنجاح');
-                        return;
-                    } catch (err) {}
-                }
-                showToast('مساحة الذاكرة ممتلئة، يرجى حذف مشاركة قديمة', true);
+                showToast('حدث خطأ في الحفظ', true);
             }
         }
 
@@ -771,58 +758,14 @@
                 return;
             }
             document.getElementById('achievementForm').reset();
-            uploadedMediaDataUrl = '';
-            document.getElementById('mediaPreviewBox').classList.add('hidden');
             document.getElementById('achievementModal').classList.remove('hidden');
-        }
-
-        // ضغط الصورة المرفوعة بشكل مكثف وآمن لتوفير مساحة الذاكرة تلقائياً
-        function handleCompressedFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 500;
-                    const MAX_HEIGHT = 500;
-                    let width = img.width;
-                    let height = img.height;
-
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.6);
-                    const previewBox = document.getElementById('mediaPreviewBox');
-                    const previewImg = document.getElementById('previewImg');
-                    previewBox.classList.remove('hidden');
-                    previewImg.src = uploadedMediaDataUrl;
-                };
-            };
-            reader.readAsDataURL(file);
         }
 
         function saveAchievement(event) {
             event.preventDefault();
-            if (!uploadedMediaDataUrl) {
-                showToast('يرجى اختيار صورة الإنجاز', true);
+            const mediaUrl = document.getElementById('fieldMediaUrl').value.trim();
+            if (!mediaUrl) {
+                showToast('يرجى إدخال رابط الصورة', true);
                 return;
             }
 
@@ -834,14 +777,14 @@
                 category: document.getElementById('fieldCategory').value,
                 teacher: document.getElementById('fieldTeacher').value.trim(),
                 hijriDate: document.getElementById('fieldHijriDate').value.trim(),
-                mediaUrl: uploadedMediaDataUrl,
+                mediaUrl: mediaUrl,
                 description: document.getElementById('fieldDescription').value.trim(),
                 likes: 1,
                 likedByMe: false
             };
 
             achievements.unshift(payload);
-            saveToLocalStorage(true); // حفظ نهائي يظهر لولي الأمر فوراً
+            saveToLocalStorage(true);
             renderGallery();
             renderAnnualTable();
             updateStats();
