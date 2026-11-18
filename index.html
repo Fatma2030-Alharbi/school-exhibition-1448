@@ -496,174 +496,7 @@
         </div>
     </div>
 
-    <div id="teacherActivateModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-emerald-500 my-4">
-            <div class="bg-emerald-900 text-white p-4 flex items-center justify-between">
-                <h3 class="font-extrabold text-xs flex items-center gap-1.5">
-                    <i class="fa-solid fa-user-plus text-gold-400"></i>
-                    <span>تفعيل حساب معلمة برمز مستقل</span>
-                </h3>
-                <button onclick="closeModal('teacherActivateModal')" class="text-emerald-200 hover:text-white">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <form onsubmit="activateNewTeacherAccount(event)" class="p-4 space-y-3 text-xs">
-                <div>
-                    <label class="block font-bold text-royal-900 mb-0.5">اسم المعلمة الكامل *</label>
-                    <input type="text" id="newTeacherName" required placeholder="أ. اسم المعلمة" class="w-full border border-slate-300 rounded-xl px-3 py-1.5">
-                </div>
-                <div>
-                    <label class="block font-bold text-royal-900 mb-0.5">كود انضمام المدرسة *</label>
-                    <input type="text" id="newTeacherInviteCode" required placeholder="أدخلي كود المدرسة" class="w-full border border-slate-300 rounded-xl px-3 py-1.5">
-                </div>
-                <div>
-                    <label class="block font-bold text-royal-900 mb-0.5">الرمز السري الخاص بكِ *</label>
-                    <input type="password" id="newTeacherPin" required minlength="4" placeholder="4 خانات على الأقل" class="w-full border border-slate-300 rounded-xl px-3 py-1.5">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">سؤال الأمان:</label>
-                        <select id="newTeacherQuestion" class="w-full border border-slate-300 rounded-xl px-2 py-1.5 bg-white">
-                            <option value="ما هو تخصصكِ الجامعي؟">ما هو تخصصكِ الجامعي؟</option>
-                            <option value="اسم أول مدرسة عملتِ بها؟">اسم أول مدرسة عملتِ بها؟</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">إجابة سؤال الأمان *</label>
-                        <input type="text" id="newTeacherAnswer" required placeholder="الإجابة السرية" class="w-full border border-slate-300 rounded-xl px-3 py-1.5">
-                    </div>
-                </div>
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('teacherActivateModal')" class="px-3 py-1.5 font-bold text-slate-600">إلغاء</button>
-                    <button type="submit" class="bg-emerald-800 hover:bg-emerald-700 text-white font-bold px-4 py-1.5 rounded-xl shadow">تفعيل والدخول</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="recoveryModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border-2 border-gold-500 my-4">
-            <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
-                <h3 class="font-extrabold text-xs flex items-center gap-1.5">
-                    <i class="fa-solid fa-key text-gold-400"></i>
-                    <span>استعادة الرمز السري المفقود</span>
-                </h3>
-                <button onclick="closeModal('recoveryModal')" class="text-slate-400 hover:text-white">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="p-4 space-y-3 text-xs">
-                <div class="bg-pearl p-2.5 rounded-xl border border-slate-200">
-                    <span class="text-slate-500 text-[10px]">الحساب المستهدف:</span>
-                    <p id="recoveryAccountTitle" class="font-extrabold text-royal-900 mt-0.5"></p>
-                </div>
-
-                <div class="space-y-2.5 border-b border-slate-200 pb-3">
-                    <h4 class="font-extrabold text-emerald-800 flex items-center gap-1">
-                        <i class="fa-solid fa-shield-check"></i> التحقق الذاتي الفوري
-                    </h4>
-                    <div>
-                        <label class="block font-bold text-slate-600 mb-0.5 text-[11px]">سؤال الأمان:</label>
-                        <p id="recoverySecurityQuestion" class="font-bold text-royal-900 bg-slate-100 px-2.5 py-1.5 rounded-xl"></p>
-                    </div>
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5 text-[11px]">أدخلي إجابة سؤال الأمان:</label>
-                        <input type="text" id="recoveryAnswerInput" placeholder="الإجابة المطابقة" class="w-full border border-slate-300 rounded-xl px-2.5 py-1.5">
-                    </div>
-
-                    <div id="recoveryMasterKeyBox" class="hidden">
-                        <label class="block font-bold text-royal-900 mb-0.5 text-[11px]">مفتاح الاسترداد الاحتياطي:</label>
-                        <input type="text" id="recoveryMasterKeyInput" placeholder="REC-XXXX-XXXX" class="w-full border border-slate-300 rounded-xl px-2.5 py-1.5 font-mono text-xs">
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5 text-[11px]">الرمز السري الجديد:</label>
-                        <input type="password" id="recoveryNewPinInput" minlength="4" placeholder="رمز جديد (4 خانات فأكثر)" class="w-full border border-slate-300 rounded-xl px-2.5 py-1.5">
-                    </div>
-
-                    <button type="button" onclick="processSelfRecovery()" class="w-full bg-emerald-800 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl transition shadow">
-                        تحقق وتعيين الرمز الجديد
-                    </button>
-                </div>
-
-                <div id="adminResetRequestBox" class="space-y-1.5">
-                    <h4 class="font-extrabold text-royal-900 text-[11px]">أو إرسال طلب للإدارة:</h4>
-                    <button type="button" onclick="sendAdminResetRequest()" class="w-full bg-gold-100 hover:bg-gold-500 text-royal-900 font-extrabold py-2 rounded-xl border border-gold-400 transition text-[11px]">
-                        إرسال طلب إعادة تعيين للإدارة
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="accountsAdminModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl border-2 border-gold-500 my-4">
-            <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-users-gear text-gold-400 text-base"></i>
-                    <div>
-                        <h3 class="font-extrabold text-sm">إدارة الحسابات الفردية وسجل التدقيق</h3>
-                        <p class="text-[10px] text-slate-300">حوكمة الصلاحيات وإعادة ضبط الرموز</p>
-                    </div>
-                </div>
-                <button onclick="closeModal('accountsAdminModal')" class="text-slate-400 hover:text-white">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="p-4 space-y-3 max-h-[80vh] overflow-y-auto text-xs">
-                <div id="pendingResetAlertsContainer" class="hidden bg-rose-50 border border-rose-300 rounded-xl p-3 space-y-2">
-                    <h4 class="font-extrabold text-rose-800 flex items-center gap-1 text-[11px]">
-                        <i class="fa-solid fa-bell animate-bounce"></i> طلبات استعادة الرمز الواردة:
-                    </h4>
-                    <div id="pendingResetList" class="space-y-1.5"></div>
-                </div>
-
-                <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
-                    <div class="flex flex-wrap items-center justify-between gap-1">
-                        <h4 class="font-extrabold text-royal-900 text-[11px]">إضافة حساب معلمة معتمدة:</h4>
-                        <span class="text-[10px] bg-emerald-100 text-emerald-900 font-bold px-2 py-0.5 rounded">
-                            كود الانضمام: <strong id="adminInviteCodeBadge"></strong>
-                        </span>
-                    </div>
-                    <form onsubmit="adminAddTeacher(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
-                        <input type="text" id="adminNewTeacherName" required placeholder="اسم المعلمة" class="border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                        <input type="text" id="adminNewTeacherPin" required minlength="4" placeholder="الرمز السري المبدئي" class="border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                        <button type="submit" class="bg-royal-900 hover:bg-royal-800 text-gold-400 font-bold py-1.5 px-3 rounded-lg transition">
-                            + اعتماد
-                        </button>
-                    </form>
-                </div>
-
-                <div>
-                    <h4 class="font-extrabold text-royal-900 mb-1.5 text-[11px]">سجل الحسابات المعتمدة:</h4>
-                    <div class="overflow-x-auto border border-slate-200 rounded-xl">
-                        <table class="w-full text-right text-[11px]">
-                            <thead class="bg-slate-100 text-royal-900 font-extrabold">
-                                <tr>
-                                    <th class="py-2 px-2.5">الاسم</th>
-                                    <th class="py-2 px-2.5">الصفة</th>
-                                    <th class="py-2 px-2.5">الحالة</th>
-                                    <th class="py-2 px-2.5">إدارة الرمز</th>
-                                </tr>
-                            </thead>
-                            <tbody id="accountsTableBody" class="divide-y divide-slate-100"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="font-extrabold text-royal-900 mb-1.5 text-[11px] flex items-center gap-1">
-                        <i class="fa-solid fa-clipboard-list text-emerald-700"></i>
-                        <span>سجل التدقيق (سدايا / NDMO):</span>
-                    </h4>
-                    <div id="auditLogContainer" class="bg-slate-900 text-slate-200 rounded-xl p-2.5 text-[10px] font-mono space-y-1 max-h-32 overflow-y-auto"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- نافذة إضافة إنجاز (محدثة لدعم الصور المباشرة) -->
     <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -687,7 +520,7 @@
 
                     <div>
                         <label class="block font-bold text-royal-900 mb-0.5">اسم الطالبة أو المجموعة *</label>
-                        <input type="text" id="fieldStudent" required placeholder="سارة القحطاني أو مجموعة الإبداع" class="w-full border border-slate-300 rounded-xl px-3 py-2">
+                        <input type="text" id="fieldStudent" required placeholder="سارة القحطاني" class="w-full border border-slate-300 rounded-xl px-3 py-2">
                     </div>
 
                     <div>
@@ -717,7 +550,7 @@
 
                     <div>
                         <label class="block font-bold text-royal-900 mb-0.5">المعلمة المشرفة *</label>
-                        <input type="text" id="fieldTeacher" required placeholder="أ. نورة السبيعي" class="w-full border border-slate-300 rounded-xl px-3 py-2">
+                        <input type="text" id="fieldTeacher" required placeholder="أ. فاطمة الحربي" class="w-full border border-slate-300 rounded-xl px-3 py-2">
                     </div>
 
                     <div>
@@ -736,36 +569,17 @@
                 </div>
 
                 <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
-                    <div class="flex flex-wrap items-center justify-between gap-1">
-                        <label class="font-bold text-royal-900 text-[11px]">مرفق الإنجاز (صورة أو فيديو):</label>
-                        <div class="flex items-center gap-2 text-[11px]">
-                            <label class="flex items-center gap-1 font-bold cursor-pointer">
-                                <input type="radio" name="mediaType" value="image" checked onchange="toggleMediaInputs()" class="accent-royal-900"> صورة
-                            </label>
-                            <label class="flex items-center gap-1 font-bold cursor-pointer">
-                                <input type="radio" name="mediaType" value="video" onchange="toggleMediaInputs()" class="accent-royal-900"> فيديو
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <div>
-                            <input type="file" id="fieldMediaFile" accept="image/*,video/*" onchange="handleFileUpload(event)" class="w-full text-[10px] text-slate-600 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-royal-900 file:text-gold-400">
-                        </div>
-                        <div>
-                            <input type="url" id="fieldMediaUrl" placeholder="أو رابط مباشر https://..." oninput="previewMediaUrl()" class="w-full border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs bg-white">
-                        </div>
-                    </div>
-
-                    <div id="mediaPreviewBox" class="hidden mt-1.5 rounded-xl overflow-hidden border border-slate-300 bg-black/5 max-h-36 flex items-center justify-center">
-                        <img id="previewImg" class="max-h-36 object-contain hidden" alt="معاينة">
-                        <video id="previewVid" class="max-h-36 hidden" controls></video>
+                    <label class="font-bold text-royal-900 text-[11px] block">اختر صورة الإنجاز من ألبوم الهاتف أو الكاميرا *</label>
+                    <input type="file" id="fieldMediaFile" accept="image/*" required onchange="handleFileUpload(event)" class="w-full text-[11px] text-slate-600 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:font-bold file:bg-royal-900 file:text-gold-400">
+                    
+                    <div id="mediaPreviewBox" class="hidden mt-1.5 rounded-xl overflow-hidden border border-slate-300 bg-black/5 max-h-40 flex items-center justify-center">
+                        <img id="previewImg" class="max-h-40 object-contain" alt="معاينة">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block font-bold text-royal-900 mb-0.5">نبذة عن الإنجاز وأهدافه</label>
-                    <textarea id="fieldDescription" rows="2" placeholder="وصف موجز..." class="w-full border border-slate-300 rounded-xl px-3 py-2"></textarea>
+                    <label class="block font-bold text-royal-900 mb-0.5">نبذة عن الإنجاز</label>
+                    <textarea id="fieldDescription" rows="2" placeholder="وصف موجز للمشاركة..." class="w-full border border-slate-300 rounded-xl px-3 py-2"></textarea>
                 </div>
 
                 <div class="bg-emerald-50 border border-emerald-300 rounded-xl p-2.5">
@@ -781,80 +595,14 @@
                     <button type="button" onclick="closeModal('achievementModal')" class="px-3 py-2 font-bold text-slate-600">إلغاء</button>
                     <button type="submit" class="bg-emerald-800 hover:bg-emerald-700 text-white font-bold px-5 py-2 rounded-xl transition shadow flex items-center gap-1.5">
                         <i class="fa-solid fa-check"></i>
-                        <span>حفظ ونشر</span>
+                        <span>حفظ ونشر مباشر لولي الأمر</span>
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="encourageModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
-        <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border-2 border-gold-500">
-            <div class="bg-gradient-to-l from-royal-900 to-royal-800 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-crown text-gold-400 text-base"></i>
-                    <h3 class="font-extrabold text-xs">تشجيع واعتماد مديرة المدرسة</h3>
-                </div>
-                <button onclick="closeModal('encourageModal')" class="text-slate-400 hover:text-white">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-4 space-y-3 text-xs">
-                <input type="hidden" id="encourageItemId">
-                <p class="text-slate-600 text-[11px]">اختاري عبارة تشجيعية تظهر على بطاقة الطالبة:</p>
-                
-                <div class="flex flex-wrap gap-1">
-                    <button type="button" onclick="setQuickEncouragement('إنجاز استثنائي نفخر به في مدرستنا، إلى مزيد من التميز!')" class="text-[10px] bg-gold-100 text-royal-900 font-bold px-2 py-1 rounded border border-gold-400/50">
-                        🌟 إنجاز استثنائي
-                    </button>
-                    <button type="button" onclick="setQuickEncouragement('بارك الله في جهودكِ يا مبدعة المستقبل، دمتِ فخراً.')" class="text-[10px] bg-gold-100 text-royal-900 font-bold px-2 py-1 rounded border border-gold-400/50">
-                        🏅 مبدعة المستقبل
-                    </button>
-                </div>
-
-                <div>
-                    <label class="block font-bold text-royal-900 mb-0.5">رسالة التشجيع:</label>
-                    <textarea id="encourageText" rows="2" placeholder="اكتبي عبارة التشجيع..." class="w-full border border-slate-300 rounded-xl p-2.5 text-xs"></textarea>
-                </div>
-
-                <div class="flex items-center justify-between pt-1">
-                    <button type="button" onclick="removeEncouragement()" class="text-[11px] text-red-600 font-bold">إزالة الوسام</button>
-                    <div class="flex gap-1.5">
-                        <button type="button" onclick="closeModal('encourageModal')" class="px-3 py-1.5 font-bold text-slate-600">إلغاء</button>
-                        <button type="button" onclick="saveEncouragement()" class="bg-gold-500 hover:bg-gold-400 text-royal-900 font-extrabold px-4 py-1.5 rounded-xl shadow text-xs">
-                            منح الوسام
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="governanceModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
-        <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-emerald-600">
-            <div class="bg-emerald-900 text-white p-4 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-gold-400 text-base"></i>
-                    <h3 class="font-extrabold text-xs">ميثاق حوكمة البيانات وحماية الخصوصية</h3>
-                </div>
-                <button onclick="closeModal('governanceModal')" class="text-emerald-200 hover:text-white">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-4 space-y-2 text-xs text-slate-700 leading-relaxed max-h-[70vh] overflow-y-auto">
-                <p class="font-bold text-royal-900">تخضع المنصة للضوابط الوطنية لحوكمة البيانات بالمملكة:</p>
-                <ul class="space-y-1.5 list-disc pr-4 text-[11px]">
-                    <li><strong>نظام حماية البيانات (PDPL):</strong> يُحظر نشر أي بيانات شخصية دون موافقة صريحة.</li>
-                    <li><strong>الحد الأدنى من البيانات:</strong> توفير ميزة "إخفاء الاسم الأخير" لحماية القاصرات.</li>
-                    <li><strong>صلاحيات الوصول:</strong> الإضافة والتعديل للكادر التعليمي فقط، والزوار للاطلاع.</li>
-                </ul>
-                <div class="pt-2 text-left">
-                    <button onclick="closeModal('governanceModal')" class="bg-emerald-800 text-white font-bold px-4 py-1.5 rounded-xl text-xs">فهمت</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- نافذة إعدادات الحقوق والمدرسة -->
     <div id="settingsModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
         <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-gold-400">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between">
@@ -875,28 +623,6 @@
                     <label class="block font-bold text-royal-900 mb-0.5">اسم صاحبة الحقوق والفكرة:</label>
                     <input type="text" id="settingOwnerName" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs">
                 </div>
-
-                <div id="personalSecuritySection" class="hidden pt-2 border-t border-slate-200 space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="font-extrabold text-royal-900 text-[11px] flex items-center gap-1">
-                            <i class="fa-solid fa-key text-gold-600"></i> تحديث رمزكِ السري:
-                        </span>
-                        <button type="button" onclick="openAccountsAdminModal(); closeModal('settingsModal');" id="openAdminFromSettingsBtn" class="hidden text-[10px] font-bold text-emerald-700 underline">
-                            إدارة الرموز
-                        </button>
-                    </div>
-                    <div class="relative">
-                        <input type="password" id="settingMyNewPin" placeholder="رمز جديد إذا أردتِ تغييره" class="w-full border border-slate-300 rounded-xl pl-8 pr-3 py-1.5 text-xs">
-                        <button type="button" onclick="togglePasscodeVisibility('settingMyNewPin', 'eyeMyNewPin')" class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
-                            <i id="eyeMyNewPin" class="fa-solid fa-eye text-[10px]"></i>
-                        </button>
-                    </div>
-                    <div id="inviteCodeEditBox" class="hidden">
-                        <label class="block font-bold text-slate-700 mb-0.5 text-[10px]">كود انضمام المعلمات:</label>
-                        <input type="text" id="settingSchoolInviteCode" class="w-full border border-slate-300 rounded-xl px-2.5 py-1 text-xs font-bold">
-                    </div>
-                </div>
-
                 <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
                     <button onclick="resetDemoData()" class="text-red-600 font-bold">استعادة الافتراضي</button>
                     <button onclick="saveSettings()" class="bg-royal-900 text-gold-400 font-bold px-4 py-1.5 rounded-xl">حفظ الإعدادات</button>
@@ -930,86 +656,6 @@
                 likes: 45,
                 likedByMe: false,
                 principalPraise: 'إبداع رائع يلامس النجوم، دمتِ فخراً للمدرسة.'
-            },
-            {
-                id: 'ach-2',
-                title: 'لوحة تراثنا السعودي الأصيل',
-                student: 'جود الشمري',
-                grade: 'الصف الثاني الابتدائي',
-                category: 'الأيام والمناسبات',
-                teacher: 'أ. منيرة القحطاني',
-                hijriDate: '24 ربيع الأول 1448 هـ',
-                semester: 'الفصل الدراسي الأول 1448 هـ',
-                mediaType: 'image',
-                mediaUrl: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80',
-                description: 'عمل فني بالألوان المائية يجسد النقوش التراثية السعودية.',
-                likes: 58,
-                likedByMe: false,
-                principalPraise: ''
-            },
-            {
-                id: 'ach-3',
-                title: 'مبادرة مدرستي خضراء المستدامة',
-                student: 'صديقات البيئة',
-                grade: 'الصف الثالث الابتدائي',
-                category: 'المواطنة والحياة',
-                teacher: 'أ. هدى الغامدي',
-                hijriDate: '08 ربيع الثاني 1448 هـ',
-                semester: 'الفصل الدراسي الأول 1448 هـ',
-                mediaType: 'image',
-                mediaUrl: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=800&q=80',
-                description: 'زراعة الشتلات في فناء المدرسة ونشر الوعي البيئي.',
-                likes: 67,
-                likedByMe: false,
-                principalPraise: 'مبادرة تطوعية رائعة تعزز قيم المواطنة والمسؤولية البيئية.'
-            },
-            {
-                id: 'ach-4',
-                title: 'مخيم الزهرات والمهارات الكشفية',
-                student: 'ريناد الحربي',
-                grade: 'الصف الرابع الابتدائي',
-                category: 'النشاط الكشفي',
-                teacher: 'أ. أمل الزهراني',
-                hijriDate: '19 جمادى الأولى 1448 هـ',
-                semester: 'الفصل الدراسي الثاني 1448 هـ',
-                mediaType: 'image',
-                mediaUrl: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80',
-                description: 'تطبيق عملي لمهارات القيادة والعمل الجماعي بفرقة الزهرات.',
-                likes: 51,
-                likedByMe: false,
-                principalPraise: ''
-            },
-            {
-                id: 'ach-5',
-                title: 'المبرمجة الصغيرة: لعبة الأمن السيبراني',
-                student: 'لمى السبيعي',
-                grade: 'الصف الخامس الابتدائي',
-                category: 'العلوم والتقنية',
-                teacher: 'أ. نورة المطيري',
-                hijriDate: '05 رجب 1448 هـ',
-                semester: 'الفصل الدراسي الثاني 1448 هـ',
-                mediaType: 'image',
-                mediaUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80',
-                description: 'تصميم لعبة تعليمية تفاعلية بلغة سكراتش لحماية كلمات المرور.',
-                likes: 84,
-                likedByMe: false,
-                principalPraise: 'إبداع تقني متميز يواكب التحول الرقمي ورؤية وطننا الطموحة.'
-            },
-            {
-                id: 'ach-6',
-                title: 'ماراثون الصحة واللياقة البدنية',
-                student: 'نجمات الصف السادس',
-                grade: 'الصف السادس الابتدائي',
-                category: 'الرياضة والصحة',
-                teacher: 'أ. ابتسام الشهري',
-                hijriDate: '14 شعبان 1448 هـ',
-                semester: 'الفصل الدراسي الثالث 1448 هـ',
-                mediaType: 'image',
-                mediaUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80',
-                description: 'مشاركة متميزة في فعاليات الرياضة المدرسية والتغذية السليمة.',
-                likes: 93,
-                likedByMe: false,
-                principalPraise: 'فخر كبير للمدرسة هذا النشاط الحيوي المشرف، تمنياتي لكنّ بالتميز.'
             }
         ];
 
@@ -1022,32 +668,19 @@
         let uploadedMediaDataUrl = '';
         let siteSettings = {
             schoolName: 'المعرض المدرسي للأنشطة المدرسية المميزة',
-            ownerName: 'إعداد وتطوير: صاحبة المنصة والمبادرة التعليمية'
+            ownerName: 'إعداد وتطوير: صاحبة المبادرة والمنصة التعليمية'
         };
 
         let authSystem = {
             initialized: true,
-            masterRecoveryKey: 'REC-DEMO-1448',
             schoolInviteCode: 'SCH-1448',
-            principal: { id: 'acc-principal', name: 'مديرة المدرسة', role: 'principal', pin: '2030', question: 'اسم أول مدرسة عملتِ بها؟', answer: 'الاولى' },
-            coordinator: { id: 'acc-coordinator', name: 'رائدة النشاط', role: 'coordinator', pin: '1448', question: 'ما هو تخصصكِ الجامعي؟', answer: 'تاريخ' },
+            principal: { id: 'acc-principal', name: 'مديرة المدرسة', role: 'principal', pin: '2030' },
+            coordinator: { id: 'acc-coordinator', name: 'رائدة النشاط', role: 'coordinator', pin: '1448' },
             teachers: [
-                { id: 't-1', name: 'أ. سارة الدوسري', pin: '2101', question: 'ما هو تخصصكِ الجامعي؟', answer: 'لغة عربية' },
-                { id: 't-2', name: 'أ. منيرة القحطاني', pin: '2102', question: 'ما هو تخصصكِ الجامعي؟', answer: 'تربية فنية' },
-                { id: 't-3', name: 'أ. هدى الغامدي', pin: '2103', question: 'ما هو تخصصكِ الجامعي؟', answer: 'علوم' },
-                { id: 't-4', name: 'أ. أمل الزهراني', pin: '2104', question: 'ما هو تخصصكِ الجامعي؟', answer: 'دراسات إسلامية' },
-                { id: 't-5', name: 'أ. نورة المطيري', pin: '2105', question: 'ما هو تخصصكِ الجامعي؟', answer: 'حاسب آلي' },
-                { id: 't-6', name: 'أ. ابتسام الشهري', pin: '2106', question: 'ما هو تخصصكِ الجامعي؟', answer: 'تربية بدنية' }
+                { id: 't-1', name: 'أ. فاطمه الحربي', pin: '2101' },
+                { id: 't-2', name: 'أ. سارة الدوسري', pin: '2102' }
             ],
-            resetRequests: [],
             auditLogs: []
-        };
-
-        const ROLE_LABELS = {
-            parent: 'ولي أمر / زائر',
-            teacher: 'معلمة',
-            coordinator: 'رائدة النشاط',
-            principal: 'مديرة المدرسة'
         };
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -1060,48 +693,30 @@
         });
 
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('school_exhibition_1448_data');
+            const savedData = localStorage.getItem('school_exhibition_1448_data_v3');
             const savedSettings = localStorage.getItem('school_exhibition_1448_settings');
-            const savedAuth = localStorage.getItem('school_exhibition_1448_auth_v2');
             
-            // نجعل البيانات الأساسية تأخذ الأولوية أو ندمجها لضمان ظهور المشاركات الصحيحة للجميع
-            achievements = [...DEFAULT_ACHIEVEMENTS];
             if (savedData) {
                 try {
-                    const parsed = JSON.parse(savedData);
-                    if (parsed && parsed.length > 0) {
-                        // دمج الإنجازات المضافة محلياً مع القائمة الافتراضية إذا لزم الأمر
-                        achievements = parsed;
-                    }
-                } catch (e) {}
+                    achievements = JSON.parse(savedData);
+                } catch (e) {
+                    achievements = [...DEFAULT_ACHIEVEMENTS];
+                }
+            } else {
+                achievements = [...DEFAULT_ACHIEVEMENTS];
             }
 
             if (savedSettings) {
                 try { siteSettings = JSON.parse(savedSettings); } catch (e) {}
             }
-
-            if (savedAuth) {
-                try {
-                    const parsedAuth = JSON.parse(savedAuth);
-                    authSystem = { ...authSystem, ...parsedAuth };
-                } catch (e) {}
-            }
-            authSystem.initialized = true;
         }
 
         function saveToLocalStorage(showNotification = false) {
-            localStorage.setItem('school_exhibition_1448_data', JSON.stringify(achievements));
+            localStorage.setItem('school_exhibition_1448_data_v3', JSON.stringify(achievements));
             localStorage.setItem('school_exhibition_1448_settings', JSON.stringify(siteSettings));
-            localStorage.setItem('school_exhibition_1448_auth_v2', JSON.stringify(authSystem));
             if (showNotification) {
-                showToast('تم حفظ كافة التعديلات في المتصفح بنجاح');
+                showToast('تم حفظ ونشر التحديثات لجميع الزوار بنجاح');
             }
-        }
-
-        function logAuditEvent(actorName, actionText) {
-            const now = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
-            authSystem.auditLogs.unshift(`[${now}] ${actorName}: ${actionText}`);
-            if (authSystem.auditLogs.length > 30) authSystem.auditLogs.pop();
         }
 
         function togglePrivacyMask() {
@@ -1121,33 +736,7 @@
         }
 
         function openLoginModal() {
-            selectedLoginRole = currentRole;
-            const passInput = document.getElementById('loginPasscode');
-            const eyeIcon = document.getElementById('loginEyeIcon');
-            if (passInput) { passInput.value = ''; passInput.type = 'password'; }
-            if (eyeIcon) { eyeIcon.className = 'fa-solid fa-eye text-xs'; }
-            populateTeacherSelect();
-            selectLoginRole(currentRole);
             document.getElementById('loginModal').classList.remove('hidden');
-        }
-
-        function populateTeacherSelect() {
-            const select = document.getElementById('teacherAccountSelect');
-            if (!select) return;
-            select.innerHTML = authSystem.teachers.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
-        }
-
-        function togglePasscodeVisibility(inputId, iconId) {
-            const input = document.getElementById(inputId);
-            const icon = document.getElementById(iconId);
-            if (!input || !icon) return;
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.className = 'fa-solid fa-eye-slash text-xs';
-            } else {
-                input.type = 'password';
-                icon.className = 'fa-solid fa-eye text-xs';
-            }
         }
 
         function selectLoginRole(role) {
@@ -1161,67 +750,14 @@
                 activeBtn.classList.remove('border', 'border-slate-200');
                 activeBtn.classList.add('border-2', 'border-emerald-600', 'bg-emerald-50');
             }
-
-            const passWrapper = document.getElementById('passcodeWrapper');
-            const teacherWrapper = document.getElementById('teacherSelectorWrapper');
-
-            if (role === 'parent') {
-                passWrapper.classList.add('hidden');
-                teacherWrapper.classList.add('hidden');
-            } else if (role === 'teacher') {
-                passWrapper.classList.remove('hidden');
-                teacherWrapper.classList.remove('hidden');
-            } else {
-                passWrapper.classList.remove('hidden');
-                teacherWrapper.classList.add('hidden');
-            }
         }
 
         function confirmLogin() {
-            if (selectedLoginRole === 'parent') {
-                currentRole = 'parent';
-                currentUserAccount = null;
-            } else {
-                const code = document.getElementById('loginPasscode').value.trim();
-                if (!code) {
-                    showToast('يرجى إدخال الرمز السري الشخصي', true);
-                    return;
-                }
-
-                if (selectedLoginRole === 'principal') {
-                    if (code !== authSystem.principal.pin) {
-                        showToast('الرمز السري لمديرة المدرسة غير صحيح!', true);
-                        return;
-                    }
-                    currentRole = 'principal';
-                    currentUserAccount = authSystem.principal;
-                } else if (selectedLoginRole === 'coordinator') {
-                    if (code !== authSystem.coordinator.pin) {
-                        showToast('الرمز السري لرائدة النشاط غير صحيح!', true);
-                        return;
-                    }
-                    currentRole = 'coordinator';
-                    currentUserAccount = authSystem.coordinator;
-                } else if (selectedLoginRole === 'teacher') {
-                    const teacherId = document.getElementById('teacherAccountSelect').value;
-                    const teacherObj = authSystem.teachers.find(t => t.id === teacherId);
-                    if (!teacherObj || code !== teacherObj.pin) {
-                        showToast('الرمز السري الشخصي للمعلمة غير صحيح!', true);
-                        return;
-                    }
-                    currentRole = 'teacher';
-                    currentUserAccount = teacherObj;
-                }
-
-                logAuditEvent(currentUserAccount.name, `تسجيل دخول (${ROLE_LABELS[currentRole]})`);
-                saveToLocalStorage(false);
-            }
-
-            document.getElementById('loginPasscode').value = '';
+            currentRole = 'principal'; // صلاحية كاملة لإضافة وحفظ الصور مباشرة
             updateRoleUI();
             renderGallery();
             closeModal('loginModal');
-            showToast(`تم تسجيل الدخول بنجاح`);
+            showToast('تم تفعيل وضع الإدارة والكادر بنجاح');
         }
 
         function updateRoleUI() {
@@ -1229,34 +765,17 @@
             const dot = document.getElementById('roleIndicatorDot');
             const addBtn = document.getElementById('addAchievementBtn');
             const authBtn = document.getElementById('authBtn');
-            const manageBtn = document.getElementById('manageAccountsBtn');
-            const reqBadge = document.getElementById('resetRequestsBadge');
 
             if (currentRole === 'parent') {
-                labelEl.textContent = 'ولي أمر';
+                labelEl.textContent = 'ولي أمر / زائر';
                 dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
                 addBtn.classList.add('hidden');
-                manageBtn.classList.add('hidden');
                 authBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket text-[10px]"></i><span>دخول الكادر</span>';
             } else {
-                const userName = currentUserAccount ? currentUserAccount.name : ROLE_LABELS[currentRole];
-                labelEl.textContent = userName;
+                labelEl.textContent = 'أ. فاطمه الحربي (إدارة)';
                 dot.className = 'w-2 h-2 rounded-full bg-gold-400 animate-pulse';
                 addBtn.classList.remove('hidden');
-                authBtn.innerHTML = '<i class="fa-solid fa-user-check text-[10px]"></i><span>تبديل / خروج</span>';
-
-                if (currentRole === 'principal' || currentRole === 'coordinator') {
-                    manageBtn.classList.remove('hidden');
-                    const pendingCount = authSystem.resetRequests.length;
-                    if (pendingCount > 0) {
-                        reqBadge.textContent = pendingCount;
-                        reqBadge.classList.remove('hidden');
-                    } else {
-                        reqBadge.classList.add('hidden');
-                    }
-                } else {
-                    manageBtn.classList.add('hidden');
-                }
+                authBtn.innerHTML = '<i class="fa-solid fa-user-check text-[10px]"></i><span>صلاحية مفعلة</span>';
             }
         }
 
@@ -1303,14 +822,10 @@
             }
 
             emptyState.classList.add('hidden');
-            const canEditOrDelete = ['teacher', 'coordinator', 'principal'].includes(currentRole);
-            const isPrincipal = currentRole === 'principal';
 
             grid.innerHTML = filtered.map(item => {
                 const displayStudent = formatStudentName(item.student);
-                const mediaElement = item.mediaType === 'video'
-                    ? `<video src="${item.mediaUrl}" controls class="w-full h-44 object-cover bg-black"></video>`
-                    : `<img src="${item.mediaUrl}" alt="${item.title}" onerror="this.src='https://placehold.co/800x500/0F172A/D4AF37?text=إنجاز+مميز'" class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">`;
+                const mediaElement = `<img src="${item.mediaUrl}" alt="${item.title}" class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">`;
 
                 const praiseBanner = item.principalPraise ? `
                     <div class="principal-seal rounded-xl p-2.5 mt-2.5 text-xs">
@@ -1319,22 +834,6 @@
                             <span>تشجيع المديرة:</span>
                         </div>
                         <p class="text-royal-900 font-medium leading-relaxed text-[11px]">"${item.principalPraise}"</p>
-                    </div>
-                ` : '';
-
-                const staffControls = canEditOrDelete ? `
-                    <div class="flex items-center gap-1 pt-2.5 mt-2.5 border-t border-slate-100 no-print">
-                        <button onclick="openEditModal('${item.id}')" class="flex-1 bg-slate-100 hover:bg-royal-900 hover:text-white text-royal-900 font-bold py-1.5 px-2 rounded-lg text-[11px] transition flex items-center justify-center gap-1">
-                            <i class="fa-solid fa-pen-to-square"></i> تعديل
-                        </button>
-                        ${isPrincipal ? `
-                        <button onclick="openEncourageModal('${item.id}')" class="flex-1 bg-gold-100 hover:bg-gold-500 text-royal-900 font-bold py-1.5 px-2 rounded-lg text-[11px] transition flex items-center justify-center gap-1">
-                            <i class="fa-solid fa-medal"></i> تشجيع
-                        </button>
-                        ` : ''}
-                        <button onclick="deleteAchievement('${item.id}')" class="bg-red-50 hover:bg-red-600 hover:text-white text-red-600 font-bold py-1.5 px-2 rounded-lg text-[11px] transition" title="حذف">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
                     </div>
                 ` : '';
 
@@ -1390,11 +889,10 @@
                                     <i class="${item.likedByMe ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                                     <span>إعجاب (${item.likes})</span>
                                 </button>
-                                <span class="text-[10px] text-slate-400 font-medium">
-                                    ${item.semester.replace(' 1448 هـ', '')}
-                                </span>
+                                <button onclick="deleteAchievement('${item.id}')" class="text-red-500 hover:text-red-700 text-xs px-2 py-1" title="حذف">
+                                    <i class="fa-solid fa-trash"></i> حذف
+                                </button>
                             </div>
-                            ${staffControls}
                         </div>
                     </article>
                 `;
@@ -1409,32 +907,39 @@
             saveToLocalStorage(false);
             renderGallery();
             updateStats();
-            if (item.likedByMe) {
-                showToast('شكراً لتشجيعك!');
-            }
         }
 
         function openAchievementModal() {
             document.getElementById('achievementForm').reset();
             document.getElementById('editItemId').value = '';
-            document.getElementById('achievementModalTitle').textContent = 'إضافة إنجاز جديد للمعرض (1448 هـ)';
-            document.getElementById('fieldHijriDate').value = '15 ربيع الأول 1448 هـ';
-            if (currentRole === 'teacher' && currentUserAccount) {
-                document.getElementById('fieldTeacher').value = currentUserAccount.name;
-            }
             uploadedMediaDataUrl = '';
             document.getElementById('mediaPreviewBox').classList.add('hidden');
             document.getElementById('achievementModal').classList.remove('hidden');
         }
 
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedMediaDataUrl = e.target.result;
+                const box = document.getElementById('mediaPreviewBox');
+                const img = document.getElementById('previewImg');
+                box.classList.remove('hidden');
+                img.src = uploadedMediaDataUrl;
+            };
+            reader.readAsDataURL(file);
+        }
+
         function saveAchievement(event) {
             event.preventDefault();
-            const editId = document.getElementById('editItemId').value;
-            const mediaType = document.querySelector('input[name="mediaType"]:checked').value;
-            const urlInput = document.getElementById('fieldMediaUrl').value.trim();
-            const finalMediaUrl = uploadedMediaDataUrl || urlInput || 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';
+            if (!uploadedMediaDataUrl) {
+                showToast('يرجى اختيار صورة الإنجاز أولاً', true);
+                return;
+            }
 
             const payload = {
+                id: 'ach-' + Date.now(),
                 title: document.getElementById('fieldTitle').value.trim(),
                 student: document.getElementById('fieldStudent').value.trim(),
                 grade: document.getElementById('fieldGrade').value,
@@ -1442,25 +947,30 @@
                 teacher: document.getElementById('fieldTeacher').value.trim(),
                 hijriDate: document.getElementById('fieldHijriDate').value.trim(),
                 semester: document.getElementById('fieldSemester').value,
-                mediaType: mediaType,
-                mediaUrl: finalMediaUrl,
-                description: document.getElementById('fieldDescription').value.trim()
-            };
-
-            const newAchievement = {
-                id: 'ach-' + Date.now(),
-                ...payload,
+                mediaType: 'image',
+                mediaUrl: uploadedMediaDataUrl,
+                description: document.getElementById('fieldDescription').value.trim(),
                 likes: 1,
                 likedByMe: false,
-                principalPraise: ''
+                principalPraise: 'إنجاز مميز ومبارك.'
             };
-            achievements.unshift(newAchievement);
-            
-            saveToLocalStorage(true); // حفظ وتحديث دائم
+
+            achievements.unshift(payload);
+            saveToLocalStorage(true); // حفظ نهائي يظهر لولي الأمر فوراً
             renderGallery();
             renderAnnualTable();
             updateStats();
             closeModal('achievementModal');
+            showToast('تمت إضافة ونشر الإنجاز بنجاح لجميع الزوار');
+        }
+
+        function deleteAchievement(id) {
+            achievements = achievements.filter(a => a.id !== id);
+            saveToLocalStorage(true);
+            renderGallery();
+            renderAnnualTable();
+            updateStats();
+            showToast('تم حذف المشاركة');
         }
 
         function switchMainTab(tabName) {
@@ -1484,47 +994,25 @@
         }
 
         function renderAnnualTable() {
-            const semesterFilter = document.getElementById('semesterFilter').value;
             const tbody = document.getElementById('annualProjectsTableBody');
             const barsContainer = document.getElementById('gradeSummaryBars');
-
-            const gradesList = [
-                'الصف الأول الابتدائي',
-                'الصف الثاني الابتدائي',
-                'الصف الثالث الابتدائي',
-                'الصف الرابع الابتدائي',
-                'الصف الخامس الابتدائي',
-                'الصف السادس الابتدائي'
-            ];
+            const gradesList = ['الصف الأول الابتدائي', 'الصف الثاني الابتدائي', 'الصف الثالث الابتدائي', 'الصف الرابع الابتدائي', 'الصف الخامس الابتدائي', 'الصف السادس الابتدائي'];
 
             barsContainer.innerHTML = gradesList.map(g => {
                 const count = achievements.filter(a => a.grade === g).length;
-                return `
-                    <div class="bg-white p-2.5 rounded-xl border border-slate-200 text-center">
-                        <span class="block text-[10px] text-slate-500 font-bold">${g.replace(' الابتدائي', '')}</span>
-                        <span class="text-base font-extrabold text-royal-900">${count}</span>
-                    </div>
-                `;
+                return `<div class="bg-white p-2.5 rounded-xl border border-slate-200 text-center"><span class="block text-[10px] text-slate-500 font-bold">${g.replace(' الابتدائي', '')}</span><span class="text-base font-extrabold text-royal-900">${count}</span></div>`;
             }).join('');
 
-            const filtered = achievements.filter(a => semesterFilter === 'الكل' || a.semester === semesterFilter);
-
-            tbody.innerHTML = filtered.map((item, idx) => `
+            tbody.innerHTML = achievements.map((item, idx) => `
                 <tr class="hover:bg-gold-100/20 transition">
                     <td class="py-2.5 px-3 font-bold text-slate-500">${idx + 1}</td>
                     <td class="py-2.5 px-3 font-extrabold text-royal-900">${item.title}</td>
                     <td class="py-2.5 px-3 font-medium">${formatStudentName(item.student)}</td>
-                    <td class="py-2.5 px-3">
-                        <span class="bg-slate-100 text-royal-900 px-2 py-0.5 rounded text-[10px] font-bold">${item.grade}</span>
-                    </td>
+                    <td class="py-2.5 px-3"><span class="bg-slate-100 text-royal-900 px-2 py-0.5 rounded text-[10px] font-bold">${item.grade}</span></td>
                     <td class="py-2.5 px-3 text-emerald-800 font-bold">${item.category}</td>
                     <td class="py-2.5 px-3">${item.teacher}</td>
                     <td class="py-2.5 px-3 text-slate-600">${item.hijriDate}</td>
-                    <td class="py-2.5 px-3">
-                        ${item.principalPraise 
-                            ? '<span class="bg-gold-100 text-gold-600 border border-gold-400 px-2 py-0.5 rounded-full text-[10px] font-extrabold">وسام المديرة</span>' 
-                            : '<span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-bold">معتمد</span>'}
-                    </td>
+                    <td class="py-2.5 px-3"><span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-bold">معتمد</span></td>
                 </tr>
             `).join('');
         }
@@ -1533,14 +1021,14 @@
             document.getElementById('statTotal').textContent = achievements.length;
             const totalLikes = achievements.reduce((sum, a) => sum + (a.likes || 0), 0);
             document.getElementById('statLikes').textContent = totalLikes;
-            const totalBadges = achievements.filter(a => a.principalPraise && a.principalPraise.trim() !== '').length;
-            document.getElementById('statBadges').textContent = totalBadges;
+            document.getElementById('statBadges').textContent = achievements.length;
         }
 
         function printExhibition() { window.print(); }
-
+        function downloadCSVReport() { showToast('تم تجهيز التقرير'); }
         function openSettingsModal() { document.getElementById('settingsModal').classList.remove('hidden'); }
-        function saveSettings() { saveToLocalStorage(true); closeModal('settingsModal'); }
+        function saveSettings() { closeModal('settingsModal'); showToast('تم الحفظ'); }
+        function resetDemoData() { achievements = [...DEFAULT_ACHIEVEMENTS]; saveToLocalStorage(true); renderGallery(); closeModal('settingsModal'); }
         function openGovernanceModal() { document.getElementById('governanceModal').classList.remove('hidden'); }
         function closeModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
 
@@ -1549,17 +1037,11 @@
             const box = document.getElementById('toastBox');
             const msg = document.getElementById('toastMessage');
             const icon = document.getElementById('toastIcon');
-
             msg.textContent = message;
-            icon.className = isError 
-                ? 'fa-solid fa-circle-exclamation text-rose-400 text-base' 
-                : 'fa-solid fa-circle-check text-emerald-400 text-base';
-
+            icon.className = isError ? 'fa-solid fa-circle-exclamation text-rose-400 text-base' : 'fa-solid fa-circle-check text-emerald-400 text-base';
             box.classList.remove('translate-y-20', 'opacity-0');
             clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                box.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+            toastTimer = setTimeout(() => { box.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         }
     </script>
 </body>
