@@ -98,7 +98,7 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-gold-400 selection:text-royal-900">
 
-    <!-- شريط تنبيه حوكمة البيانات السعودية (سدايا / NDMO / PDPL) -->
+    <!-- شريط حوكمة البيانات -->
     <div class="bg-emerald-900 text-white text-[11px] py-1 px-3 border-b border-gold-500/40 no-print">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-1">
             <div class="flex items-center gap-1.5 truncate">
@@ -119,12 +119,11 @@
         </div>
     </div>
 
-    <!-- الرأس الرئيسي المدمج والمحسّن للهواتف -->
+    <!-- رأس الصفحة -->
     <header class="bg-royal-900 text-white shadow-lg sticky top-0 z-40 border-b-2 border-gold-500">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
                 
-                <!-- الهوية والعنوان -->
                 <div class="flex items-center gap-2.5">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-royal-900 shadow shrink-0 border border-white/20 text-base">
                         <i class="fa-solid fa-award"></i>
@@ -141,23 +140,16 @@
                     </div>
                 </div>
 
-                <!-- شريط التحكم والأدوات المصغرة -->
                 <div class="flex flex-wrap items-center gap-1.5 no-print">
                     <div class="bg-royal-800 border border-slate-700 rounded-lg px-2.5 py-1 flex items-center gap-1.5 text-[11px]">
                         <span id="roleIndicatorDot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
                         <span class="text-slate-400 hidden sm:inline">الصفة:</span>
-                        <span id="currentRoleLabel" class="font-bold text-gold-400 truncate max-w-[120px]">ولي أمر</span>
+                        <span id="currentRoleLabel" class="font-bold text-gold-400 truncate max-w-[120px]">ولي أمر / زائر</span>
                     </div>
 
                     <button onclick="openLoginModal()" id="authBtn" class="bg-gold-500 hover:bg-gold-400 text-royal-900 font-bold px-2.5 py-1 rounded-lg text-[11px] transition shadow flex items-center gap-1">
                         <i class="fa-solid fa-right-to-bracket text-[10px]"></i>
                         <span>دخول الكادر</span>
-                    </button>
-
-                    <button onclick="openAccountsAdminModal()" id="manageAccountsBtn" class="hidden bg-royal-800 hover:bg-slate-700 text-gold-400 font-bold px-2.5 py-1 rounded-lg text-[11px] transition border border-gold-500/40 flex items-center gap-1">
-                        <i class="fa-solid fa-users-gear text-[10px]"></i>
-                        <span>الإدارة</span>
-                        <span id="resetRequestsBadge" class="hidden bg-rose-600 text-white text-[9px] font-extrabold px-1 rounded-full">0</span>
                     </button>
 
                     <button onclick="openAchievementModal()" id="addAchievementBtn" class="hidden bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-2.5 py-1 rounded-lg text-[11px] transition border border-emerald-500 flex items-center gap-1">
@@ -167,7 +159,6 @@
                 </div>
             </div>
 
-            <!-- شريط التنقل السفلي المصغر -->
             <div class="mt-2 pt-2 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 no-print">
                 <nav class="flex items-center gap-1">
                     <button onclick="switchMainTab('gallery')" id="tab-gallery" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-royal-900 shadow transition flex items-center gap-1.5">
@@ -189,13 +180,6 @@
                         <i class="fa-solid fa-print text-gold-400"></i>
                         <span class="hidden sm:inline">طباعة</span>
                     </button>
-                    <button onclick="downloadCSVReport()" title="تنزيل الملف" class="bg-royal-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-2 py-1 rounded-lg text-[11px] transition flex items-center gap-1">
-                        <i class="fa-solid fa-file-arrow-down text-sky-400"></i>
-                        <span class="hidden sm:inline">تنزيل</span>
-                    </button>
-                    <button onclick="openSettingsModal()" title="إعدادات" class="bg-royal-800 hover:bg-slate-700 text-slate-200 border border-slate-700 p-1.5 rounded-lg text-[11px] transition">
-                        <i class="fa-solid fa-gear text-slate-400"></i>
-                    </button>
                 </div>
             </div>
         </div>
@@ -204,7 +188,7 @@
     <!-- المحتوى الرئيسي -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4">
 
-        <!-- بطاقات الإحصائيات السريعة -->
+        <!-- الإحصائيات -->
         <section class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 mb-4">
             <div class="bg-white rounded-xl p-3 shadow-sm border border-gold-400/30 flex items-center gap-2.5">
                 <div class="w-9 h-9 rounded-lg bg-royal-900 text-gold-400 flex items-center justify-center text-sm shrink-0">
@@ -247,7 +231,7 @@
             </div>
         </section>
 
-        <!-- القسم الأول: أروقة المعرض التفاعلي -->
+        <!-- المعرض -->
         <div id="view-gallery">
             <section class="bg-white rounded-xl p-3 shadow-sm border border-slate-200/80 mb-4 no-print">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5">
@@ -255,28 +239,16 @@
                         <button onclick="setGradeFilter('الكل')" data-grade="الكل" class="grade-tab active px-3 py-1.5 rounded-lg text-xs font-bold bg-royal-900 text-white whitespace-nowrap transition">
                             جميع الصفوف
                         </button>
-                        <button onclick="setGradeFilter('الصف الأول الابتدائي')" data-grade="الصف الأول الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">
-                            الأول
-                        </button>
-                        <button onclick="setGradeFilter('الصف الثاني الابتدائي')" data-grade="الصف الثاني الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">
-                            الثاني
-                        </button>
-                        <button onclick="setGradeFilter('الصف الثالث الابتدائي')" data-grade="الصف الثالث الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">
-                            الثالث
-                        </button>
-                        <button onclick="setGradeFilter('الصف الرابع الابتدائي')" data-grade="الصف الرابع الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">
-                            الرابع
-                        </button>
-                        <button onclick="setGradeFilter('الصف الخامس الابتدائي')" data-grade="الصف الخامس الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">
-                            الخامس
-                        </button>
-                        <button onclick="setGradeFilter('الصف السادس الابتدائي')" data-grade="الصف السادس الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">
-                            السادس
-                        </button>
+                        <button onclick="setGradeFilter('الصف الأول الابتدائي')" data-grade="الصف الأول الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">الأول</button>
+                        <button onclick="setGradeFilter('الصف الثاني الابتدائي')" data-grade="الصف الثاني الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">الثاني</button>
+                        <button onclick="setGradeFilter('الصف الثالث الابتدائي')" data-grade="الصف الثالث الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">الثالث</button>
+                        <button onclick="setGradeFilter('الصف الرابع الابتدائي')" data-grade="الصف الرابع الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">الرابع</button>
+                        <button onclick="setGradeFilter('الصف الخامس الابتدائي')" data-grade="الصف الخامس الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">الخامس</button>
+                        <button onclick="setGradeFilter('الصف السادس الابتدائي')" data-grade="الصف السادس الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">السادس</button>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <select id="categoryFilter" onchange="renderGallery()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-royal-900 focus:outline-none focus:border-gold-500">
+                        <select id="categoryFilter" onchange="renderGallery()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-royal-900 focus:outline-none">
                             <option value="الكل">جميع الأنواع</option>
                             <option value="الثقافة والفنون">الثقافة والفنون</option>
                             <option value="العلوم والتقنية">العلوم والتقنية</option>
@@ -289,7 +261,7 @@
 
                         <div class="relative flex-grow sm:flex-grow-0">
                             <i class="fa-solid fa-magnifying-glass absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[11px]"></i>
-                            <input type="text" id="searchInput" oninput="renderGallery()" placeholder="ابحث باسم الطالبة أو المشروع..." class="w-full sm:w-52 bg-slate-50 border border-slate-200 rounded-lg pr-7 pl-2.5 py-1.5 text-xs text-royal-900 focus:outline-none focus:border-gold-500">
+                            <input type="text" id="searchInput" oninput="renderGallery()" placeholder="ابحث باسم الطالبة أو المشروع..." class="w-full sm:w-52 bg-slate-50 border border-slate-200 rounded-lg pr-7 pl-2.5 py-1.5 text-xs text-royal-900 focus:outline-none">
                         </div>
                     </div>
                 </div>
@@ -303,56 +275,27 @@
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
                 <h3 class="text-base font-bold text-royal-900">لا توجد إنجازات مطابقة للبحث</h3>
-                <p class="text-xs text-slate-500 mt-0.5">جرّب تغيير خيارات التصفية أو إعادة الضبط.</p>
-                <button onclick="resetFilters()" class="mt-3 bg-royal-900 text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-royal-800 transition">
-                    عرض جميع الإنجازات
-                </button>
+                <button onclick="resetFilters()" class="mt-3 bg-royal-900 text-white px-4 py-1.5 rounded-lg text-xs font-bold">عرض جميع الإنجازات</button>
             </div>
         </div>
 
-        <!-- القسم الثاني: قائمة المشاريع خلال العام -->
+        <!-- المشاريع -->
         <div id="view-annual-plan" class="hidden">
             <div class="bg-white rounded-2xl shadow-sm border border-gold-400/30 overflow-hidden">
-                <div class="bg-gradient-to-l from-royal-900 to-royal-800 p-4 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                        <span class="text-gold-400 text-[10px] font-bold tracking-wider uppercase">الخطة السنوية والتوثيق الشامل</span>
-                        <h2 class="text-base sm:text-lg font-extrabold mt-0.5">قائمة المشاريع خلال العام الدراسي 1448 هـ</h2>
-                    </div>
-                    <div class="flex items-center gap-2 no-print">
-                        <select id="semesterFilter" onchange="renderAnnualTable()" class="bg-royal-800 border border-gold-500/40 text-white rounded-lg px-2.5 py-1 text-xs font-bold focus:outline-none">
-                            <option value="الكل">جميع الفصول (1448)</option>
-                            <option value="الفصل الدراسي الأول 1448 هـ">الفصل الأول</option>
-                            <option value="الفصل الدراسي الثاني 1448 هـ">الفصل الثاني</option>
-                            <option value="الفصل الدراسي الثالث 1448 هـ">الفصل الثالث</option>
-                        </select>
-                        <button onclick="downloadCSVReport()" class="bg-gold-500 hover:bg-gold-400 text-royal-900 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
-                            <i class="fa-solid fa-file-excel"></i>
-                            <span>تصدير</span>
-                        </button>
-                    </div>
+                <div class="bg-gradient-to-l from-royal-900 to-royal-800 p-4 text-white flex items-center justify-between">
+                    <h2 class="text-base font-extrabold">قائمة المشاريع خلال العام الدراسي 1448 هـ</h2>
                 </div>
-
-                <div class="p-4 bg-pearl border-b border-slate-200">
-                    <h3 class="text-xs font-bold text-royal-900 mb-2.5 flex items-center gap-1.5">
-                        <i class="fa-solid fa-chart-pie text-emerald-700"></i>
-                        <span>إحصائية المشاريع حسب الصفوف (1448 هـ):</span>
-                    </h3>
-                    <div id="gradeSummaryBars" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
-                    </div>
-                </div>
-
                 <div class="overflow-x-auto">
                     <table class="w-full text-right border-collapse text-xs">
                         <thead>
                             <tr class="bg-slate-100 text-royal-900 font-extrabold border-b border-slate-200">
                                 <th class="py-3 px-3">#</th>
                                 <th class="py-3 px-3">عنوان المشروع</th>
-                                <th class="py-3 px-3">الطالبة / المجموعة</th>
+                                <th class="py-3 px-3">الطالبة</th>
                                 <th class="py-3 px-3">الصف</th>
                                 <th class="py-3 px-3">النوع</th>
                                 <th class="py-3 px-3">المعلمة</th>
                                 <th class="py-3 px-3">التاريخ</th>
-                                <th class="py-3 px-3">الاعتماد</th>
                             </tr>
                         </thead>
                         <tbody id="annualProjectsTableBody" class="divide-y divide-slate-100">
@@ -361,166 +304,112 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <!-- التذييل -->
     <footer class="bg-royal-900 text-slate-300 border-t-4 border-gold-500 mt-8">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center text-xs">
-                <div>
-                    <div class="flex items-center gap-1.5 text-white font-extrabold text-sm">
-                        <i class="fa-solid fa-award text-gold-400"></i>
-                        <span id="footerSchoolName">المعرض المدرسي للأنشطة المدرسية المميزة</span>
-                    </div>
-                    <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">
-                        منصة رقمية تفاعلية لتوثيق إبداعات طالبات المرحلة الابتدائية للعام الدراسي 1448 هـ.
-                    </p>
-                </div>
-
-                <div class="bg-royal-800/80 border border-emerald-700/50 rounded-xl p-3">
-                    <div class="flex items-center gap-1.5 text-emerald-400 font-bold text-[11px] mb-0.5">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span>الامتثال لحوكمة البيانات (سدايا / PDPL)</span>
-                    </div>
-                    <p class="text-[10px] text-slate-300 leading-relaxed">
-                        تلتزم المنصة بحماية البيانات الشخصية ومنع نشر صور الطالبات دون موافقة ولي الأمر.
-                    </p>
-                </div>
-
-                <div class="md:text-left">
-                    <div class="inline-block bg-gold-500/10 border border-gold-500/30 rounded-xl px-3.5 py-2.5">
-                        <p class="text-[10px] text-gold-400 font-bold">جميع الحقوق محفوظة © 1448 هـ</p>
-                        <p id="copyrightOwnerDisplay" class="text-xs font-extrabold text-white mt-0.5">
-                            إعداد وتصميم: صاحبة المبادرة والمنصة
-                        </p>
-                        <button onclick="openSettingsModal()" class="text-[10px] text-slate-400 hover:text-gold-400 underline mt-0.5 no-print">
-                            تعديل الحقوق والمدرسة
-                        </button>
-                    </div>
-                </div>
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 text-xs flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <p class="text-white font-extrabold">المعرض المدرسي للأنشطة المدرسية المميزة</p>
+                <p class="text-slate-400 text-[11px]">منصة رقمية موثقة لحوكمة الأنشطة المدرسية 1448 هـ.</p>
+            </div>
+            <div>
+                <button onclick="openLoginModal()" class="bg-royal-800 hover:bg-slate-700 text-gold-400 border border-gold-500/40 px-3 py-1.5 rounded-xl font-bold">
+                    <i class="fa-solid fa-lock text-[10px]"></i> دخول الإدارة
+                </button>
             </div>
         </div>
     </footer>
 
-    <!-- ==================== النوافذ المنبثقة ==================== -->
+    <!-- ==================== النوافذ المنبثقة وحماية الرمز السري ==================== -->
 
-    <!-- 1. نافذة تسجيل الدخول -->
-    <div id="loginModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-gold-400/40 my-4">
+    <!-- نافذة تسجيل الدخول الآمن -->
+    <div id="loginModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border-2 border-gold-500">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-user-lock text-gold-400 text-base"></i>
-                    <h3 class="font-extrabold text-sm">بوابة الدخول والحسابات الفردية</h3>
-                </div>
-                <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-white">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <h3 class="font-extrabold text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-gold-400"></i>
+                    <span>بوابة الحماية وتسجيل الكادر</span>
+                </h3>
+                <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
-            <div class="p-4 space-y-3 max-h-[80vh] overflow-y-auto text-xs">
+            <div class="p-4 space-y-3 text-xs">
                 <p class="text-slate-600 bg-pearl p-2.5 rounded-xl border border-slate-200 text-[11px]">
-                    لكل منسوبة حساب ورمز سري خاص بها لضمان الموثوقية وفق حوكمة البيانات.
+                    المنصة محمية برمز سري خاص بالمعلمات والإدارة لضمان أمن البيانات.
                 </p>
-
-                <div class="space-y-1.5">
-                    <label class="block font-bold text-royal-900">اختر الصفة:</label>
-                    <div class="grid grid-cols-2 gap-1.5">
-                        <button type="button" onclick="selectLoginRole('parent')" id="roleBtn-parent" class="role-option text-right p-2.5 rounded-xl border-2 border-emerald-600 bg-emerald-50 flex items-center justify-between">
-                            <div>
-                                <p class="font-bold text-royal-900">ولي أمر / زائر</p>
-                                <p class="text-[9px] text-slate-500">اطلاع وإعجاب</p>
-                            </div>
-                            <i class="fa-solid fa-eye text-emerald-700 text-xs"></i>
-                        </button>
-
-                        <button type="button" onclick="selectLoginRole('teacher')" id="roleBtn-teacher" class="role-option text-right p-2.5 rounded-xl border border-slate-200 hover:border-gold-500 flex items-center justify-between">
-                            <div>
-                                <p class="font-bold text-royal-900">معلمة</p>
-                                <p class="text-[9px] text-slate-500">حساب فردي</p>
-                            </div>
-                            <i class="fa-solid fa-chalkboard-user text-royal-800 text-xs"></i>
-                        </button>
-
-                        <button type="button" onclick="selectLoginRole('coordinator')" id="roleBtn-coordinator" class="role-option text-right p-2.5 rounded-xl border border-slate-200 hover:border-gold-500 flex items-center justify-between">
-                            <div>
-                                <p class="font-bold text-royal-900">رائدة النشاط</p>
-                                <p class="text-[9px] text-slate-500">إدارة واعتماد</p>
-                            </div>
-                            <i class="fa-solid fa-star text-gold-600 text-xs"></i>
-                        </button>
-
-                        <button type="button" onclick="selectLoginRole('principal')" id="roleBtn-principal" class="role-option text-right p-2.5 rounded-xl border border-slate-200 hover:border-gold-500 flex items-center justify-between">
-                            <div>
-                                <p class="font-bold text-royal-900">مديرة المدرسة</p>
-                                <p class="text-[9px] text-slate-500">إدارة وتشجيع</p>
-                            </div>
-                            <i class="fa-solid fa-crown text-gold-500 text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div id="teacherSelectorWrapper" class="hidden space-y-1.5 pt-2 border-t border-slate-100">
-                    <div class="flex items-center justify-between">
-                        <label for="teacherAccountSelect" class="block font-bold text-royal-900">اختاري حسابكِ:</label>
-                        <button type="button" onclick="openTeacherActivateModal()" class="text-[10px] font-bold text-emerald-700 hover:underline">
-                            + تفعيل معلمة جديدة
-                        </button>
-                    </div>
-                    <select id="teacherAccountSelect" class="w-full border border-slate-300 rounded-xl px-2.5 py-2 bg-white font-bold text-royal-900">
-                    </select>
-                </div>
-
-                <div id="passcodeWrapper" class="hidden space-y-1.5 pt-2 border-t border-slate-100">
-                    <div class="flex items-center justify-between">
-                        <label for="loginPasscode" class="block font-bold text-royal-900">الرمز السري الشخصي:</label>
-                        <button type="button" onclick="openRecoveryModal()" class="text-[10px] font-bold text-gold-600 underline">
-                            نسيت الرمز؟
-                        </button>
-                    </div>
+                <div>
+                    <label class="block font-bold text-royal-900 mb-1">الرمز السري الشخصي:</label>
                     <div class="relative">
-                        <input type="password" id="loginPasscode" autocomplete="new-password" placeholder="أدخلي رمزكِ السري" class="w-full border border-slate-300 rounded-xl pl-9 pr-3 py-2 text-xs focus:outline-none focus:border-gold-500">
+                        <input type="password" id="loginPasscode" placeholder="أدخل الرمز السري" class="w-full border border-slate-300 rounded-xl pl-9 pr-3 py-2 text-xs focus:outline-none focus:border-gold-500">
                         <button type="button" onclick="togglePasscodeVisibility('loginPasscode', 'loginEyeIcon')" class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
                             <i id="loginEyeIcon" class="fa-solid fa-eye text-xs"></i>
                         </button>
                     </div>
                 </div>
 
-                <div class="flex items-center justify-end gap-2 pt-2">
-                    <button onclick="closeModal('loginModal')" class="px-3 py-2 rounded-xl font-bold text-slate-600 hover:bg-slate-100">إلغاء</button>
-                    <button onclick="confirmLogin()" class="bg-royal-900 hover:bg-royal-800 text-gold-400 font-bold px-5 py-2 rounded-xl transition shadow">
-                        تأكيد الدخول
+                <div class="flex items-center justify-between pt-1">
+                    <button type="button" onclick="openRecoveryModal()" class="text-[11px] text-gold-600 font-bold underline">
+                        نسيت الرمز السري؟
+                    </button>
+                    <button type="button" onclick="confirmLogin()" class="bg-royal-900 hover:bg-royal-800 text-gold-400 font-extrabold px-4 py-2 rounded-xl shadow">
+                        دخول آمن
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- نافذة إضافة إنجاز (محدثة لدعم الصور المباشرة) -->
+    <!-- نافذة استعادة الرمز السري -->
+    <div id="recoveryModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border-2 border-gold-500">
+            <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
+                <h3 class="font-extrabold text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-key text-gold-400"></i>
+                    <span>استعادة الرمز السري المفقود</span>
+                </h3>
+                <button onclick="closeModal('recoveryModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-4 space-y-3 text-xs">
+                <p class="text-slate-600 bg-pearl p-2.5 rounded-xl border border-slate-200 text-[11px]">
+                    أدخل مفتاح الاستاستعادة المعتمد أو رمز الطوارئ لإعادة ضبط الرمز السري:
+                </p>
+                <div>
+                    <label class="block font-bold text-royal-900 mb-1">مفتاح الاستعادة / رمز الطوارئ:</label>
+                    <input type="password" id="recoveryKeyInput" placeholder="أدخل مفتاح الطوارئ" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs">
+                </div>
+                <div>
+                    <label class="block font-bold text-royal-900 mb-1">الرمز السري الجديد:</label>
+                    <input type="password" id="newPinInput" placeholder="أدخل 4 أرقام جديدة فأكثر" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('recoveryModal')" class="px-3 py-1.5 font-bold text-slate-600">إلغاء</button>
+                    <button type="button" onclick="executePinReset()" class="bg-emerald-800 text-white font-bold px-4 py-1.5 rounded-xl shadow">تحديث الرمز</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة إنجاز (مع ضغط الصور التلقائي للحفظ الفوري) -->
     <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-sparkles text-gold-400 text-base"></i>
-                    <h3 id="achievementModalTitle" class="font-extrabold text-sm">إضافة إنجاز جديد للمعرض</h3>
-                </div>
-                <button onclick="closeModal('achievementModal')" class="text-slate-400 hover:text-white">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <h3 class="font-extrabold text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-sparkles text-gold-400"></i>
+                    <span>إضافة إنجاز جديد للمعرض</span>
+                </h3>
+                <button onclick="closeModal('achievementModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <form id="achievementForm" onsubmit="saveAchievement(event)" class="p-4 space-y-3 max-h-[80vh] overflow-y-auto text-xs">
-                <input type="hidden" id="editItemId">
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div class="sm:col-span-2">
                         <label class="block font-bold text-royal-900 mb-0.5">عنوان الإنجاز / المشاركة *</label>
-                        <input type="text" id="fieldTitle" required placeholder="مثال: لوحة رؤية السعودية 2030" class="w-full border border-slate-300 rounded-xl px-3 py-2">
+                        <input type="text" id="fieldTitle" required placeholder="مثال: لوحة الفضاء" class="w-full border border-slate-300 rounded-xl px-3 py-2">
                     </div>
 
                     <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">اسم الطالبة أو المجموعة *</label>
-                        <input type="text" id="fieldStudent" required placeholder="سارة القحطاني" class="w-full border border-slate-300 rounded-xl px-3 py-2">
+                        <label class="block font-bold text-royal-900 mb-0.5">اسم الطالبة *</label>
+                        <input type="text" id="fieldStudent" required placeholder="رسيل الحربي" class="w-full border border-slate-300 rounded-xl px-3 py-2">
                     </div>
 
                     <div>
@@ -538,8 +427,8 @@
                     <div>
                         <label class="block font-bold text-royal-900 mb-0.5">نوع المشاركة *</label>
                         <select id="fieldCategory" required class="w-full border border-slate-300 rounded-xl px-3 py-2 bg-white">
-                            <option value="الثقافة والفنون">الثقافة والفنون</option>
                             <option value="العلوم والتقنية">العلوم والتقنية</option>
+                            <option value="الثقافة والفنون">الثقافة والفنون</option>
                             <option value="النشاط الكشفي">النشاط الكشفي</option>
                             <option value="المواطنة والحياة">المواطنة والحياة</option>
                             <option value="الرياضة والصحة">الرياضة والصحة</option>
@@ -550,27 +439,18 @@
 
                     <div>
                         <label class="block font-bold text-royal-900 mb-0.5">المعلمة المشرفة *</label>
-                        <input type="text" id="fieldTeacher" required placeholder="أ. فاطمة الحربي" class="w-full border border-slate-300 rounded-xl px-3 py-2">
+                        <input type="text" id="fieldTeacher" required value="فاطمه الحربي" class="w-full border border-slate-300 rounded-xl px-3 py-2">
                     </div>
 
                     <div>
                         <label class="block font-bold text-royal-900 mb-0.5">التاريخ الهجري (1448 هـ) *</label>
                         <input type="text" id="fieldHijriDate" required value="15 ربيع الأول 1448 هـ" class="w-full border border-slate-300 rounded-xl px-3 py-2">
                     </div>
-
-                    <div>
-                        <label class="block font-bold text-royal-900 mb-0.5">الفصل الدراسي</label>
-                        <select id="fieldSemester" class="w-full border border-slate-300 rounded-xl px-3 py-2 bg-white">
-                            <option value="الفصل الدراسي الأول 1448 هـ">الفصل الدراسي الأول 1448 هـ</option>
-                            <option value="الفصل الدراسي الثاني 1448 هـ">الفصل الدراسي الثاني 1448 هـ</option>
-                            <option value="الفصل الدراسي الثالث 1448 هـ">الفصل الدراسي الثالث 1448 هـ</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
                     <label class="font-bold text-royal-900 text-[11px] block">اختر صورة الإنجاز من ألبوم الهاتف أو الكاميرا *</label>
-                    <input type="file" id="fieldMediaFile" accept="image/*" required onchange="handleFileUpload(event)" class="w-full text-[11px] text-slate-600 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:font-bold file:bg-royal-900 file:text-gold-400">
+                    <input type="file" id="fieldMediaFile" accept="image/*" required onchange="handleCompressedFileUpload(event)" class="w-full text-[11px] text-slate-600 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:font-bold file:bg-royal-900 file:text-gold-400">
                     
                     <div id="mediaPreviewBox" class="hidden mt-1.5 rounded-xl overflow-hidden border border-slate-300 bg-black/5 max-h-40 flex items-center justify-center">
                         <img id="previewImg" class="max-h-40 object-contain" alt="معاينة">
@@ -579,59 +459,38 @@
 
                 <div>
                     <label class="block font-bold text-royal-900 mb-0.5">نبذة عن الإنجاز</label>
-                    <textarea id="fieldDescription" rows="2" placeholder="وصف موجز للمشاركة..." class="w-full border border-slate-300 rounded-xl px-3 py-2"></textarea>
-                </div>
-
-                <div class="bg-emerald-50 border border-emerald-300 rounded-xl p-2.5">
-                    <label class="flex items-start gap-2 cursor-pointer">
-                        <input type="checkbox" id="fieldGovernanceConsent" required class="mt-0.5 w-3.5 h-3.5 accent-emerald-800 rounded">
-                        <span class="text-[11px] text-emerald-950 leading-relaxed font-medium">
-                            <strong>إقرار حوكمة البيانات (PDPL):</strong> أقرّ بأن النشر يتم بعد موافقة ولي الأمر وفق الضوابط الوطنية.
-                        </span>
-                    </label>
+                    <textarea id="fieldDescription" rows="2" placeholder="وصف موجز..." class="w-full border border-slate-300 rounded-xl px-3 py-2"></textarea>
                 </div>
 
                 <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
                     <button type="button" onclick="closeModal('achievementModal')" class="px-3 py-2 font-bold text-slate-600">إلغاء</button>
-                    <button type="submit" class="bg-emerald-800 hover:bg-emerald-700 text-white font-bold px-5 py-2 rounded-xl transition shadow flex items-center gap-1.5">
-                        <i class="fa-solid fa-check"></i>
-                        <span>حفظ ونشر مباشر لولي الأمر</span>
+                    <button type="submit" class="bg-emerald-800 hover:bg-emerald-700 text-white font-bold px-5 py-2 rounded-xl transition shadow">
+                        حفظ ونشر مباشر لولي الأمر
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- نافذة إعدادات الحقوق والمدرسة -->
-    <div id="settingsModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
-        <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-gold-400">
-            <div class="bg-royal-900 text-white p-4 flex items-center justify-between">
+    <!-- نافذة الخصوصية وحوكمة البيانات -->
+    <div id="governanceModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-emerald-600">
+            <div class="bg-emerald-900 text-white p-4 flex items-center justify-between">
                 <h3 class="font-extrabold text-xs flex items-center gap-1.5">
-                    <i class="fa-solid fa-gear text-gold-400"></i>
-                    <span>إعدادات الحقوق والهوية</span>
+                    <i class="fa-solid fa-shield-halved text-gold-400"></i> حوكمة البيانات (PDPL)
                 </h3>
-                <button onclick="closeModal('settingsModal')" class="text-slate-400 hover:text-white">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <button onclick="closeModal('governanceModal')" class="text-emerald-200 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="p-4 space-y-3 text-xs">
-                <div>
-                    <label class="block font-bold text-royal-900 mb-0.5">اسم المدرسة:</label>
-                    <input type="text" id="settingSchoolName" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs">
-                </div>
-                <div>
-                    <label class="block font-bold text-royal-900 mb-0.5">اسم صاحبة الحقوق والفكرة:</label>
-                    <input type="text" id="settingOwnerName" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs">
-                </div>
-                <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
-                    <button onclick="resetDemoData()" class="text-red-600 font-bold">استعادة الافتراضي</button>
-                    <button onclick="saveSettings()" class="bg-royal-900 text-gold-400 font-bold px-4 py-1.5 rounded-xl">حفظ الإعدادات</button>
+            <div class="p-4 space-y-2 text-xs text-slate-700 leading-relaxed">
+                <p>تلتزم المنصة بحماية البيانات الشخصية، وإخفاء الاسم الأخير للقاصرات، وحماية لوحة التحكم برمز سري حصري للكادر التعليمي.</p>
+                <div class="pt-2 text-left">
+                    <button onclick="closeModal('governanceModal')" class="bg-emerald-800 text-white font-bold px-4 py-1.5 rounded-xl">فهمت</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- إشعار (Toast) -->
+    <!-- إشعار Toast -->
     <div id="toastBox" class="fixed bottom-4 left-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
         <div class="bg-royal-900 text-white border-r-4 border-gold-500 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-bold">
             <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
@@ -649,38 +508,23 @@
                 category: 'العلوم والتقنية',
                 teacher: 'فاطمه الحربي',
                 hijriDate: '15 ربيع الأول 1448 هـ',
-                semester: 'الفصل الدراسي الأول 1448 هـ',
-                mediaType: 'image',
                 mediaUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
                 description: 'مشاركة مدرسية مميزة ضمن خطة الأنشطة وأسبوع الفضاء العالمي.',
                 likes: 45,
-                likedByMe: false,
-                principalPraise: 'إبداع رائع يلامس النجوم، دمتِ فخراً للمدرسة.'
+                likedByMe: false
             }
         ];
 
         let achievements = [];
         let currentRole = 'parent';
-        let currentUserAccount = null;
-        let selectedLoginRole = 'parent';
         let currentGradeFilter = 'الكل';
         let privacyMaskEnabled = true;
         let uploadedMediaDataUrl = '';
-        let siteSettings = {
-            schoolName: 'المعرض المدرسي للأنشطة المدرسية المميزة',
-            ownerName: 'إعداد وتطوير: صاحبة المبادرة والمنصة التعليمية'
-        };
-
-        let authSystem = {
-            initialized: true,
-            schoolInviteCode: 'SCH-1448',
-            principal: { id: 'acc-principal', name: 'مديرة المدرسة', role: 'principal', pin: '2030' },
-            coordinator: { id: 'acc-coordinator', name: 'رائدة النشاط', role: 'coordinator', pin: '1448' },
-            teachers: [
-                { id: 't-1', name: 'أ. فاطمه الحربي', pin: '2101' },
-                { id: 't-2', name: 'أ. سارة الدوسري', pin: '2102' }
-            ],
-            auditLogs: []
+        
+        // الرمز السري الأساسي ومفتاح الطوارئ للاسترداد (بدون تلميحات نهائياً)
+        let schoolSecurity = {
+            adminPin: '1448',
+            emergencyKey: 'REC-1448-SA'
         };
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -689,33 +533,28 @@
             renderGallery();
             renderAnnualTable();
             updateStats();
-            applySettingsUI();
         });
 
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('school_exhibition_1448_data_v3');
-            const savedSettings = localStorage.getItem('school_exhibition_1448_settings');
+            const savedData = localStorage.getItem('school_exhibition_1448_data_v4');
+            const savedSec = localStorage.getItem('school_exhibition_1448_sec');
             
             if (savedData) {
-                try {
-                    achievements = JSON.parse(savedData);
-                } catch (e) {
-                    achievements = [...DEFAULT_ACHIEVEMENTS];
-                }
+                try { achievements = JSON.parse(savedData); } catch (e) { achievements = [...DEFAULT_ACHIEVEMENTS]; }
             } else {
                 achievements = [...DEFAULT_ACHIEVEMENTS];
             }
 
-            if (savedSettings) {
-                try { siteSettings = JSON.parse(savedSettings); } catch (e) {}
+            if (savedSec) {
+                try { schoolSecurity = JSON.parse(savedSec); } catch (e) {}
             }
         }
 
         function saveToLocalStorage(showNotification = false) {
-            localStorage.setItem('school_exhibition_1448_data_v3', JSON.stringify(achievements));
-            localStorage.setItem('school_exhibition_1448_settings', JSON.stringify(siteSettings));
+            localStorage.setItem('school_exhibition_1448_data_v4', JSON.stringify(achievements));
+            localStorage.setItem('school_exhibition_1448_sec', JSON.stringify(schoolSecurity));
             if (showNotification) {
-                showToast('تم حفظ ونشر التحديثات لجميع الزوار بنجاح');
+                showToast('تم حفظ التحديثات ونشرها لجميع الزوار بنجاح');
             }
         }
 
@@ -724,7 +563,6 @@
             document.getElementById('privacyToggleText').textContent = privacyMaskEnabled ? 'حماية الأسماء: مفعّلة' : 'عرض كامل';
             renderGallery();
             renderAnnualTable();
-            showToast(privacyMaskEnabled ? 'تم تفعيل إخفاء الاسم الأخير وفق حوكمة البيانات' : 'تم عرض الأسماء الكاملة');
         }
 
         function formatStudentName(fullName) {
@@ -736,28 +574,65 @@
         }
 
         function openLoginModal() {
+            document.getElementById('loginPasscode').value = '';
             document.getElementById('loginModal').classList.remove('hidden');
         }
 
-        function selectLoginRole(role) {
-            selectedLoginRole = role;
-            document.querySelectorAll('.role-option').forEach(btn => {
-                btn.classList.remove('border-2', 'border-emerald-600', 'bg-emerald-50');
-                btn.classList.add('border', 'border-slate-200');
-            });
-            const activeBtn = document.getElementById(`roleBtn-${role}`);
-            if (activeBtn) {
-                activeBtn.classList.remove('border', 'border-slate-200');
-                activeBtn.classList.add('border-2', 'border-emerald-600', 'bg-emerald-50');
+        function togglePasscodeVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (!input || !icon) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash text-xs';
+            } else {
+                input.type = 'password';
+                icon.className = 'fa-solid fa-eye text-xs';
             }
         }
 
         function confirmLogin() {
-            currentRole = 'principal'; // صلاحية كاملة لإضافة وحفظ الصور مباشرة
-            updateRoleUI();
-            renderGallery();
+            const passcode = document.getElementById('loginPasscode').value.trim();
+            if (!passcode) {
+                showToast('يرجى إدخال الرمز السري', true);
+                return;
+            }
+
+            if (passcode === schoolSecurity.adminPin) {
+                currentRole = 'admin';
+                updateRoleUI();
+                renderGallery();
+                closeModal('loginModal');
+                showToast('تم تسجيل الدخول بنجاح - صلاحيات الإدارة مفعلة');
+            } else {
+                showToast('الرمز السري غير صحيح!', true);
+            }
+        }
+
+        function openRecoveryModal() {
             closeModal('loginModal');
-            showToast('تم تفعيل وضع الإدارة والكادر بنجاح');
+            document.getElementById('recoveryKeyInput').value = '';
+            document.getElementById('newPinInput').value = '';
+            document.getElementById('recoveryModal').classList.remove('hidden');
+        }
+
+        function executePinReset() {
+            const key = document.getElementById('recoveryKeyInput').value.trim();
+            const newPin = document.getElementById('newPinInput').value.trim();
+
+            if (key !== schoolSecurity.emergencyKey) {
+                showToast('مفتاح الطوارئ غير صحيح!', true);
+                return;
+            }
+            if (!newPin || newPin.length < 4) {
+                showToast('يرجى إدخال رمز سري جديد لا يقل عن 4 خانات', true);
+                return;
+            }
+
+            schoolSecurity.adminPin = newPin;
+            saveToLocalStorage(false);
+            closeModal('recoveryModal');
+            showToast('تم تحديث الرمز السري بنجاح، يمكنك الدخول به الآن');
         }
 
         function updateRoleUI() {
@@ -772,10 +647,10 @@
                 addBtn.classList.add('hidden');
                 authBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket text-[10px]"></i><span>دخول الكادر</span>';
             } else {
-                labelEl.textContent = 'أ. فاطمه الحربي (إدارة)';
+                labelEl.textContent = 'الإدارة والمعلمات (مفعل)';
                 dot.className = 'w-2 h-2 rounded-full bg-gold-400 animate-pulse';
                 addBtn.classList.remove('hidden');
-                authBtn.innerHTML = '<i class="fa-solid fa-user-check text-[10px]"></i><span>صلاحية مفعلة</span>';
+                authBtn.innerHTML = '<i class="fa-solid fa-user-check text-[10px]"></i><span>خروج</span>';
             }
         }
 
@@ -810,8 +685,7 @@
                 const matchSearch = !searchVal ||
                     item.title.toLowerCase().includes(searchVal) ||
                     item.student.toLowerCase().includes(searchVal) ||
-                    item.teacher.toLowerCase().includes(searchVal) ||
-                    item.grade.toLowerCase().includes(searchVal);
+                    item.teacher.toLowerCase().includes(searchVal);
                 return matchGrade && matchCat && matchSearch;
             });
 
@@ -822,18 +696,17 @@
             }
 
             emptyState.classList.add('hidden');
+            const isAdmin = currentRole === 'admin';
 
             grid.innerHTML = filtered.map(item => {
                 const displayStudent = formatStudentName(item.student);
                 const mediaElement = `<img src="${item.mediaUrl}" alt="${item.title}" class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">`;
 
-                const praiseBanner = item.principalPraise ? `
-                    <div class="principal-seal rounded-xl p-2.5 mt-2.5 text-xs">
-                        <div class="flex items-center gap-1 text-gold-600 font-extrabold mb-0.5 text-[11px]">
-                            <i class="fa-solid fa-crown"></i>
-                            <span>تشجيع المديرة:</span>
-                        </div>
-                        <p class="text-royal-900 font-medium leading-relaxed text-[11px]">"${item.principalPraise}"</p>
+                const adminControls = isAdmin ? `
+                    <div class="pt-2.5 mt-2.5 border-t border-slate-100 flex justify-end no-print">
+                        <button onclick="deleteAchievement('${item.id}')" class="bg-red-50 hover:bg-red-600 hover:text-white text-red-600 font-bold py-1 px-3 rounded-lg text-[11px] transition">
+                            <i class="fa-solid fa-trash"></i> حذف المشاركة
+                        </button>
                     </div>
                 ` : '';
 
@@ -865,12 +738,12 @@
                                 </h3>
                                 
                                 <p class="text-[11px] text-slate-600 mt-1 line-clamp-2 leading-relaxed">
-                                    ${item.description || 'مشاركة مدرسية مميزة ضمن خطة الأنشطة.'}
+                                    ${item.description || 'مشاركة مدرسية مميزة.'}
                                 </p>
 
                                 <div class="mt-3 bg-pearl rounded-xl p-2.5 space-y-1 border border-slate-100 text-[11px]">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-slate-500">المبدعة:</span>
+                                        <span class="text-slate-500">الطالبة:</span>
                                         <span class="font-extrabold text-royal-900">${displayStudent}</span>
                                     </div>
                                     <div class="flex items-center justify-between">
@@ -878,8 +751,6 @@
                                         <span class="font-bold text-emerald-800">${item.teacher}</span>
                                     </div>
                                 </div>
-
-                                ${praiseBanner}
                             </div>
                         </div>
 
@@ -889,10 +760,8 @@
                                     <i class="${item.likedByMe ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                                     <span>إعجاب (${item.likes})</span>
                                 </button>
-                                <button onclick="deleteAchievement('${item.id}')" class="text-red-500 hover:text-red-700 text-xs px-2 py-1" title="حذف">
-                                    <i class="fa-solid fa-trash"></i> حذف
-                                </button>
                             </div>
+                            ${adminControls}
                         </div>
                     </article>
                 `;
@@ -910,23 +779,55 @@
         }
 
         function openAchievementModal() {
+            if (currentRole !== 'admin') {
+                openLoginModal();
+                return;
+            }
             document.getElementById('achievementForm').reset();
-            document.getElementById('editItemId').value = '';
             uploadedMediaDataUrl = '';
             document.getElementById('mediaPreviewBox').classList.add('hidden');
             document.getElementById('achievementModal').classList.remove('hidden');
         }
 
-        function handleFileUpload(event) {
+        // ضغط وتصغير الصور تلقائياً لضمان حفظها بنجاح دون مشاكل في مساحة التخزين
+        function handleCompressedFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
+
             const reader = new FileReader();
             reader.onload = function(e) {
-                uploadedMediaDataUrl = e.target.result;
-                const box = document.getElementById('mediaPreviewBox');
-                const img = document.getElementById('previewImg');
-                box.classList.remove('hidden');
-                img.src = uploadedMediaDataUrl;
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800;
+                    const MAX_HEIGHT = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.75);
+                    const previewBox = document.getElementById('mediaPreviewBox');
+                    const previewImg = document.getElementById('previewImg');
+                    previewBox.classList.remove('hidden');
+                    previewImg.src = uploadedMediaDataUrl;
+                };
             };
             reader.readAsDataURL(file);
         }
@@ -934,7 +835,7 @@
         function saveAchievement(event) {
             event.preventDefault();
             if (!uploadedMediaDataUrl) {
-                showToast('يرجى اختيار صورة الإنجاز أولاً', true);
+                showToast('يرجى اختيار صورة الإنجاز', true);
                 return;
             }
 
@@ -946,13 +847,10 @@
                 category: document.getElementById('fieldCategory').value,
                 teacher: document.getElementById('fieldTeacher').value.trim(),
                 hijriDate: document.getElementById('fieldHijriDate').value.trim(),
-                semester: document.getElementById('fieldSemester').value,
-                mediaType: 'image',
                 mediaUrl: uploadedMediaDataUrl,
                 description: document.getElementById('fieldDescription').value.trim(),
                 likes: 1,
-                likedByMe: false,
-                principalPraise: 'إنجاز مميز ومبارك.'
+                likedByMe: false
             };
 
             achievements.unshift(payload);
@@ -961,7 +859,6 @@
             renderAnnualTable();
             updateStats();
             closeModal('achievementModal');
-            showToast('تمت إضافة ونشر الإنجاز بنجاح لجميع الزوار');
         }
 
         function deleteAchievement(id) {
@@ -970,7 +867,7 @@
             renderGallery();
             renderAnnualTable();
             updateStats();
-            showToast('تم حذف المشاركة');
+            showToast('تم حذف المشاركة بنجاح');
         }
 
         function switchMainTab(tabName) {
@@ -995,14 +892,6 @@
 
         function renderAnnualTable() {
             const tbody = document.getElementById('annualProjectsTableBody');
-            const barsContainer = document.getElementById('gradeSummaryBars');
-            const gradesList = ['الصف الأول الابتدائي', 'الصف الثاني الابتدائي', 'الصف الثالث الابتدائي', 'الصف الرابع الابتدائي', 'الصف الخامس الابتدائي', 'الصف السادس الابتدائي'];
-
-            barsContainer.innerHTML = gradesList.map(g => {
-                const count = achievements.filter(a => a.grade === g).length;
-                return `<div class="bg-white p-2.5 rounded-xl border border-slate-200 text-center"><span class="block text-[10px] text-slate-500 font-bold">${g.replace(' الابتدائي', '')}</span><span class="text-base font-extrabold text-royal-900">${count}</span></div>`;
-            }).join('');
-
             tbody.innerHTML = achievements.map((item, idx) => `
                 <tr class="hover:bg-gold-100/20 transition">
                     <td class="py-2.5 px-3 font-bold text-slate-500">${idx + 1}</td>
@@ -1012,7 +901,6 @@
                     <td class="py-2.5 px-3 text-emerald-800 font-bold">${item.category}</td>
                     <td class="py-2.5 px-3">${item.teacher}</td>
                     <td class="py-2.5 px-3 text-slate-600">${item.hijriDate}</td>
-                    <td class="py-2.5 px-3"><span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-bold">معتمد</span></td>
                 </tr>
             `).join('');
         }
@@ -1025,10 +913,6 @@
         }
 
         function printExhibition() { window.print(); }
-        function downloadCSVReport() { showToast('تم تجهيز التقرير'); }
-        function openSettingsModal() { document.getElementById('settingsModal').classList.remove('hidden'); }
-        function saveSettings() { closeModal('settingsModal'); showToast('تم الحفظ'); }
-        function resetDemoData() { achievements = [...DEFAULT_ACHIEVEMENTS]; saveToLocalStorage(true); renderGallery(); closeModal('settingsModal'); }
         function openGovernanceModal() { document.getElementById('governanceModal').classList.remove('hidden'); }
         function closeModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
 
