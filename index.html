@@ -375,7 +375,7 @@
         </div>
     </div>
 
-    <!-- نافذة إضافة إنجاز (اختيار الصورة من الألبوم مباشرة مع ضغط ذكي) -->
+    <!-- نافذة إضافة إنجاز (تتقبل روابط Google Drive أو أي روابط صور مباشرة) -->
     <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -434,13 +434,10 @@
                     </div>
                 </div>
 
-                <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
-                    <label class="font-bold text-royal-900 text-[11px] block">اختر صورة الإنجاز من ألبوم الجوال أو الكاميرا *</label>
-                    <input type="file" id="fieldMediaFile" accept="image/*" required onchange="handleCompressedFileUpload(event)" class="w-full text-[11px] text-slate-600 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:font-bold file:bg-royal-900 file:text-gold-400">
-                    
-                    <div id="mediaPreviewBox" class="hidden mt-1.5 rounded-xl overflow-hidden border border-slate-300 bg-black/5 max-h-40 flex items-center justify-center">
-                        <img id="previewImg" class="max-h-40 object-contain" alt="معاينة">
-                    </div>
+                <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-1.5">
+                    <label class="font-bold text-royal-900 text-[11px] block">رابط الصورة (Google Drive أو رابط مباشر) *</label>
+                    <input type="url" id="fieldMediaUrl" required placeholder="الصقي رابط Google Drive هنا..." class="w-full border border-slate-300 rounded-xl px-3 py-2 text-left" dir="ltr">
+                    <p class="text-[10px] text-slate-500">ضعي رابط مشاركة Google Drive (وتأكدس أنه متاح للجميع)، أو أي رابط صورة مباشر لضمان الظهور الفوري لولي الأمر دون أي مشاكل ذاكرة.</p>
                 </div>
 
                 <div>
@@ -487,7 +484,6 @@
         let currentRole = 'parent';
         let currentGradeFilter = 'الكل';
         let privacyMaskEnabled = true;
-        let uploadedMediaDataUrl = '';
         
         let schoolSecurity = {
             adminPin: '1448',
@@ -503,8 +499,8 @@
         });
 
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('school_exhibition_1448_data_v9');
-            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v9');
+            const savedData = localStorage.getItem('school_exhibition_1448_data_v10');
+            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v10');
             
             if (savedData) {
                 try { achievements = JSON.parse(savedData); } catch (e) { achievements = [...DEFAULT_ACHIEVEMENTS]; }
@@ -519,14 +515,35 @@
 
         function saveToLocalStorage(showNotification = false) {
             try {
-                localStorage.setItem('school_exhibition_1448_data_v9', JSON.stringify(achievements));
-                localStorage.setItem('school_exhibition_1448_sec_v9', JSON.stringify(schoolSecurity));
+                localStorage.setItem('school_exhibition_1448_data_v10', JSON.stringify(achievements));
+                localStorage.setItem('school_exhibition_1448_sec_v10', JSON.stringify(schoolSecurity));
                 if (showNotification) {
                     showToast('تم الحفظ والنشر بنجاح لجميع الزوار');
                 }
             } catch (e) {
-                showToast('ذاكرة المتصفح ممتلئة، يرجى حذف إنجاز قديم لتفريغ مساحة', true);
+                showToast('حدث خطأ في الحفظ', true);
             }
+        }
+
+        // دالة ذكية لتحويل روابط Google Drive العادية إلى روابط عرض مباشر للصورة
+        function formatDriveUrl(url) {
+            if (!url) return '';
+            if (url.includes('drive.google.com')) {
+                let fileId = '';
+                if (url.includes('/file/d/')) {
+                    const parts = url.split('/file/d/');
+                    if (parts.length > 1) {
+                        fileId = parts[1].split('/')[0];
+                    }
+                } else if (url.includes('id=')) {
+                    const urlParams = new URLSearchParams(url.split('?')[1]);
+                    fileId = urlParams.get('id');
+                }
+                if (fileId) {
+                    return `https://drive.google.com/uc?export=view&id=${fileId}`;
+                }
+            }
+            return url;
         }
 
         function togglePrivacyMask() {
@@ -762,60 +779,18 @@
                 return;
             }
             document.getElementById('achievementForm').reset();
-            uploadedMediaDataUrl = '';
-            document.getElementById('mediaPreviewBox').classList.add('hidden');
             document.getElementById('achievementModal').classList.remove('hidden');
-        }
-
-        // ضغط الصورة المرفوعة من الألبوم مباشرة لتناسب حجم التخزين المحلي
-        function handleCompressedFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 450;
-                    const MAX_HEIGHT = 450;
-                    let width = img.width;
-                    let height = img.height;
-
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.55);
-                    const previewBox = document.getElementById('mediaPreviewBox');
-                    const previewImg = document.getElementById('previewImg');
-                    previewBox.classList.remove('hidden');
-                    previewImg.src = uploadedMediaDataUrl;
-                };
-            };
-            reader.readAsDataURL(file);
         }
 
         function saveAchievement(event) {
             event.preventDefault();
-            if (!uploadedMediaDataUrl) {
-                showToast('يرجى اختيار صورة الإنجاز', true);
+            const rawUrl = document.getElementById('fieldMediaUrl').value.trim();
+            if (!rawUrl) {
+                showToast('يرجى إدخال رابط الصورة', true);
                 return;
             }
+
+            const formattedUrl = formatDriveUrl(rawUrl);
 
             const payload = {
                 id: 'ach-' + Date.now(),
@@ -825,7 +800,7 @@
                 category: document.getElementById('fieldCategory').value,
                 teacher: document.getElementById('fieldTeacher').value.trim(),
                 hijriDate: document.getElementById('fieldHijriDate').value.trim(),
-                mediaUrl: uploadedMediaDataUrl,
+                mediaUrl: formattedUrl,
                 description: document.getElementById('fieldDescription').value.trim(),
                 likes: 1,
                 likedByMe: false
