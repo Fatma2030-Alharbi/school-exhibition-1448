@@ -68,11 +68,6 @@
             border-color: rgba(212, 175, 55, 0.65);
         }
 
-        .principal-seal {
-            background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
-            border: 1.5px dashed #C5A028;
-        }
-
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -112,9 +107,6 @@
                     <i class="fa-solid fa-user-shield text-gold-400"></i>
                     <span id="privacyToggleText">حماية الأسماء: مفعّلة</span>
                 </button>
-                <button onclick="openGovernanceModal()" class="underline text-gold-400 hover:text-white text-[10px]">
-                    الخصوصية
-                </button>
             </div>
         </div>
     </div>
@@ -147,9 +139,9 @@
                         <span id="currentRoleLabel" class="font-bold text-gold-400 truncate max-w-[120px]">ولي أمر / زائر</span>
                     </div>
 
-                    <button onclick="openLoginModal()" id="authBtn" class="bg-gold-500 hover:bg-gold-400 text-royal-900 font-bold px-2.5 py-1 rounded-lg text-[11px] transition shadow flex items-center gap-1">
+                    <button onclick="handleAuthButtonClick()" id="authBtn" class="bg-gold-500 hover:bg-gold-400 text-royal-900 font-bold px-2.5 py-1 rounded-lg text-[11px] transition shadow flex items-center gap-1">
                         <i class="fa-solid fa-right-to-bracket text-[10px]"></i>
-                        <span>دخول الكادر</span>
+                        <span id="authBtnText">دخول الإدارة</span>
                     </button>
 
                     <button onclick="openAchievementModal()" id="addAchievementBtn" class="hidden bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-2.5 py-1 rounded-lg text-[11px] transition border border-emerald-500 flex items-center gap-1">
@@ -172,10 +164,6 @@
                 </nav>
 
                 <div class="flex items-center gap-1">
-                    <button onclick="saveToLocalStorage(true)" title="حفظ" class="bg-royal-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-2 py-1 rounded-lg text-[11px] transition flex items-center gap-1">
-                        <i class="fa-solid fa-floppy-disk text-emerald-400"></i>
-                        <span class="hidden sm:inline">حفظ</span>
-                    </button>
                     <button onclick="printExhibition()" title="طباعة" class="bg-royal-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-2 py-1 rounded-lg text-[11px] transition flex items-center gap-1">
                         <i class="fa-solid fa-print text-gold-400"></i>
                         <span class="hidden sm:inline">طباعة</span>
@@ -215,8 +203,8 @@
                     <i class="fa-solid fa-medal"></i>
                 </div>
                 <div>
-                    <p class="text-[10px] text-slate-500 font-medium">أوسمة المديرة</p>
-                    <p id="statBadges" class="text-lg font-extrabold text-gold-600">0</p>
+                    <p class="text-[10px] text-slate-500 font-medium">التميز المدرسي</p>
+                    <p id="statBadges" class="text-lg font-extrabold text-gold-600">1448</p>
                 </div>
             </div>
 
@@ -236,9 +224,7 @@
             <section class="bg-white rounded-xl p-3 shadow-sm border border-slate-200/80 mb-4 no-print">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5">
                     <div class="flex items-center gap-1 overflow-x-auto pb-1 lg:pb-0" id="gradeFilterTabs">
-                        <button onclick="setGradeFilter('الكل')" data-grade="الكل" class="grade-tab active px-3 py-1.5 rounded-lg text-xs font-bold bg-royal-900 text-white whitespace-nowrap transition">
-                            جميع الصفوف
-                        </button>
+                        <button onclick="setGradeFilter('الكل')" data-grade="الكل" class="grade-tab active px-3 py-1.5 rounded-lg text-xs font-bold bg-royal-900 text-white whitespace-nowrap transition">جميع الصفوف</button>
                         <button onclick="setGradeFilter('الصف الأول الابتدائي')" data-grade="الصف الأول الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">الأول</button>
                         <button onclick="setGradeFilter('الصف الثاني الابتدائي')" data-grade="الصف الثاني الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">الثاني</button>
                         <button onclick="setGradeFilter('الصف الثالث الابتدائي')" data-grade="الصف الثالث الابتدائي" class="grade-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-gold-100 whitespace-nowrap transition">الثالث</button>
@@ -314,14 +300,14 @@
                 <p class="text-slate-400 text-[11px]">منصة رقمية موثقة لحوكمة الأنشطة المدرسية 1448 هـ.</p>
             </div>
             <div>
-                <button onclick="openLoginModal()" class="bg-royal-800 hover:bg-slate-700 text-gold-400 border border-gold-500/40 px-3 py-1.5 rounded-xl font-bold">
-                    <i class="fa-solid fa-lock text-[10px]"></i> دخول الإدارة
+                <button onclick="handleAuthButtonClick()" class="bg-royal-800 hover:bg-slate-700 text-gold-400 border border-gold-500/40 px-3 py-1.5 rounded-xl font-bold">
+                    <i class="fa-solid fa-lock text-[10px]"></i> إدارة الدخول
                 </button>
             </div>
         </div>
     </footer>
 
-    <!-- ==================== النوافذ المنبثقة وحماية الرمز السري ==================== -->
+    <!-- ==================== النوافذ المنبثقة ==================== -->
 
     <!-- نافذة تسجيل الدخول الآمن -->
     <div id="loginModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
@@ -329,13 +315,13 @@
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
                 <h3 class="font-extrabold text-xs flex items-center gap-1.5">
                     <i class="fa-solid fa-shield-halved text-gold-400"></i>
-                    <span>بوابة الحماية وتسجيل الكادر</span>
+                    <span>بوابة حماية الإدارة</span>
                 </h3>
                 <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="p-4 space-y-3 text-xs">
                 <p class="text-slate-600 bg-pearl p-2.5 rounded-xl border border-slate-200 text-[11px]">
-                    المنصة محمية برمز سري خاص بالمعلمات والإدارة لضمان أمن البيانات.
+                    المنصة محمية بررمز سري خاص بصاحبة الصلاحية فقط.
                 </p>
                 <div>
                     <label class="block font-bold text-royal-900 mb-1">الرمز السري الشخصي:</label>
@@ -371,15 +357,15 @@
             </div>
             <div class="p-4 space-y-3 text-xs">
                 <p class="text-slate-600 bg-pearl p-2.5 rounded-xl border border-slate-200 text-[11px]">
-                    أدخل مفتاح الاستاستعادة المعتمد أو رمز الطوارئ لإعادة ضبط الرمز السري:
+                    أدخل مفتاح الاستعادة الخاص بكِ لإعادة تعيين رمز جديد:
                 </p>
                 <div>
-                    <label class="block font-bold text-royal-900 mb-1">مفتاح الاستعادة / رمز الطوارئ:</label>
+                    <label class="block font-bold text-royal-900 mb-1">مفتاح الاستعادة (الطوارئ):</label>
                     <input type="password" id="recoveryKeyInput" placeholder="أدخل مفتاح الطوارئ" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs">
                 </div>
                 <div>
                     <label class="block font-bold text-royal-900 mb-1">الرمز السري الجديد:</label>
-                    <input type="password" id="newPinInput" placeholder="أدخل 4 أرقام جديدة فأكثر" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs">
+                    <input type="password" id="newPinInput" placeholder="أدخل 4 أرقام جديدة" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs">
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" onclick="closeModal('recoveryModal')" class="px-3 py-1.5 font-bold text-slate-600">إلغاء</button>
@@ -389,7 +375,7 @@
         </div>
     </div>
 
-    <!-- نافذة إضافة إنجاز (مع ضغط الصور التلقائي للحفظ الفوري) -->
+    <!-- نافذة إضافة إنجاز (مع حفظ فوري مضمون) -->
     <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -404,7 +390,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div class="sm:col-span-2">
                         <label class="block font-bold text-royal-900 mb-0.5">عنوان الإنجاز / المشاركة *</label>
-                        <input type="text" id="fieldTitle" required placeholder="مثال: لوحة الفضاء" class="w-full border border-slate-300 rounded-xl px-3 py-2">
+                        <input type="text" id="fieldTitle" required placeholder="مثال: المشاركة بأسبوع الفضاء" class="w-full border border-slate-300 rounded-xl px-3 py-2">
                     </div>
 
                     <div>
@@ -420,7 +406,7 @@
                             <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي</option>
                             <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي</option>
                             <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي</option>
-                            <option value="الصف السادس الابتدائي">الصف السادس الابتدائي</option>
+                            <option value="الصف السادس الابتدائي" selected>الصف السادس الابتدائي</option>
                         </select>
                     </div>
 
@@ -459,7 +445,7 @@
 
                 <div>
                     <label class="block font-bold text-royal-900 mb-0.5">نبذة عن الإنجاز</label>
-                    <textarea id="fieldDescription" rows="2" placeholder="وصف موجز..." class="w-full border border-slate-300 rounded-xl px-3 py-2"></textarea>
+                    <textarea id="fieldDescription" rows="2" placeholder="وصف موجز للمشاركة..." class="w-full border border-slate-300 rounded-xl px-3 py-2">مشاركة مدرسية مميزة ضمن خطة الأنشطة.</textarea>
                 </div>
 
                 <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
@@ -469,24 +455,6 @@
                     </button>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <!-- نافذة الخصوصية وحوكمة البيانات -->
-    <div id="governanceModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
-        <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-emerald-600">
-            <div class="bg-emerald-900 text-white p-4 flex items-center justify-between">
-                <h3 class="font-extrabold text-xs flex items-center gap-1.5">
-                    <i class="fa-solid fa-shield-halved text-gold-400"></i> حوكمة البيانات (PDPL)
-                </h3>
-                <button onclick="closeModal('governanceModal')" class="text-emerald-200 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="p-4 space-y-2 text-xs text-slate-700 leading-relaxed">
-                <p>تلتزم المنصة بحماية البيانات الشخصية، وإخفاء الاسم الأخير للقاصرات، وحماية لوحة التحكم برمز سري حصري للكادر التعليمي.</p>
-                <div class="pt-2 text-left">
-                    <button onclick="closeModal('governanceModal')" class="bg-emerald-800 text-white font-bold px-4 py-1.5 rounded-xl">فهمت</button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -521,7 +489,7 @@
         let privacyMaskEnabled = true;
         let uploadedMediaDataUrl = '';
         
-        // الرمز السري الأساسي ومفتاح الطوارئ للاسترداد (بدون تلميحات نهائياً)
+        // الأمان والرمز السري الحصري
         let schoolSecurity = {
             adminPin: '1448',
             emergencyKey: 'REC-1448-SA'
@@ -536,8 +504,8 @@
         });
 
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('school_exhibition_1448_data_v4');
-            const savedSec = localStorage.getItem('school_exhibition_1448_sec');
+            const savedData = localStorage.getItem('school_exhibition_1448_data_v5');
+            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v5');
             
             if (savedData) {
                 try { achievements = JSON.parse(savedData); } catch (e) { achievements = [...DEFAULT_ACHIEVEMENTS]; }
@@ -551,10 +519,14 @@
         }
 
         function saveToLocalStorage(showNotification = false) {
-            localStorage.setItem('school_exhibition_1448_data_v4', JSON.stringify(achievements));
-            localStorage.setItem('school_exhibition_1448_sec', JSON.stringify(schoolSecurity));
-            if (showNotification) {
-                showToast('تم حفظ التحديثات ونشرها لجميع الزوار بنجاح');
+            try {
+                localStorage.setItem('school_exhibition_1448_data_v5', JSON.stringify(achievements));
+                localStorage.setItem('school_exhibition_1448_sec_v5', JSON.stringify(schoolSecurity));
+                if (showNotification) {
+                    showToast('تم حفظ ونشر التحديثات لجميع الزوار بنجاح');
+                }
+            } catch (e) {
+                showToast('مساحة التخزين ممتلئة، يجدر تصغير حجم الصورة قليلاً', true);
             }
         }
 
@@ -573,9 +545,18 @@
             return `${parts[0]} (${parts[parts.length - 1].charAt(0)}.)`;
         }
 
-        function openLoginModal() {
-            document.getElementById('loginPasscode').value = '';
-            document.getElementById('loginModal').classList.remove('hidden');
+        function handleAuthButtonClick() {
+            if (currentRole === 'admin') {
+                // تسجيل خروج
+                currentRole = 'parent';
+                updateRoleUI();
+                renderGallery();
+                showToast('تم تسجيل الخروج بنجاح');
+            } else {
+                // فتح نافذة الدخول
+                document.getElementById('loginPasscode').value = '';
+                document.getElementById('loginModal').classList.remove('hidden');
+            }
         }
 
         function togglePasscodeVisibility(inputId, iconId) {
@@ -603,7 +584,7 @@
                 updateRoleUI();
                 renderGallery();
                 closeModal('loginModal');
-                showToast('تم تسجيل الدخول بنجاح - صلاحيات الإدارة مفعلة');
+                showToast('مرحباً بكِ، تم تفعيل صلاحيات الإدارة بنجاح');
             } else {
                 showToast('الرمز السري غير صحيح!', true);
             }
@@ -621,7 +602,7 @@
             const newPin = document.getElementById('newPinInput').value.trim();
 
             if (key !== schoolSecurity.emergencyKey) {
-                showToast('مفتاح الطوارئ غير صحيح!', true);
+                showToast('مفتاح الاستعادة غير صحيح!', true);
                 return;
             }
             if (!newPin || newPin.length < 4) {
@@ -639,18 +620,18 @@
             const labelEl = document.getElementById('currentRoleLabel');
             const dot = document.getElementById('roleIndicatorDot');
             const addBtn = document.getElementById('addAchievementBtn');
-            const authBtn = document.getElementById('authBtn');
+            const authBtnText = document.getElementById('authBtnText');
 
             if (currentRole === 'parent') {
                 labelEl.textContent = 'ولي أمر / زائر';
                 dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
                 addBtn.classList.add('hidden');
-                authBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket text-[10px]"></i><span>دخول الكادر</span>';
+                authBtnText.textContent = 'دخول الإدارة';
             } else {
-                labelEl.textContent = 'الإدارة والمعلمات (مفعل)';
+                labelEl.textContent = 'أ. فاطمه الحربي (إدارة)';
                 dot.className = 'w-2 h-2 rounded-full bg-gold-400 animate-pulse';
                 addBtn.classList.remove('hidden');
-                authBtn.innerHTML = '<i class="fa-solid fa-user-check text-[10px]"></i><span>خروج</span>';
+                authBtnText.textContent = 'تسجيل خروج';
             }
         }
 
@@ -789,7 +770,7 @@
             document.getElementById('achievementModal').classList.remove('hidden');
         }
 
-        // ضغط وتصغير الصور تلقائياً لضمان حفظها بنجاح دون مشاكل في مساحة التخزين
+        // ضغط الصورة المرفوعة لضمان حفظها الفوري الموثوق
         function handleCompressedFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -800,8 +781,8 @@
                 img.src = e.target.result;
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 800;
-                    const MAX_HEIGHT = 800;
+                    const MAX_WIDTH = 700;
+                    const MAX_HEIGHT = 700;
                     let width = img.width;
                     let height = img.height;
 
@@ -822,7 +803,7 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.75);
+                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.7);
                     const previewBox = document.getElementById('mediaPreviewBox');
                     const previewImg = document.getElementById('previewImg');
                     previewBox.classList.remove('hidden');
@@ -909,11 +890,9 @@
             document.getElementById('statTotal').textContent = achievements.length;
             const totalLikes = achievements.reduce((sum, a) => sum + (a.likes || 0), 0);
             document.getElementById('statLikes').textContent = totalLikes;
-            document.getElementById('statBadges').textContent = achievements.length;
         }
 
         function printExhibition() { window.print(); }
-        function openGovernanceModal() { document.getElementById('governanceModal').classList.remove('hidden'); }
         function closeModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
 
         let toastTimer;
