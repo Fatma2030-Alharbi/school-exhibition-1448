@@ -124,7 +124,7 @@
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
                 
-                <!-- الهوية والعنوان (مدمج بشكل أنيق) -->
+                <!-- الهوية والعنوان -->
                 <div class="flex items-center gap-2.5">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-royal-900 shadow shrink-0 border border-white/20 text-base">
                         <i class="fa-solid fa-award"></i>
@@ -143,14 +143,12 @@
 
                 <!-- شريط التحكم والأدوات المصغرة -->
                 <div class="flex flex-wrap items-center gap-1.5 no-print">
-                    <!-- مؤشر الدور الحالي -->
                     <div class="bg-royal-800 border border-slate-700 rounded-lg px-2.5 py-1 flex items-center gap-1.5 text-[11px]">
                         <span id="roleIndicatorDot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
                         <span class="text-slate-400 hidden sm:inline">الصفة:</span>
                         <span id="currentRoleLabel" class="font-bold text-gold-400 truncate max-w-[120px]">ولي أمر</span>
                     </div>
 
-                    <!-- أزرار الإجراءات المدمجة -->
                     <button onclick="openLoginModal()" id="authBtn" class="bg-gold-500 hover:bg-gold-400 text-royal-900 font-bold px-2.5 py-1 rounded-lg text-[11px] transition shadow flex items-center gap-1">
                         <i class="fa-solid fa-right-to-bracket text-[10px]"></i>
                         <span>دخول الكادر</span>
@@ -169,7 +167,7 @@
                 </div>
             </div>
 
-            <!-- شريط التنقل والأدوات السريعة السفلي المصغر -->
+            <!-- شريط التنقل السفلي المصغر -->
             <div class="mt-2 pt-2 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 no-print">
                 <nav class="flex items-center gap-1">
                     <button onclick="switchMainTab('gallery')" id="tab-gallery" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-royal-900 shadow transition flex items-center gap-1.5">
@@ -206,7 +204,7 @@
     <!-- المحتوى الرئيسي -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4">
 
-        <!-- بطاقات الإحصائيات السريعة (مصغرة وأنيقة) -->
+        <!-- بطاقات الإحصائيات السريعة -->
         <section class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 mb-4">
             <div class="bg-white rounded-xl p-3 shadow-sm border border-gold-400/30 flex items-center gap-2.5">
                 <div class="w-9 h-9 rounded-lg bg-royal-900 text-gold-400 flex items-center justify-center text-sm shrink-0">
@@ -251,10 +249,8 @@
 
         <!-- القسم الأول: أروقة المعرض التفاعلي -->
         <div id="view-gallery">
-            <!-- شريط الفلترة والبحث المدمج -->
             <section class="bg-white rounded-xl p-3 shadow-sm border border-slate-200/80 mb-4 no-print">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5">
-                    <!-- تبويبات الصفوف الدراسية -->
                     <div class="flex items-center gap-1 overflow-x-auto pb-1 lg:pb-0" id="gradeFilterTabs">
                         <button onclick="setGradeFilter('الكل')" data-grade="الكل" class="grade-tab active px-3 py-1.5 rounded-lg text-xs font-bold bg-royal-900 text-white whitespace-nowrap transition">
                             جميع الصفوف
@@ -279,7 +275,6 @@
                         </button>
                     </div>
 
-                    <!-- البحث ونوع المشاركة -->
                     <div class="flex items-center gap-2">
                         <select id="categoryFilter" onchange="renderGallery()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-medium text-royal-900 focus:outline-none focus:border-gold-500">
                             <option value="الكل">جميع الأنواع</option>
@@ -300,12 +295,9 @@
                 </div>
             </section>
 
-            <!-- شبكة عرض بطاقات الإنجازات -->
             <section id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- يتم توليد البطاقات برمجياً هنا -->
             </section>
 
-            <!-- حالة عدم وجود نتائج -->
             <div id="emptyState" class="hidden bg-white rounded-2xl p-8 text-center border border-dashed border-slate-300 my-4">
                 <div class="w-12 h-12 rounded-full bg-gold-100 text-gold-600 flex items-center justify-center text-xl mx-auto mb-2">
                     <i class="fa-solid fa-folder-open"></i>
@@ -318,7 +310,7 @@
             </div>
         </div>
 
-        <!-- القسم الثاني: قائمة المشاريع خلال العام الدراسي كامل 1448 هـ -->
+        <!-- القسم الثاني: قائمة المشاريع خلال العام -->
         <div id="view-annual-plan" class="hidden">
             <div class="bg-white rounded-2xl shadow-sm border border-gold-400/30 overflow-hidden">
                 <div class="bg-gradient-to-l from-royal-900 to-royal-800 p-4 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -340,18 +332,15 @@
                     </div>
                 </div>
 
-                <!-- ملخص توزيع المشاريع حسب الصفوف -->
                 <div class="p-4 bg-pearl border-b border-slate-200">
                     <h3 class="text-xs font-bold text-royal-900 mb-2.5 flex items-center gap-1.5">
                         <i class="fa-solid fa-chart-pie text-emerald-700"></i>
                         <span>إحصائية المشاريع حسب الصفوف (1448 هـ):</span>
                     </h3>
                     <div id="gradeSummaryBars" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
-                        <!-- يتم توليد الإحصائيات هنا -->
                     </div>
                 </div>
 
-                <!-- جدول المشاريع السنوي -->
                 <div class="overflow-x-auto">
                     <table class="w-full text-right border-collapse text-xs">
                         <thead>
@@ -367,7 +356,6 @@
                             </tr>
                         </thead>
                         <tbody id="annualProjectsTableBody" class="divide-y divide-slate-100">
-                            <!-- يتم توليد الصفوف هنا -->
                         </tbody>
                     </table>
                 </div>
@@ -376,7 +364,7 @@
 
     </main>
 
-    <!-- التذييل وحفظ الحقوق -->
+    <!-- التذييل -->
     <footer class="bg-royal-900 text-slate-300 border-t-4 border-gold-500 mt-8">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center text-xs">
@@ -415,9 +403,9 @@
         </div>
     </footer>
 
-    <!-- ==================== النوافذ المنبثقة (Modals) ==================== -->
+    <!-- ==================== النوافذ المنبثقة ==================== -->
 
-    <!-- 0. معالج الإعداد الأولي الآمن للمنصة -->
+    <!-- 0. معالج التهيئة الأمنية (يظهر فقط إذا لم يتم ضبط النظام مسبقاً) -->
     <div id="setupWizardModal" class="fixed inset-0 bg-royal-900/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border-2 border-gold-500 my-4">
             <div class="bg-gradient-to-l from-royal-900 to-royal-800 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -425,7 +413,7 @@
                     <i class="fa-solid fa-shield-halved text-gold-400 text-lg"></i>
                     <div>
                         <h3 class="font-extrabold text-sm">معالج التهيئة الأمنية للمنصة</h3>
-                        <p class="text-[10px] text-slate-300">تعيين الرموز الفردية المستقلة للكادر</p>
+                        <p class="text-[10px] text-slate-300">تعيين الرموز الفردية المستقرة للكادر</p>
                     </div>
                 </div>
             </div>
@@ -435,7 +423,6 @@
                     <strong>تنبيه أمني:</strong> يرجى تعيين رمز سري مستقل لكل من <strong>مديرة المدرسة</strong> و<strong>رائدة النشاط</strong>، وحفظ <strong>مفتاح الاسترداد</strong>.
                 </div>
 
-                <!-- بيانات مديرة المدرسة -->
                 <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
                     <h4 class="font-extrabold text-royal-900 flex items-center gap-1">
                         <i class="fa-solid fa-crown text-gold-600"></i> حساب مديرة المدرسة
@@ -465,7 +452,6 @@
                     </div>
                 </div>
 
-                <!-- بيانات رائدة النشاط -->
                 <div class="bg-pearl p-3 rounded-xl border border-slate-200 space-y-2">
                     <h4 class="font-extrabold text-royal-900 flex items-center gap-1">
                         <i class="fa-solid fa-star text-emerald-700"></i> حساب رائدة النشاط
@@ -517,7 +503,7 @@
         </div>
     </div>
 
-    <!-- 1. نافذة تسجيل الدخول وتبديل الصلاحيات الفردية -->
+    <!-- 1. نافذة تسجيل الدخول -->
     <div id="loginModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-gold-400/40 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -608,7 +594,7 @@
         </div>
     </div>
 
-    <!-- 1-ب. نافذة تفعيل حساب معلمة جديدة -->
+    <!-- باقي النوافذ -->
     <div id="teacherActivateModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-emerald-500 my-4">
             <div class="bg-emerald-900 text-white p-4 flex items-center justify-between">
@@ -654,7 +640,6 @@
         </div>
     </div>
 
-    <!-- 1-ج. نافذة استعادة الرمز المفقود -->
     <div id="recoveryModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border-2 border-gold-500 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -711,7 +696,6 @@
         </div>
     </div>
 
-    <!-- 1-د. لوحة إدارة حسابات الكادر وسجل التدقيق -->
     <div id="accountsAdminModal" class="fixed inset-0 bg-royal-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl border-2 border-gold-500 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -779,7 +763,6 @@
         </div>
     </div>
 
-    <!-- 2. نافذة إضافة / تعديل إنجاز طالبة -->
     <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -904,7 +887,6 @@
         </div>
     </div>
 
-    <!-- 3. نافذة وسام وتشجيع المديرة -->
     <div id="encourageModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
         <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border-2 border-gold-500">
             <div class="bg-gradient-to-l from-royal-900 to-royal-800 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -947,7 +929,6 @@
         </div>
     </div>
 
-    <!-- 4. نافذة ميثاق حوكمة البيانات -->
     <div id="governanceModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
         <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-emerald-600">
             <div class="bg-emerald-900 text-white p-4 flex items-center justify-between">
@@ -973,7 +954,6 @@
         </div>
     </div>
 
-    <!-- 5. نافذة إعدادات الحقوق والمدرسة -->
     <div id="settingsModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
         <div class="bg-white rounded-2xl max-w-sm w-full overflow-hidden shadow-2xl border border-gold-400">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between">
@@ -1024,7 +1004,7 @@
         </div>
     </div>
 
-    <!-- إشعار منبثق (Toast) -->
+    <!-- إشعار (Toast) -->
     <div id="toastBox" class="fixed bottom-4 left-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
         <div class="bg-royal-900 text-white border-r-4 border-gold-500 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-bold">
             <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
@@ -1145,11 +1125,11 @@
         };
 
         let authSystem = {
-            initialized: false,
-            masterRecoveryKey: '',
+            initialized: true, // تم الضبط تلقائياً لفتح المعرض مباشرة للزوار
+            masterRecoveryKey: 'REC-DEMO-1448',
             schoolInviteCode: 'SCH-1448',
-            principal: { id: 'acc-principal', name: 'مديرة المدرسة', role: 'principal', pin: '', question: 'اسم أول مدرسة عملتِ بها؟', answer: '' },
-            coordinator: { id: 'acc-coordinator', name: 'رائدة النشاط', role: 'coordinator', pin: '', question: 'ما هو تخصصكِ الجامعي؟', answer: '' },
+            principal: { id: 'acc-principal', name: 'مديرة المدرسة', role: 'principal', pin: '2030', question: 'اسم أول مدرسة عملتِ بها؟', answer: 'الاولى' },
+            coordinator: { id: 'acc-coordinator', name: 'رائدة النشاط', role: 'coordinator', pin: '1448', question: 'ما هو تخصصكِ الجامعي؟', answer: 'تاريخ' },
             teachers: [
                 { id: 't-1', name: 'أ. سارة الدوسري', pin: '2101', question: 'ما هو تخصصكِ الجامعي؟', answer: 'لغة عربية' },
                 { id: 't-2', name: 'أ. منيرة القحطاني', pin: '2102', question: 'ما هو تخصصكِ الجامعي؟', answer: 'تربية فنية' },
@@ -1176,10 +1156,6 @@
             renderAnnualTable();
             updateStats();
             applySettingsUI();
-
-            if (!authSystem.initialized) {
-                openSetupWizard();
-            }
         });
 
         function loadFromLocalStorage() {
@@ -1200,6 +1176,7 @@
                     authSystem = { ...authSystem, ...parsedAuth };
                 } catch (e) {}
             }
+            authSystem.initialized = true; // ضمان عدم ظهور معالج التهيئة لأي زائر جديد
         }
 
         function saveToLocalStorage(showNotification = false) {
@@ -1215,57 +1192,6 @@
             const now = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
             authSystem.auditLogs.unshift(`[${now}] ${actorName}: ${actionText}`);
             if (authSystem.auditLogs.length > 30) authSystem.auditLogs.pop();
-        }
-
-        function generateMasterKey() {
-            const part1 = Math.random().toString(36).substring(2, 6).toUpperCase();
-            const part2 = Math.random().toString(36).substring(2, 6).toUpperCase();
-            return `REC-${part1}-${part2}`;
-        }
-
-        function openSetupWizard() {
-            const key = generateMasterKey();
-            document.getElementById('setupMasterKeyDisplay').value = key;
-            document.getElementById('setupWizardModal').classList.remove('hidden');
-        }
-
-        function copyMasterKey() {
-            const input = document.getElementById('setupMasterKeyDisplay');
-            input.select();
-            document.execCommand('copy');
-            showToast('تم نسخ مفتاح الاسترداد الاحتياطي');
-        }
-
-        function completeInitialSetup(event) {
-            event.preventDefault();
-            const pName = document.getElementById('setupPrincipalName').value.trim();
-            const pPin = document.getElementById('setupPrincipalPin').value.trim();
-            const pQ = document.getElementById('setupPrincipalQuestion').value;
-            const pA = document.getElementById('setupPrincipalAnswer').value.trim();
-
-            const cName = document.getElementById('setupCoordName').value.trim();
-            const cPin = document.getElementById('setupCoordPin').value.trim();
-            const cQ = document.getElementById('setupCoordQuestion').value;
-            const cA = document.getElementById('setupCoordAnswer').value.trim();
-
-            const inviteCode = document.getElementById('setupSchoolInviteCode').value.trim();
-            const masterKey = document.getElementById('setupMasterKeyDisplay').value.trim();
-
-            if (pPin === cPin) {
-                showToast('يرجى اختيار رمز سري مختلف لمديرة المدرسة عن رائدة النشاط', true);
-                return;
-            }
-
-            authSystem.principal = { id: 'acc-principal', name: pName, role: 'principal', pin: pPin, question: pQ, answer: pA };
-            authSystem.coordinator = { id: 'acc-coordinator', name: cName, role: 'coordinator', pin: cPin, question: cQ, answer: cA };
-            authSystem.schoolInviteCode = inviteCode;
-            authSystem.masterRecoveryKey = masterKey;
-            authSystem.initialized = true;
-
-            logAuditEvent(pName, 'تهيئة النظام الأمني وتعيين الرموز');
-            saveToLocalStorage(false);
-            closeModal('setupWizardModal');
-            showToast('تم تفعيل نظام الحسابات الآمنة بنجاح');
         }
 
         function togglePrivacyMask() {
@@ -1285,10 +1211,6 @@
         }
 
         function openLoginModal() {
-            if (!authSystem.initialized) {
-                openSetupWizard();
-                return;
-            }
             selectedLoginRole = currentRole;
             const passInput = document.getElementById('loginPasscode');
             const eyeIcon = document.getElementById('loginEyeIcon');
