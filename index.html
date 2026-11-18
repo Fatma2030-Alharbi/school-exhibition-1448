@@ -321,7 +321,7 @@
             </div>
             <div class="p-4 space-y-3 text-xs">
                 <p class="text-slate-600 bg-pearl p-2.5 rounded-xl border border-slate-200 text-[11px]">
-                    المنصة محمية بررمز سري خاص بصاحبة الصلاحية فقط.
+                    المنصة محمية بررمز سري حصري لصاحبة الصلاحية فقط.
                 </p>
                 <div>
                     <label class="block font-bold text-royal-900 mb-1">الرمز السري الشخصي:</label>
@@ -375,7 +375,7 @@
         </div>
     </div>
 
-    <!-- نافذة إضافة إنجاز (مع حفظ فوري مضمون) -->
+    <!-- نافذة إضافة إنجاز (مع ضغط فوري للصورة وحفظ مضمون) -->
     <div id="achievementModal" class="fixed inset-0 bg-royal-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-gold-400/50 my-4">
             <div class="bg-royal-900 text-white p-4 flex items-center justify-between border-b-2 border-gold-500">
@@ -489,7 +489,6 @@
         let privacyMaskEnabled = true;
         let uploadedMediaDataUrl = '';
         
-        // الأمان والرمز السري الحصري
         let schoolSecurity = {
             adminPin: '1448',
             emergencyKey: 'REC-1448-SA'
@@ -504,8 +503,8 @@
         });
 
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('school_exhibition_1448_data_v5');
-            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v5');
+            const savedData = localStorage.getItem('school_exhibition_1448_data_v6');
+            const savedSec = localStorage.getItem('school_exhibition_1448_sec_v6');
             
             if (savedData) {
                 try { achievements = JSON.parse(savedData); } catch (e) { achievements = [...DEFAULT_ACHIEVEMENTS]; }
@@ -520,13 +519,13 @@
 
         function saveToLocalStorage(showNotification = false) {
             try {
-                localStorage.setItem('school_exhibition_1448_data_v5', JSON.stringify(achievements));
-                localStorage.setItem('school_exhibition_1448_sec_v5', JSON.stringify(schoolSecurity));
+                localStorage.setItem('school_exhibition_1448_data_v6', JSON.stringify(achievements));
+                localStorage.setItem('school_exhibition_1448_sec_v6', JSON.stringify(schoolSecurity));
                 if (showNotification) {
-                    showToast('تم حفظ ونشر التحديثات لجميع الزوار بنجاح');
+                    showToast('تم الحفظ والنشر بنجاح لجميع الزوار');
                 }
             } catch (e) {
-                showToast('مساحة التخزين ممتلئة، يجدر تصغير حجم الصورة قليلاً', true);
+                showToast('حدث خطأ في الحفظ، يجدر تصغير الصورة أو مساحة التخزين', true);
             }
         }
 
@@ -547,13 +546,11 @@
 
         function handleAuthButtonClick() {
             if (currentRole === 'admin') {
-                // تسجيل خروج
                 currentRole = 'parent';
                 updateRoleUI();
                 renderGallery();
                 showToast('تم تسجيل الخروج بنجاح');
             } else {
-                // فتح نافذة الدخول
                 document.getElementById('loginPasscode').value = '';
                 document.getElementById('loginModal').classList.remove('hidden');
             }
@@ -770,7 +767,7 @@
             document.getElementById('achievementModal').classList.remove('hidden');
         }
 
-        // ضغط الصورة المرفوعة لضمان حفظها الفوري الموثوق
+        // ضغط وتصغير الصور تلقائياً لضمان حفظها الفوري دون أي مشاكل في المساحة
         function handleCompressedFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -781,8 +778,8 @@
                 img.src = e.target.result;
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 700;
-                    const MAX_HEIGHT = 700;
+                    const MAX_WIDTH = 600;
+                    const MAX_HEIGHT = 600;
                     let width = img.width;
                     let height = img.height;
 
@@ -803,7 +800,7 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                    uploadedMediaDataUrl = canvas.toDataURL('image/jpeg', 0.65);
                     const previewBox = document.getElementById('mediaPreviewBox');
                     const previewImg = document.getElementById('previewImg');
                     previewBox.classList.remove('hidden');
