@@ -140,7 +140,7 @@
                 <p class="text-slate-400 text-[11px]">الإدارة العامة للتعليم بالقصيم • 1448 هـ</p>
             </div>
             <div class="text-gold-400 font-medium">
-                إشراف رائدة النشاط: أ. فاطمه الحربي
+                مبادرة واشراف رائدة النشاط فاطمه الحربي
             </div>
         </div>
     </footer>
@@ -217,19 +217,20 @@
     </div>
 
     <script>
-        let exhibitionPhotos = [
+        const DEFAULT_PHOTOS = [
             {
                 id: 'photo-1',
-                title: 'تفعيل أسبوع الفضاء العالمي - تلوين الكواكب والمجموعة الشمسية',
+                title: 'تفعيل أسبوع الفضاء العالمي - أعمال الطالبات',
                 url: 'https://i.postimg.cc/CKzXRNwb/IMG-3831.jpg'
             },
             {
                 id: 'photo-2',
-                title: 'مجسمات المجموعة الشمسية وإبداعات الطالبات',
-                url: 'https://i.postimg.cc/1a5616/placeholder.jpg' // يمكن تحديثها أو استبدالها برابطك
+                title: 'تفعيل أسبوع الفضاء العالمي - تلوين الكواكب والمجموعة الشمسية',
+                url: 'https://i.postimg.cc/VL4p18MB/IMG-5055.jpg'
             }
         ];
 
+        let exhibitionPhotos = [...DEFAULT_PHOTOS];
         let isAdmin = false;
         const adminPin = '1448';
 
@@ -240,15 +241,30 @@
 
         function loadPhotos() {
             try {
-                const saved = localStorage.getItem('pure_gallery_photos_v1');
-                if (saved) exhibitionPhotos = JSON.parse(saved);
-            } catch(e) {}
+                const saved = localStorage.getItem('pure_gallery_photos_v2');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed)) {
+                        exhibitionPhotos = parsed.filter(p => p && p.url && !p.url.includes('placeholder'));
+                    }
+                }
+            } catch(e) {
+                exhibitionPhotos = [...DEFAULT_PHOTOS];
+            }
         }
 
         function savePhotos() {
             try {
-                localStorage.setItem('pure_gallery_photos_v1', JSON.stringify(exhibitionPhotos));
+                localStorage.setItem('pure_gallery_photos_v2', JSON.stringify(exhibitionPhotos));
             } catch(e) {}
+        }
+
+        function deletePhoto(id, event) {
+            event.stopPropagation();
+            exhibitionPhotos = exhibitionPhotos.filter(photo => photo.id !== id);
+            savePhotos();
+            renderPureGallery();
+            showToast('تم حذف البطاقة بنجاح');
         }
 
         function renderPureGallery() {
@@ -256,6 +272,11 @@
             
             grid.innerHTML = exhibitionPhotos.map(photo => `
                 <article class="gallery-card rounded-2xl overflow-hidden shadow-sm flex flex-col group cursor-pointer relative" onclick="openImageModal('${photo.url}')">
+                    ${isAdmin ? `
+                        <button onclick="deletePhoto('${photo.id}', event)" title="حذف الصورة" class="no-print absolute top-2.5 left-2.5 z-20 bg-rose-600/90 hover:bg-rose-700 text-white w-8 h-8 rounded-full flex items-center justify-center shadow transition">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                        </button>
+                    ` : ''}
                     <div class="relative overflow-hidden bg-slate-100 aspect-[4/3]">
                         <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-royal-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
@@ -273,6 +294,7 @@
                 isAdmin = false;
                 document.getElementById('addBtn').classList.add('hidden');
                 document.getElementById('authBtnText').textContent = 'دخول الإدارة';
+                renderPureGallery();
                 showToast('تم تسجيل الخروج من الإدارة');
             } else {
                 document.getElementById('loginPasscode').value = '';
@@ -287,7 +309,8 @@
                 document.getElementById('addBtn').classList.remove('hidden');
                 document.getElementById('authBtnText').textContent = 'تسجيل خروج';
                 closeModal('loginModal');
-                showToast('أهلاً بكِ أ. فاطمه، تم تفعيل وضع الإدارة');
+                renderPureGallery();
+                showToast('أهلاً بكِ، تم تفعيل وضع الإدارة');
             } else {
                 showToast('الرمز السري غير صحيح', true);
             }
@@ -300,7 +323,7 @@
         }
 
         function addNewPhoto() {
-            const title = document.getElementById('newTitle').value.trim() || 'إنشاط مدرسي مميز';
+            const title = document.getElementById('newTitle').value.trim() || 'نشاط مدرسي مميز';
             const url = document.getElementById('newUrl').value.trim();
 
             if (!url) {
