@@ -195,13 +195,36 @@
         </div>
     </div>
 
-    <!-- نافذة تكبير الصورة (LightBox) -->
+    <!-- نافذة تكبير الصورة (LightBox) مع التنقل والإعجاب -->
     <div id="imageModal" class="fixed inset-0 bg-royal-900/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 cursor-pointer" onclick="closeImageModal()">
-        <div class="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl shadow-2xl border-2 border-gold-500 bg-black/50" onclick="event.stopPropagation()">
-            <button onclick="closeImageModal()" class="absolute top-3 left-3 bg-royal-900/80 hover:bg-royal-900 text-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition z-10 text-base">
+        <div class="relative max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-2xl shadow-2xl border-2 border-gold-500 bg-black/75 flex flex-col" onclick="event.stopPropagation()">
+            
+            <!-- زر الإغلاق -->
+            <button onclick="closeImageModal()" title="إغلاق" class="absolute top-3 left-3 bg-royal-900/85 hover:bg-royal-900 text-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition z-20 text-base">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <img id="modalImg" class="max-w-full max-h-[85vh] object-contain mx-auto block" alt="عرض مكبر">
+
+            <!-- منطقة عرض الصورة وأسهم التنقل -->
+            <div class="relative flex items-center justify-center bg-black/50 min-h-[260px] max-h-[75vh]">
+                <button id="prevPhotoBtn" onclick="navigateModal(-1, event)" title="الصورة السابقة" class="absolute right-3 z-20 bg-royal-900/80 hover:bg-gold-500 text-white hover:text-royal-900 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+
+                <img id="modalImg" class="max-w-full max-h-[75vh] object-contain mx-auto block" alt="عرض مكبر">
+
+                <button id="nextPhotoBtn" onclick="navigateModal(1, event)" title="الصورة التالية" class="absolute left-3 z-20 bg-royal-900/80 hover:bg-gold-500 text-white hover:text-royal-900 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+            </div>
+
+            <!-- شريط سفلي هادئ داخل نافذة التكبير لزر الإعجاب ورقم الصورة -->
+            <div class="bg-royal-900/95 text-white px-4 py-3 flex items-center justify-between gap-3 border-t border-gold-500/30 text-xs">
+                <span id="modalCounter" class="text-slate-300 font-medium"></span>
+                <button id="modalLikeBtn" onclick="toggleLikeCurrentModal(event)" class="bg-royal-800 hover:bg-slate-700 border border-gold-500/40 px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition">
+                    <i id="modalLikeIcon" class="fa-regular fa-heart text-rose-400"></i>
+                    <span id="modalLikeCount">0</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -218,31 +241,46 @@
             {
                 id: 'photo-1',
                 title: 'تفعيل أسبوع الفضاء العالمي - أعمال الطالبات',
-                url: 'https://i.postimg.cc/CKzXRNwb/IMG-3831.jpg'
+                url: 'https://i.postimg.cc/CKzXRNwb/IMG-3831.jpg',
+                likes: 0
             },
             {
                 id: 'photo-2',
                 title: 'تفعيل أسبوع الفضاء العالمي - تلوين الكواكب والمجموعة الشمسية',
-                url: 'https://i.postimg.cc/VL4p18MB/IMG-5055.jpg'
+                url: 'https://i.postimg.cc/VL4p18MB/IMG-5055.jpg',
+                likes: 0
             }
         ];
 
         let exhibitionPhotos = [...DEFAULT_PHOTOS];
+        let likedPhotoIds = [];
+        let activeModalIndex = 0;
         let isAdmin = false;
         const adminPin = '4814';
 
         window.addEventListener('DOMContentLoaded', () => {
             loadPhotos();
+            loadLikedIds();
             renderPureGallery();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('imageModal');
+            if (modal.classList.contains('hidden')) return;
+            if (e.key === 'ArrowRight') navigateModal(-1, e);
+            if (e.key === 'ArrowLeft') navigateModal(1, e);
+            if (e.key === 'Escape') closeImageModal();
         });
 
         function loadPhotos() {
             try {
-                const saved = localStorage.getItem('pure_gallery_photos_v2');
+                const saved = localStorage.getItem('pure_gallery_photos_v3');
                 if (saved) {
                     const parsed = JSON.parse(saved);
                     if (Array.isArray(parsed)) {
-                        exhibitionPhotos = parsed.filter(p => p && p.url && !p.url.includes('placeholder'));
+                        exhibitionPhotos = parsed
+                            .filter(p => p && p.url && !p.url.includes('placeholder'))
+                            .map(p => ({ ...p, likes: typeof p.likes === 'number' ? p.likes : 0 }));
                     }
                 }
             } catch(e) {
@@ -252,8 +290,57 @@
 
         function savePhotos() {
             try {
-                localStorage.setItem('pure_gallery_photos_v2', JSON.stringify(exhibitionPhotos));
+                localStorage.setItem('pure_gallery_photos_v3', JSON.stringify(exhibitionPhotos));
             } catch(e) {}
+        }
+
+        function loadLikedIds() {
+            try {
+                const savedLikes = localStorage.getItem('pure_gallery_liked_ids_v1');
+                if (savedLikes) {
+                    const parsed = JSON.parse(savedLikes);
+                    if (Array.isArray(parsed)) likedPhotoIds = parsed;
+                }
+            } catch(e) {
+                likedPhotoIds = [];
+            }
+        }
+
+        function saveLikedIds() {
+            try {
+                localStorage.setItem('pure_gallery_liked_ids_v1', JSON.stringify(likedPhotoIds));
+            } catch(e) {}
+        }
+
+        function hasUserLiked(photoId) {
+            return likedPhotoIds.includes(photoId);
+        }
+
+        function toggleLike(photoId, event) {
+            if (event) event.stopPropagation();
+
+            if (hasUserLiked(photoId)) {
+                showToast('لقد قمتِ بالإعجاب بهذه الصورة مسبقاً');
+                return;
+            }
+
+            const target = exhibitionPhotos.find(p => p.id === photoId);
+            if (!target) return;
+
+            target.likes = (target.likes || 0) + 1;
+            likedPhotoIds.push(photoId);
+
+            savePhotos();
+            saveLikedIds();
+            renderPureGallery();
+            updateModalFooter();
+            showToast('تم تسجيل إعجابكِ بنجاح');
+        }
+
+        function toggleLikeCurrentModal(event) {
+            const currentPhoto = exhibitionPhotos[activeModalIndex];
+            if (!currentPhoto) return;
+            toggleLike(currentPhoto.id, event);
         }
 
         function deletePhoto(id, event) {
@@ -267,23 +354,30 @@
         function renderPureGallery() {
             const grid = document.getElementById('galleryGrid');
             
-            grid.innerHTML = exhibitionPhotos.map(photo => `
-                <article class="gallery-card rounded-2xl overflow-hidden shadow-sm flex flex-col group cursor-pointer relative" onclick="openImageModal('${photo.url}')">
-                    ${isAdmin ? `
-                        <button onclick="deletePhoto('${photo.id}', event)" title="حذف الصورة" class="no-print absolute top-2.5 left-2.5 z-20 bg-rose-600/90 hover:bg-rose-700 text-white w-8 h-8 rounded-full flex items-center justify-center shadow transition">
-                            <i class="fa-solid fa-trash text-xs"></i>
-                        </button>
-                    ` : ''}
-                    <div class="relative overflow-hidden bg-slate-100 aspect-[4/3]">
-                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-royal-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold flex items-center gap-1.5">
-                                <i class="fa-solid fa-magnifying-glass-plus text-gold-400"></i> ${photo.title}
-                            </span>
+            grid.innerHTML = exhibitionPhotos.map((photo, index) => {
+                const liked = hasUserLiked(photo.id);
+                return `
+                    <article class="gallery-card rounded-2xl overflow-hidden shadow-sm flex flex-col group cursor-pointer relative" onclick="openImageModal(${index})">
+                        ${isAdmin ? `
+                            <button onclick="deletePhoto('${photo.id}', event)" title="حذف الصورة" class="no-print absolute top-2.5 left-2.5 z-20 bg-rose-600/90 hover:bg-rose-700 text-white w-8 h-8 rounded-full flex items-center justify-center shadow transition">
+                                <i class="fa-solid fa-trash text-xs"></i>
+                            </button>
+                        ` : ''}
+                        <div class="relative overflow-hidden bg-slate-100 aspect-[4/3]">
+                            <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-royal-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end justify-between p-3.5">
+                                <span class="text-white text-xs font-bold flex items-center gap-1.5">
+                                    <i class="fa-solid fa-magnifying-glass-plus text-gold-400"></i> عرض الصورة
+                                </span>
+                                <button onclick="toggleLike('${photo.id}', event)" title="${liked ? 'تم الإعجاب مسبقاً' : 'إعجاب'}" class="no-print ${liked ? 'bg-rose-600 text-white border-rose-400' : 'bg-royal-900/85 hover:bg-royal-900 text-white border-white/20'} border px-2.5 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 shadow transition">
+                                    <i class="${liked ? 'fa-solid' : 'fa-regular'} fa-heart ${liked ? 'text-white' : 'text-rose-400'}"></i>
+                                    <span>${photo.likes || 0}</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </article>
-            `).join('');
+                    </article>
+                `;
+            }).join('');
         }
 
         function handleAuthClick() {
@@ -331,7 +425,8 @@
             exhibitionPhotos.unshift({
                 id: 'photo-' + Date.now(),
                 title: title,
-                url: url
+                url: url,
+                likes: 0
             });
 
             savePhotos();
@@ -340,9 +435,47 @@
             showToast('تمت إضافة الصورة بنجاح');
         }
 
-        function openImageModal(url) {
-            document.getElementById('modalImg').src = url;
+        function openImageModal(index) {
+            if (!exhibitionPhotos.length) return;
+            activeModalIndex = Math.max(0, Math.min(index, exhibitionPhotos.length - 1));
+            updateModalView();
             document.getElementById('imageModal').classList.remove('hidden');
+        }
+
+        function navigateModal(step, event) {
+            if (event) event.stopPropagation();
+            if (!exhibitionPhotos.length) return;
+            activeModalIndex = (activeModalIndex + step + exhibitionPhotos.length) % exhibitionPhotos.length;
+            updateModalView();
+        }
+
+        function updateModalView() {
+            const photo = exhibitionPhotos[activeModalIndex];
+            if (!photo) return;
+            document.getElementById('modalImg').src = photo.url;
+            document.getElementById('modalImg').alt = photo.title || 'عرض مكبر';
+            updateModalFooter();
+        }
+
+        function updateModalFooter() {
+            const photo = exhibitionPhotos[activeModalIndex];
+            if (!photo) return;
+
+            document.getElementById('modalCounter').textContent = `${activeModalIndex + 1} / ${exhibitionPhotos.length}`;
+
+            const liked = hasUserLiked(photo.id);
+            const btn = document.getElementById('modalLikeBtn');
+            const icon = document.getElementById('modalLikeIcon');
+            const count = document.getElementById('modalLikeCount');
+
+            count.textContent = photo.likes || 0;
+            if (liked) {
+                icon.className = 'fa-solid fa-heart text-rose-500';
+                btn.classList.add('border-rose-400/60');
+            } else {
+                icon.className = 'fa-regular fa-heart text-rose-400';
+                btn.classList.remove('border-rose-400/60');
+            }
         }
 
         function closeImageModal() {
