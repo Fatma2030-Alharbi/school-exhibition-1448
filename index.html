@@ -156,9 +156,6 @@
                 <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="p-4 space-y-3 text-xs">
-                <p class="text-slate-600 bg-pearl p-2.5 rounded-xl border border-slate-200 text-[11px]">
-                    أدخلي الرمز السري للإدارة (الافتراضي: 1448)
-                </p>
                 <div>
                     <label class="block font-bold text-royal-900 mb-1">الرمز السري:</label>
                     <input type="password" id="loginPasscode" placeholder="أدخل الرمز السري" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-gold-500">
@@ -232,7 +229,7 @@
 
         let exhibitionPhotos = [...DEFAULT_PHOTOS];
         let isAdmin = false;
-        const adminPin = '1448';
+        const adminPin = '4814';
 
         window.addEventListener('DOMContentLoaded', () => {
             loadPhotos();
